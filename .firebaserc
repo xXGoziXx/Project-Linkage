@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "project-linkage": {
+      "hosting": {
+        "Project-Linkage": [
+          "project-linkage"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "project-linkage"
+  }
+}
