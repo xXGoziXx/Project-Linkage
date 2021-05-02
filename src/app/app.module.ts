@@ -5,12 +5,28 @@ import { AppRoutingModule } from './app-routing.routing';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ProductComponent } from './pages/product/product.component';
+import { NavComponent } from './components/nav/nav.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { SizingFitComponent } from './pages/sizing-fit/sizing-fit.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    CheckoutComponent,
+    ContactUsComponent,
+    HomeComponent,
+    ProductComponent,
+    NavComponent,
+    BasketComponent,
+    SizingFitComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
