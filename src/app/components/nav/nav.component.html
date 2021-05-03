@@ -1,1 +1,30 @@
-<p>nav works!</p>
+<div class="navbar-fixed ">
+  <nav class="valign-wrapper"
+       [ngClass]="menuOpen ? 'z-depth-0' : 'z-depth-1'">
+    <div id="menuContainer"
+         class="valign-wrapper animate__animated animate__fadeOut">
+      <button (click)="hamburgerClickHandler($event)"
+              class="hamburger hamburger--emphatic"
+              id="animatedHamburger"
+              type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
+    <button (click)="hamburgerClickHandler($event)"
+            class="hamburger hamburger--emphatic"
+            type="button">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <mat-icon class="right-align"
+              (click)="menuOpen = !menuOpen"
+              [inline]="true">shopping_cart</mat-icon>
+    <span class="brand-logo truncate">{{'Project Linkage'| uppercase}}</span>
+  </nav>
+</div>
+<div class="animate__animated navbar-fullscreen"
+     [ngClass]="menuOpen ? 'animate__slideInDown' : 'animate__slideOutUp'">
+</div>
