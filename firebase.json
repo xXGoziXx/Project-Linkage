@@ -13,7 +13,7 @@
     ]
   },
   "hosting": {
-    "public": "dist",
+    "public": "dist/Project-Linkage",
     "ignore": [
       "firebase.json",
       "**/.*",
