@@ -1,1 +1,73 @@
-<p>basket works!</p>
+<!-- <span (click)="close()"> -->
+<div id="basketContainer"
+     class="valign-wrapper animate__animated animate__fadeIn"
+     *ngIf="!firstChange"
+     (click)="backgroundClickHandler($event)">
+  <div class="container row animate__animated animate__fadeInUp"
+       id="basket">
+    <div class="col s12">
+      <div class="card secondary white-text">
+        <h4 class="secondary white-text">Basket
+          <div id="closeButton"
+               (click)="close()"
+               class="hamburger hamburger--emphatic is-active right"
+               tabindex="0"
+               aria-label="Close"
+               role="button"
+               aria-controls="navigation">
+            <div class="hamburger-box">
+              <div class="hamburger-inner"></div>
+            </div>
+          </div>
+        </h4>
+        <div class="card-content">
+          <table class="highlight">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col style="width:100px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of [].constructor(10); let i = index">
+                <td class="truncate">Hoodie</td>
+                <td>{{i+1}}</td>
+                <td>
+                  $20.00
+                </td>
+                <td>
+                  <mat-icon>remove</mat-icon>
+                  <mat-icon>add</mat-icon>
+                  <mat-icon>delete</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot class="row">
+              <td></td>
+              <td></td>
+              <td colspan="2">
+                <b>Subtotal:</b> $100.00
+              </td>
+            </tfoot>
+          </table>
+        </div>
+        <div class="width-100 button-container">
+          <a [routerLink]="['/checkout']"
+             class="waves-effect waves-light primary btn-large font-bold truncate">
+            Proceed to
+            Checkout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </span> -->

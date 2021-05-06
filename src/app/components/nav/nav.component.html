@@ -3,28 +3,96 @@
        [ngClass]="menuOpen ? 'z-depth-0' : 'z-depth-1'">
     <div id="menuContainer"
          class="valign-wrapper animate__animated animate__fadeOut">
-      <button (click)="hamburgerClickHandler($event)"
-              class="hamburger hamburger--emphatic"
-              id="animatedHamburger"
-              type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </button>
+      <div (click)="hamburgerClickHandler()"
+           id="animatedHamburger"
+           class="hamburger hamburger--emphatic"
+           tabindex="0"
+           aria-label="Menu1"
+           role="button"
+           aria-controls="navigation">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
     </div>
-    <button (click)="hamburgerClickHandler($event)"
-            class="hamburger hamburger--emphatic"
-            type="button">
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
-    </button>
-    <mat-icon class="right-align"
-              (click)="menuOpen = !menuOpen"
-              [inline]="true">shopping_cart</mat-icon>
+    <div (click)="hamburgerClickHandler()"
+         class="hamburger hamburger--emphatic"
+         tabindex="1"
+         aria-label="Menu2"
+         role="button"
+         aria-controls="navigation">
+      <div class="hamburger-box">
+        <div class="hamburger-inner"></div>
+      </div>
+    </div>
+    <!-- <mat-icon              [inline]="true">shopping_cart</mat-icon> -->
     <span class="brand-logo truncate">{{'Project Linkage'| uppercase}}</span>
+    <div class="shopping-cart clickable right-align"
+         (click)="basketClickHandler()">
+      <svg width="36"
+           height="36"
+           viewBox="0 0 36 36"
+           fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <path d="M25.5 27C26.2956 27 27.0587 27.3161 27.6213 27.8787C28.1839 28.4413 28.5 29.2044 28.5 30C28.5 30.7956 28.1839 31.5587 27.6213 32.1213C27.0587 32.6839 26.2956 33 25.5 33C24.7044 33 23.9413 32.6839 23.3787 32.1213C22.8161 31.5587 22.5 30.7956 22.5 30C22.5 28.335 23.835 27 25.5 27ZM1.5 3H6.405L7.815 6H30C30.3978 6 30.7794 6.15804 31.0607 6.43934C31.342 6.72064 31.5 7.10218 31.5 7.5C31.5 7.755 31.425 8.01 31.32 8.25L25.95 17.955C25.44 18.87 24.45 19.5 23.325 19.5H12.15L10.8 21.945L10.755 22.125C10.755 22.2245 10.7945 22.3198 10.8648 22.3902C10.9352 22.4605 11.0305 22.5 11.13 22.5H28.5V25.5H10.5C9.70435 25.5 8.94129 25.1839 8.37868 24.6213C7.81607 24.0587 7.5 23.2956 7.5 22.5C7.5 21.975 7.635 21.48 7.86 21.06L9.9 17.385L4.5 6H1.5V3ZM10.5 27C11.2956 27 12.0587 27.3161 12.6213 27.8787C13.1839 28.4413 13.5 29.2044 13.5 30C13.5 30.7956 13.1839 31.5587 12.6213 32.1213C12.0587 32.6839 11.2956 33 10.5 33C9.70435 33 8.94129 32.6839 8.37868 32.1213C7.81607 31.5587 7.5 30.7956 7.5 30C7.5 28.335 8.835 27 10.5 27ZM24 16.5L28.17 9H9.21L12.75 16.5H24Z"
+              fill="white" />
+      </svg>
+    </div>
+
   </nav>
 </div>
 <div class="animate__animated navbar-fullscreen"
      [ngClass]="menuOpen ? 'animate__slideInDown' : 'animate__slideOutUp'">
+  <ng-container *ngIf="!firstMenuOpen; else logo">
+    <div *ngFor="let route of routes; let last = last"
+         class="animate__animated"
+         [ngClass]="menuOpen ? 'animate__slideInDown' : 'animate__slideOutUp'">
+      <!-- For small devices -->
+      <h3 class="center-align hide-on-med-and-up">
+        <a [routerLink]="'/' + route.path"
+           routerLinkActive="active"
+           (click)="hamburgerClickHandler()">
+          {{route.title}}
+        </a>
+      </h3>
+      <!-- For medium devices -->
+      <h2 class="center-align hide-on-small-only hide-on-large-only">
+        <a [routerLink]="'/' + route.path"
+           routerLinkActive="active"
+           (click)="hamburgerClickHandler()">
+          {{route.title}}
+        </a>
+      </h2>
+      <!-- For large devices -->
+      <h1 class="center-align hide-on-med-and-down">
+        <a [routerLink]="'/' + route.path"
+           routerLinkActive="active"
+           (click)="hamburgerClickHandler()">
+          {{route.title}}
+        </a>
+      </h1>
+      <hr *ngIf="!last"
+          class="center-align divider">
+    </div>
+  </ng-container>
+  <ng-template #logo>
+    <div class="animate__animated"
+         [ngClass]="menuOpen ? 'animate__slideInDown' : 'animate__slideOutUp'">
+      <!-- For small devices -->
+      <h3 class="center-align hide-on-med-and-up">
+        <a [routerLink]="'/home'">{{ 'Project Linkage' | uppercase }}</a>
+      </h3>
+      <!-- For medium devices -->
+      <h2 class="center-align hide-on-small-only hide-on-large-only">
+        <a [routerLink]="'/home'">{{ 'Project Linkage' | uppercase }}</a>
+      </h2>
+      <!-- For large devices -->
+      <h1 class="center-align hide-on-med-and-down">
+        <a [routerLink]="'/home'">{{ 'Project Linkage' | uppercase }}</a>
+      </h1>
+    </div>
+  </ng-template>
 </div>
+<app-basket [basket]="basket"
+            (basketOutput)='setBasket($event)'
+            class="position-fixed width-100 height-100"></app-basket>

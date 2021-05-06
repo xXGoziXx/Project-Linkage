@@ -32,7 +32,6 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "node_modules/material-design-icons/iconfont/material-icons.css",
               "src/styles.sass"
             ],
             "scripts": [

@@ -1,21 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
-$hamburger-padding-x: 1.4rem !default
-
-$hamburger-padding-y: 1.4rem !default
-
-$hamburger-layer-width: 2.4rem !default
-
-$hamburger-layer-height: .16rem !default
-$hamburger-layer-spacing: .56rem !default
-
-$hamburger-layer-border-radius: .08rem !default
-$hamburger-layer-color: #fff !default
-
-@import '~hamburgers/_sass/hamburgers/hamburgers'
+@import '~material-design-icons/iconfont/material-icons'
 @import '~materialize-css/sass/components/_color-variables'
-$primary-color: #1e1e1e !default
-$secondary-color: #eee !default
+@import 'assets/styles/variables'
+@import '~hamburgers/_sass/hamburgers/hamburgers'
 @import '~materialize-css/sass/materialize'
 @import '~animate.css/animate.min'
 @font-face
@@ -25,22 +13,44 @@ $secondary-color: #eee !default
 html
   box-sizing: border-box
 
-  color: #eee
+  color: $quaternary-color
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'
   font-size: 14px
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
 
-  background-color: #2b2b2b
-
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5, .brand-logo
+  background-color: $secondary-color
+[class*='Out']
+  pointer-events: none
+h1, h2, h3, h4, h5, .brand-logo
   font-family: 'Hangyaku'
 
-.brand-logo
-  left: 50% !important
-  z-index: 1
+@for $i from 1 through 6
+  .h#{$i}
+    @extend h#{$i}
 
-  transform: translateX(-50%) !important
+
+    font-family: 'Hangyaku'
+
+  .brand-logo
+    left: 50% !important
+    z-index: 1
+
+    transform: translateX(-50%) !important
+
+.hamburger
+  display: inherit
+
+  pointer-events: auto
+
+.clickable
+  cursor: pointer
+
+.width-100
+  width: 100% !important
+
+.height-100
+  height: 100% !important
 
 .font-bold
   font-weight: bold
@@ -53,4 +63,31 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5, .brand-logo
 
 .font-lighter
   font-weight: lighter
+
+.position-fixed
+  position: fixed
+
+.primary
+  background-color: $primary-color
+
+.primary-text
+  color: $primary-color
+
+.secondary
+  background-color: $secondary-color
+
+.secondary-text
+  color: $secondary-color
+
+.tertiary
+  background-color: $tertiary-color
+
+.tertiary-text
+  color: $tertiary-color
+
+.quaternary
+  background-color: $quaternary-color
+
+.quaternary-text
+  color: $quaternary-color
 
