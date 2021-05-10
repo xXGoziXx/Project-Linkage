@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 const routes: Routes = [{
   path: 'home', component: HomeComponent,
@@ -38,7 +39,7 @@ const routes: Routes = [{
 },
 {
   path: 'checkout',
-  component: PrivacyPolicyComponent,
+  component: CheckoutComponent,
   data: { title: 'Checkout' }
 },
 {

@@ -25,7 +25,6 @@ export class BasketComponent implements OnInit, OnChanges {
         const basketContainer = document.getElementById('basketContainer');
         const basket = document.getElementById('basket');
         if (!this.firstChange) {
-
           const containerInAnimation = 'animate__fadeIn';
           const containerOutAnimation = 'animate__fadeOut';
           const basketInAnimation = 'animate__fadeInUp';
@@ -44,9 +43,7 @@ export class BasketComponent implements OnInit, OnChanges {
             basket?.classList.add(basketOutAnimation);
             basketContainer?.classList.add(containerOutAnimation);
           }
-          // console.log(basketContainer?.classList);
         }
-
       }
     }
   }

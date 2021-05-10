@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -61,6 +60,8 @@ export class NavComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+
 
   setBasket (val: boolean) {
     this.basket = val;
