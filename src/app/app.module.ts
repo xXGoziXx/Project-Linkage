@@ -2,7 +2,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -42,6 +42,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     AngularFireStorageModule,
     AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
     BrowserModule,
+    HammerModule,
     AppRoutingModule,
     MatIconModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
