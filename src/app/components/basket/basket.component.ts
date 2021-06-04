@@ -27,7 +27,7 @@ export class BasketComponent implements OnInit, OnChanges {
         if (!this.firstChange) {
           const containerInAnimation = 'animate__fadeIn';
           const containerOutAnimation = 'animate__fadeOut';
-          const basketInAnimation = 'animate__fadeInUp';
+          const basketInAnimation = 'animate__zoomIn';
           const basketOutAnimation = 'animate__zoomOut';
           // Remove initial animation
           basketContainer?.classList.remove('animate__fadeIn');

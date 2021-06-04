@@ -1,0 +1,67 @@
+@import '../../../styles'
+.ng-fa-icon
+  margin: 0 5vw
+
+  font-size: 3rem !important
+.carousel
+  height: 25vh !important
+  .carousel-item
+    background-repeat: no-repeat
+    background-position: top center
+    background-size: contain
+#quote
+  height: 33.33vh !important
+#contact
+  height: 33.33vh !important
+#subscribe
+  height: 50vh
+a > fa-icon
+  pointer-events: none
+img.materialboxed
+  padding: 0
+  margin: 0 !important
+.input-button
+  margin: 50px 0
+  button
+    height: 36px !important
+    margin: 0 !important
+
+    line-height: 36px !important
+
+    border-radius: 0 !important
+    &:hover, &:focus, &:active
+      background-color: revert !important
+  input
+    width: 300px !important
+    height: 34px
+    max-width: 200px !important
+    padding-left: 4px !important
+    margin: 0 !important
+
+    color: $tertiary-color
+
+    vertical-align: middle
+
+    box-shadow: none !important
+    border: thin $tertiary-color solid !important
+    &::placeholder
+      color: grey
+
+    &.invalid
+      border-top-color: #f44336 !important
+      border-bottom-color: #f44336 !important
+      border-left-color: #f44336 !important
+
+@media #{$medium-and-up}
+  // styles for large screens and up
+  .carousel
+    height: 93vh !important
+    .carousel-item
+      background-repeat: no-repeat
+      background-position: center
+      background-size: contain
+  #quote
+    height: 93vh !important
+  #contact
+    height: 93vh !important
+
