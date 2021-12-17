@@ -1,0 +1,214 @@
+[debug] [2021-12-17T02:16:23.271Z] ----------------------------------------------------------------------
+[debug] [2021-12-17T02:16:23.273Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\gosar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-12-17T02:16:23.274Z] CLI Version:   9.23.0
+[debug] [2021-12-17T02:16:23.274Z] Platform:      win32
+[debug] [2021-12-17T02:16:23.274Z] Node Version:  v16.13.0
+[debug] [2021-12-17T02:16:23.275Z] Time:          Fri Dec 17 2021 02:16:23 GMT+0000 (Greenwich Mean Time)
+[debug] [2021-12-17T02:16:23.275Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-17T02:16:23.278Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-12-17T02:16:23.297Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-17T02:16:23.298Z] > authorizing via signed-in user (nosarobo@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\gosar\Documents\Projects\Project-Linkage
+
+[debug] [2021-12-17T02:16:23.674Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-12-17T02:16:23.675Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2021-12-17T02:17:03.713Z] > refreshing access token with scopes: []
+[debug] [2021-12-17T02:17:03.714Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-17T02:17:03.814Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Fri, 17 Dec 2021 02:17:04 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:03.822Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2021-12-17T02:17:04.312Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2021-12-17T02:17:04.312Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project project-linkage (Project Linkage) 
+[info] 
+=== Database Setup
+[info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
+[debug] [2021-12-17T02:17:09.274Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-17T02:17:09.274Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-17T02:17:09.321Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Fri, 17 Dec 2021 02:17:09 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:09.328Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/project-linkage/services/firebasedatabase.googleapis.com  
+ 
+[debug] [2021-12-17T02:17:10.152Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  database: required API firebasedatabase.googleapis.com is enabled 
+[info] 
+[debug] [2021-12-17T02:17:10.154Z] >>> HTTP REQUEST GET https://firebasedatabase.googleapis.com/v1beta/projects/project-linkage/locations/-/instances/project-linkage-default-rtdb  
+ 
+[debug] [2021-12-17T02:17:10.606Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] Firebase Realtime Database Security Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[debug] [2021-12-17T02:17:29.511Z] >>> HTTP REQUEST GET https://project-linkage-default-rtdb.firebaseio.com/.settings/rules.json  
+ 
+[debug] [2021-12-17T02:17:30.076Z] <<< HTTP RESPONSE 200 {"server":"nginx","date":"Fri, 17 Dec 2021 02:17:30 GMT","content-type":"application/json; charset=utf-8","content-length":"60","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
+[info] +  Database Rules for project-linkage-default-rtdb have been written to database.rules.json. 
+[info] Future modifications to database.rules.json will update Realtime Database Security Rules when you run
+[info] firebase deploy.
+[info] 
+=== Firestore Setup
+[debug] [2021-12-17T02:17:30.081Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/project-linkage/services/firestore.googleapis.com  
+ 
+[debug] [2021-12-17T02:17:30.845Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:30.845Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/project-linkage  
+ 
+[debug] [2021-12-17T02:17:31.183Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:31.183Z] database_type: CLOUD_FIRESTORE
+[debug] [2021-12-17T02:17:31.183Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-17T02:17:31.183Z] > authorizing via signed-in user (nosarobo@gmail.com)
+[debug] [2021-12-17T02:17:31.184Z] [iam] checking project project-linkage for permissions ["firebase.projects.get"]
+[debug] [2021-12-17T02:17:31.184Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/project-linkage:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-12-17T02:17:31.371Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=128","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2021-12-17T02:17:35.715Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/project-linkage/releases?pageSize=10&pageToken=  
+ 
+[debug] [2021-12-17T02:17:36.448Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:36.449Z] Found ruleset: projects/project-linkage/rulesets/28dd704b-42f1-4c44-91ae-8cd0da3e2f8a
+[debug] [2021-12-17T02:17:36.449Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/project-linkage/rulesets/28dd704b-42f1-4c44-91ae-8cd0da3e2f8a  
+ 
+[debug] [2021-12-17T02:17:36.636Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2021-12-17T02:17:37.615Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/project-linkage/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2021-12-17T02:17:37.615Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/project-linkage/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2021-12-17T02:17:38.371Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:38 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:38.438Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:38 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with sample code
+[info] pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2021-12-17T02:17:38.440Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-17T02:17:38.440Z] > authorizing via signed-in user (nosarobo@gmail.com)
+[debug] [2021-12-17T02:17:38.440Z] [iam] checking project project-linkage for permissions ["firebase.projects.get"]
+[debug] [2021-12-17T02:17:38.440Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/project-linkage:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-12-17T02:17:38.576Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:38 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=119","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:38.577Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/project-linkage/services/cloudfunctions.googleapis.com:enable  
+ 
+[debug] [2021-12-17T02:17:38.578Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/project-linkage/services/runtimeconfig.googleapis.com:enable  
+ 
+[debug] [2021-12-17T02:17:39.324Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:39 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:17:39.422Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:17:39 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  Wrote functions/package.json 
+[info] +  Wrote functions/.eslintrc.js 
+[info] +  Wrote functions/tsconfig.json 
+[info] +  Wrote functions/tsconfig.dev.json 
+[info] +  Wrote functions/src/index.ts 
+[info] +  Wrote functions/.gitignore 
+[info] 
+[error] NPM install failed, continuing with Firebase initialization...
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2021-12-17T02:19:16.613Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2021-12-17T02:19:16.671Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2021-12-17T02:19:16.671Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"9.6.1","browserURL":"https://www.gstatic.com/firebasejs/9.6.1/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/9.6.1/firebase.tgz"},"live":{"version":"9.6","browserURL":"https://www.gstatic.com/firebasejs/live/9.6/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/9.6/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/9.6.1/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/9.6.1/firebase-auth/cordova.js","auth/react-native":"https://www.gstatic.com/firebasejs/9.6.1/firebase-auth/react-native.js","functions":"https://www.gstatic.com/firebasejs/9.6.1/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore/lite.js","storage":"https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/9.6.1/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/9.6.1/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.memory.js"}}
+[info] +  Wrote dist/index.html 
+[info] 
+[info] i  Detected a .git folder at C:\Users\gosar\Documents\Projects\Project-Linkage 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=579111874&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-12-17T02:19:18.366Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"8ae340a736e40ec16554","redirect_uri":"http://localhost:9005","state":"579111874"}
+[debug] [2021-12-17T02:19:18.658Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Fri, 17 Dec 2021 02:19:18 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"4e576d8dd09b432ba6894472d332c33a\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/","x-github-request-id":"26E5:B55D:48A081:4CDCD1:61BBF3A6"}
+[debug] [2021-12-17T02:19:18.662Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2021-12-17T02:19:19.154Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2021-12-17T02:19:19.154Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"xXGoziXx","id":9575063,"node_id":"MDQ6VXNlcjk1NzUwNjM=","avatar_url":"https://avatars.githubusercontent.com/u/9575063?v=4","gravatar_id":"","url":"https://api.github.com/users/xXGoziXx","html_url":"https://github.com/xXGoziXx","followers_url":"https://api.github.com/users/xXGoziXx/followers","following_url":"https://api.github.com/users/xXGoziXx/following{/other_user}","gists_url":"https://api.github.com/users/xXGoziXx/gists{/gist_id}","starred_url":"https://api.github.com/users/xXGoziXx/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/xXGoziXx/subscriptions","organizations_url":"https://api.github.com/users/xXGoziXx/orgs","repos_url":"https://api.github.com/users/xXGoziXx/repos","events_url":"https://api.github.com/users/xXGoziXx/events{/privacy}","received_events_url":"https://api.github.com/users/xXGoziXx/received_events","type":"User","site_admin":false,"name":"Godstime Osarobo","company":"GT Inventions","blog":"https://www.linkedin.com/in/godstime-osarobo/","location":"Ireland","email":"nosarobo@gmail.com","hireable":true,"bio":"Maynooth University\r\nGraduate B.Sc. Computer Science and Software Engineering, Interested in Web/App Development, Music Programming, and Computer Games😊📱🎶🎮","twitter_username":"Gozi101","public_repos":25,"public_gists":2,"followers":6,"following":6,"created_at":"2014-11-05T17:14:31Z","updated_at":"2021-12-14T12:13:30Z","private_gists":4,"total_private_repos":9,"owned_private_repos":9,"disk_usage":465769,"collaborators":7,"two_factor_authentication":true,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as xXGoziXx 
+[info] 
+[debug] [2021-12-17T02:19:39.568Z] >>> [apiv2][query] GET https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/public-key type=owner
+[debug] [2021-12-17T02:19:39.959Z] <<< [apiv2][status] GET https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/public-key 200
+[debug] [2021-12-17T02:19:39.959Z] <<< [apiv2][body] GET https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/public-key {"key_id":"568250167242549743","key":"IBEPNhLgYw9XH/QOAhqyZXqyeph+2tVZFa8v8jDkMxM="}
+[debug] [2021-12-17T02:19:39.961Z] >>> [apiv2][query] GET https://api.github.com/repos/xXGoziXx/Project-Linkage [none]
+[debug] [2021-12-17T02:19:40.292Z] <<< [apiv2][status] GET https://api.github.com/repos/xXGoziXx/Project-Linkage 200
+[debug] [2021-12-17T02:19:40.292Z] <<< [apiv2][body] GET https://api.github.com/repos/xXGoziXx/Project-Linkage {"id":361577378,"node_id":"MDEwOlJlcG9zaXRvcnkzNjE1NzczNzg=","name":"Project-Linkage","full_name":"xXGoziXx/Project-Linkage","private":false,"owner":{"login":"xXGoziXx","id":9575063,"node_id":"MDQ6VXNlcjk1NzUwNjM=","avatar_url":"https://avatars.githubusercontent.com/u/9575063?v=4","gravatar_id":"","url":"https://api.github.com/users/xXGoziXx","html_url":"https://github.com/xXGoziXx","followers_url":"https://api.github.com/users/xXGoziXx/followers","following_url":"https://api.github.com/users/xXGoziXx/following{/other_user}","gists_url":"https://api.github.com/users/xXGoziXx/gists{/gist_id}","starred_url":"https://api.github.com/users/xXGoziXx/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/xXGoziXx/subscriptions","organizations_url":"https://api.github.com/users/xXGoziXx/orgs","repos_url":"https://api.github.com/users/xXGoziXx/repos","events_url":"https://api.github.com/users/xXGoziXx/events{/privacy}","received_events_url":"https://api.github.com/users/xXGoziXx/received_events","type":"User","site_admin":false},"html_url":"https://github.com/xXGoziXx/Project-Linkage","description":"The E-Commerce website for Project Linkage, an anime-centered online clothing store.","fork":false,"url":"https://api.github.com/repos/xXGoziXx/Project-Linkage","forks_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/forks","keys_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/keys{/key_id}","collaborators_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/teams","hooks_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/hooks","issue_events_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/issues/events{/number}","events_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/events","assignees_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/assignees{/user}","branches_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/branches{/branch}","tags_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/tags","blobs_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/git/refs{/sha}","trees_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/git/trees{/sha}","statuses_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/statuses/{sha}","languages_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/languages","stargazers_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/stargazers","contributors_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/contributors","subscribers_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/subscribers","subscription_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/subscription","commits_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/commits{/sha}","git_commits_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/git/commits{/sha}","comments_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/comments{/number}","issue_comment_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/issues/comments{/number}","contents_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/contents/{+path}","compare_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/compare/{base}...{head}","merges_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/merges","archive_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/downloads","issues_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/issues{/number}","pulls_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/pulls{/number}","milestones_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/milestones{/number}","notifications_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/labels{/name}","releases_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/releases{/id}","deployments_url":"https://api.github.com/repos/xXGoziXx/Project-Linkage/deployments","created_at":"2021-04-26T01:05:30Z","updated_at":"2021-06-04T09:42:18Z","pushed_at":"2021-10-06T22:57:08Z","git_url":"git://github.com/xXGoziXx/Project-Linkage.git","ssh_url":"git@github.com:xXGoziXx/Project-Linkage.git","clone_url":"https://github.com/xXGoziXx/Project-Linkage.git","svn_url":"https://github.com/xXGoziXx/Project-Linkage","homepage":null,"size":3758,"stargazers_count":0,"watchers_count":0,"language":"TypeScript","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"disabled":false,"open_issues_count":3,"license":null,"allow_forking":true,"is_template":false,"topics":[],"visibility":"public","forks":0,"open_issues":3,"watchers":0,"default_branch":"main","permissions":{"admin":true,"maintain":true,"push":true,"triage":true,"pull":true},"temp_clone_token":"","allow_squash_merge":true,"allow_merge_commit":true,"allow_rebase_merge":true,"allow_auto_merge":false,"delete_branch_on_merge":false,"allow_update_branch":false,"network_count":0,"subscribers_count":1}
+[debug] [2021-12-17T02:19:40.294Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/project-linkage/serviceAccounts  
+ {"accountId":"github-action-361577378","serviceAccount":{"displayName":"GitHub Actions (xXGoziXx/Project-Linkage)","description":"A service account with permission to deploy to Firebase Hosting for the GitHub repository xXGoziXx/Project-Linkage"}}
+[debug] [2021-12-17T02:19:40.712Z] <<< HTTP RESPONSE 409 {"vary":"X-Origin, Referer, Origin,Accept-Encoding","content-type":"application/json; charset=UTF-8","date":"Fri, 17 Dec 2021 02:19:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:19:40.712Z] <<< HTTP RESPONSE BODY {"error":{"code":409,"message":"Service account github-action-361577378 already exists within project projects/project-linkage.","status":"ALREADY_EXISTS","details":[{"@type":"type.googleapis.com/google.rpc.ResourceInfo","resourceName":"projects/project-linkage/serviceAccounts/github-action-361577378@project-linkage.iam.gserviceaccount.com"}]}}
+[debug] [2021-12-17T02:19:40.715Z] >>> HTTP REQUEST GET https://iam.googleapis.com/v1/projects/project-linkage/serviceAccounts/github-action-361577378@project-linkage.iam.gserviceaccount.com  
+ 
+[debug] [2021-12-17T02:19:40.715Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/project-linkage:getIamPolicy  
+ 
+[debug] [2021-12-17T02:19:40.987Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:19:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:19:41.417Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:19:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=682","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:19:41.417Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/project-linkage:setIamPolicy  
+ {"policy":{"version":1,"etag":"BwXNVH1wbGM=","bindings":[{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-383652081205@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:project-linkage@appspot.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:firebase-service-account@firebase-sa-management.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-szl4d@project-linkage.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-szl4d@project-linkage.iam.gserviceaccount.com","serviceAccount:github-action-361577378@project-linkage.iam.gserviceaccount.com"]},{"role":"roles/firebasedatabase.admin","members":["serviceAccount:firebase-adminsdk-szl4d@project-linkage.iam.gserviceaccount.com"]},{"role":"roles/firebasehosting.admin","members":["serviceAccount:github-action-361577378@project-linkage.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-383652081205@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firebasestorage.serviceAgent","members":["serviceAccount:service-383652081205@gcp-sa-firebasestorage.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-383652081205@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-szl4d@project-linkage.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:nosarobo@gmail.com"]},{"role":"roles/run.viewer","members":["serviceAccount:github-action-361577378@project-linkage.iam.gserviceaccount.com"]},{"role":"roles/serviceusage.apiKeysViewer","members":["serviceAccount:github-action-361577378@project-linkage.iam.gserviceaccount.com"]}]},"updateMask":"bindings"}
+[debug] [2021-12-17T02:19:42.111Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:19:42 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=674","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-17T02:19:42.112Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/project-linkage/serviceAccounts/github-action-361577378@project-linkage.iam.gserviceaccount.com/keys  
+ {"keyAlgorithm":"KEY_ALG_UNSPECIFIED","privateKeyType":"TYPE_GOOGLE_CREDENTIALS_FILE"}
+[debug] [2021-12-17T02:19:42.746Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 17 Dec 2021 02:19:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] +  Created service account github-action-361577378 with Firebase Hosting admin permissions. 
+[debug] [2021-12-17T02:19:42.785Z] >>> [apiv2][query] PUT https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PROJECT_LINKAGE [none]
+[debug] [2021-12-17T02:19:42.785Z] >>> [apiv2][body] PUT https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PROJECT_LINKAGE {"encrypted_value":"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","key_id":"568250167242549743"}
+[debug] [2021-12-17T02:19:43.340Z] <<< [apiv2][status] PUT https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PROJECT_LINKAGE 204
+[debug] [2021-12-17T02:19:43.341Z] <<< [apiv2][body] PUT https://api.github.com/repos/xXGoziXx/Project-Linkage/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PROJECT_LINKAGE undefined
+[info] +  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_PROJECT_LINKAGE. 
+[info] i  You can manage your secrets at https://github.com/xXGoziXx/Project-Linkage/settings/secrets. 
+[info] 
+[info] 
+[info] +  Created workflow file C:\Users\gosar\Documents\Projects\Project-Linkage\.github/workflows/firebase-hosting-pull-request.yml 
+[info] 
+[info] +  Created workflow file C:\Users\gosar\Documents\Projects\Project-Linkage\.github/workflows/firebase-hosting-merge.yml 
+[info] 
+[info] i  Action required: Visit this URL to revoke authorization for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] i  Action required: Push any new workflow file(s) to your repo 
+[info] 
+=== Storage Setup
+[info] 
+[info] Firebase Storage Security Rules allow you to define how and when to allow
+[info] uploads and downloads. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] +  Wrote storage.rules 
+[info] 
+=== Emulators Setup
+[info] i  ui: downloading ui-v1.6.4.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.6.4.zip..."}}
+[debug] [2021-12-17T02:22:24.477Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.6.4.zip 
+[info] 
+=== Remoteconfig Setup
+[debug] [2021-12-17T02:22:24.673Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.6.4.zip 200
+[debug] [2021-12-17T02:22:24.673Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.6.4.zip [stream]
+[info] i  ui: Removing outdated emulator files: ui-v1.6.3 {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.6.3"}}
+[info] i  ui: Removing outdated emulator files: ui-v1.6.3.zip {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.6.3.zip"}}
