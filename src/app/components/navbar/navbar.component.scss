@@ -1,0 +1,496 @@
+//mixins
+@mixin transition-mix(
+  $property: all,
+  $duration: 0.2s,
+  $timing: linear,
+  $delay: 0s
+) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+@mixin position-absolute($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+@mixin transition-delay($n: 6, $gap: 0.1, $delay: 0.85) {
+  @for $i from 1 through $n {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$delay + ($i * $gap)}s;
+    }
+  }
+}
+
+// COMMON STYLES !!!YOU DON'T NEED THEM
+//basic variables
+$theme-font-color: #2c2c2c;
+
+//header styles
+.header {
+  max-width: 600px;
+  margin: 0 auto 50px;
+
+  text-align: center;
+}
+
+.logo {
+  width: auto;
+  height: 50px;
+}
+.cart {
+  height: 40px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  transform: scale(1);
+  opacity: 0.7;
+  transition: all 0.2s ease-in-out;
+  &:hover,
+  &:focus {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+.toggler-close {
+  top: 11px;
+}
+
+// NAV STYLES !!!YOU NEED THEM
+$nav-dark-color: #2c2c2c;
+$nav-light-color: #fff;
+// $nav-accent-color-1: #119da4;
+// $nav-accent-color-2: #ed474a;
+// $nav-accent-color-3: #568259;
+// $nav-accent-color-4: #422040;
+// $nav-accent-color-5: #02a9ea;
+$nav-padding: 20px;
+
+$toggler-width: 40px;
+$toggler-height: 28px;
+
+$toggler-bar-height: 3px;
+
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  //   padding: $nav-padding 0;
+
+  z-index: 900;
+}
+
+.container {
+  width: 95%;
+  max-width: 1920px;
+  height: 100%;
+  margin: auto;
+}
+
+.main-nav__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.main-nav__toggler {
+  position: relative;
+
+  width: $toggler-width;
+  height: $toggler-height;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.toggler-open {
+  &:hover,
+  &:focus {
+    .toggler-open__bar {
+      &:nth-child(1) {
+        transform: scaleX(1.1) translateY(-3px);
+        background-color: rgba($nav-light-color, 1);
+      }
+
+      &:nth-child(2) {
+        transform: scaleX(0.9);
+        background-color: rgba($nav-light-color, 1);
+      }
+
+      &:nth-child(3) {
+        transform: scaleX(1.1) translateY(3px);
+        background-color: rgba($nav-light-color, 1);
+      }
+    }
+  }
+}
+
+.toggler-open__bar {
+  @include position-absolute($left: 0);
+  @include transition-mix(
+    $duration: 0.2s,
+    $timing: cubic-bezier(0, 1.07, 1, 2.71)
+  );
+
+  width: 100%;
+  height: $toggler-bar-height;
+
+  background-color: rgba($nav-light-color, 0.7);
+  border-radius: $toggler-bar-height;
+
+  &:nth-child(1) {
+    top: 0;
+  }
+
+  &:nth-child(2) {
+    top: $toggler-bar-height * 4;
+  }
+
+  &:nth-child(3) {
+    top: $toggler-bar-height * 8;
+  }
+}
+
+.toggler-close {
+  &:before,
+  &:after {
+    @include position-absolute($top: 45%, $left: 5%);
+    @include transition-mix(
+      $duration: 0.15s,
+      $timing: cubic-bezier(0, 1.07, 1, 2.71)
+    );
+
+    display: block;
+    width: 90%;
+    height: $toggler-bar-height;
+
+    content: "";
+
+    background-color: $nav-dark-color;
+    border-radius: $toggler-bar-height;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover,
+  &:focus {
+    &:before {
+      transform: rotate(25deg);
+    }
+
+    &:after {
+      transform: rotate(-25deg);
+    }
+  }
+}
+
+.main-nav__expandable {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+
+.main-nav__expandable-inner {
+  @include position-absolute($top: 0, $left: 0);
+
+  width: 100%;
+  height: 100%;
+  padding: $nav-padding 0;
+
+  background-color: $nav-light-color;
+
+  z-index: 5;
+}
+
+.main-nav__expandable-content {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.main-nav__list {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+
+  list-style-type: none;
+}
+
+.main-nav__item {
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
+
+.main-nav__link {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  color: $nav-dark-color;
+}
+
+.main-nav__link-title {
+  font: {
+    size: 2.4rem;
+    weight: 700;
+  }
+  letter-spacing: 2px;
+}
+
+.main-nav__link-descr {
+  margin-top: 5px;
+
+  font: {
+    size: 1.2rem;
+    style: italic;
+  }
+}
+
+// nav toggling - effect styles
+.main-nav__expandable {
+  &:before,
+  &:after {
+    @include position-absolute($top: 0, $left: 0);
+    @include transition-mix($duration: 0.3s, $timing: ease-out);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    transform: scaleX(0);
+    transform-origin: left center;
+
+    content: "";
+
+    z-index: 1;
+  }
+
+  &:before {
+    background-color: $nav-dark-color;
+  }
+
+  &:after {
+    transition-delay: 0.07s;
+    background-color: rgba($nav-light-color, 0.7);
+  }
+
+  &.js-open {
+    opacity: 1;
+    visibility: visible;
+
+    &:before,
+    &:after,
+    .main-nav__expandable-inner {
+      transform: scaleX(1);
+    }
+
+    .main-nav__expandable-inner {
+      @include transition-mix(
+        $duration: 0.3s,
+        $timing: ease-out,
+        $delay: 0.14s
+      );
+    }
+
+    .main-nav__list {
+      @include transition-mix($duration: 0s, $delay: 0.85s);
+
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .main-nav__item {
+      @include transition-mix($duration: 0.1s);
+      @include transition-delay($n: 6);
+      transform: translateY(0);
+
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toggler-close {
+      @include transition-mix(
+        $duration: 0.2s,
+        $delay: 0.65s,
+        $timing: cubic-bezier(0.14, 1.01, 0.54, 1.38)
+      );
+      transform: translateX(0);
+
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.main-nav__expandable-inner {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.toggler-close {
+  transform: translateX(15px);
+
+  opacity: 0;
+  visibility: hidden;
+}
+
+.main-nav__list,
+.main-nav__item {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes transformScaling {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  50.5% {
+    transform: scaleX(1);
+    transform-origin: right center;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+}
+
+.main-nav__item {
+  position: relative;
+
+  transform: translateY(20px);
+
+  &:before {
+    @include position-absolute($top: 0, $left: 0);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    content: "";
+
+    transform: scaleX(0);
+    transform-origin: left center;
+
+    background-color: $nav-dark-color;
+
+    z-index: 10;
+  }
+
+  &:after {
+    @include position-absolute($top: -0.7rem, $left: -0.7rem);
+    @include transition-mix($delay: 0s);
+
+    display: block;
+
+    font: {
+      size: 3.2rem;
+      weight: 700;
+    }
+
+    content: attr(data-add-text);
+
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.main-nav__link-title {
+  @include transition-mix($delay: 0s);
+}
+
+.main-nav__item:hover {
+  &:before {
+    animation: transformScaling 0.4s linear 0s forwards;
+  }
+
+  &:after {
+    @include transition-mix($delay: 0.45s, $timing: ease-out);
+
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .main-nav__link-title {
+    @include transition-mix($timing: ease-out, $delay: 0.45s);
+
+    transform: translateX(10px);
+  }
+}
+#nav-blur {
+  position: fixed;
+  background: linear-gradient(to top, transparent 0%, black 100%);
+  width: 100%;
+  top: 0;
+  right: 0;
+  @apply pb-5 pt-3;
+  z-index: -1;
+}
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  #nav-blur {
+    background: none;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+#nav-fixed-container {
+  left: 0;
+  width: 100%;
+}
+
+#nav-fixed {
+  @apply my-3 uppercase;
+  box-shadow: 0 -2px 0 #fff, 0 2px 0 #fff;
+  > .nav-items {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
+    transition: all 0.2s linear;
+    @apply px-5 py-3 text-center;
+    &:hover {
+      // background-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 1);
+    }
+    &.active {
+      background-color: rgba(255, 255, 255, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.content {
+  position: relative;
+  background-color: black;
+}
+.nav_arrows > img {
+  height: 50px;
+  width: auto;
+}
+#nav-fixed-container {
+  left: 0;
+  width: 100%;
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  #nav-fixed-container {
+    background: none;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+#nav {
+  @apply my-3 border-solid border-y-2 border-white;
+  > .nav-items {
+    @apply px-5 py-3 text-center;
+  }
+}
+
+img {
+  outline: 2px solid white;
+  outline-offset: -2px;
+}

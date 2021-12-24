@@ -1,1 +1,71 @@
-<p>navbar works!</p>
+<!--PEN CONTENT-->
+<nav class="main-nav ">
+    <div class="container py-2 mx-auto px-1">
+        <div class="main-nav__inner">
+            <!--nav open button-->
+            <button class="main-nav__toggler toggler-open"
+                    type="button"
+                    title="Open Menu">
+                <div class="toggler-open__bar"></div>
+                <div class="toggler-open__bar"></div>
+                <div class="toggler-open__bar"></div>
+            </button>
+            <!-- logo block-->
+            <a class="logo center flex mt-2"
+               routerLink="/home"
+               title="Our Nice Logo"><img src="../../../assets/img/logo.png"
+                     alt="Project Linkage"></a>
+            <!--nav cart button-->
+            <a routerLink="/checkout"
+               class="cart w-fit"
+               draggable="false"
+               type="button"
+               title="Open Menu">
+                <img src="../../../assets/icons/cart.svg"
+                     alt="checkout" />
+            </a>
+            <!--nav expandable area-->
+            <div class="main-nav__expandable">
+                <div class="main-nav__expandable-inner">
+                    <div class="container">
+                        <div class="main-nav__expandable-content">
+                            <!--nav close btn-->
+                            <button class="main-nav__toggler toggler-close"
+                                    type="button"
+                                    title="Close Menu"></button>
+                            <!--nav links list-->
+                            <ul class="main-nav__list">
+                                <!-- Loop pages here -->
+                                <li *ngFor="let page of pages"
+                                    class="main-nav__item"
+                                    [attr.data-add-text]="page.title">
+                                    <a class="main-nav__link"
+                                       draggable="false"
+                                       [routerLink]="page.routerLink"
+                                       [attr.title]="page.title">
+                                        <span class="main-nav__link-title">{{page.title}}</span>
+                                        <span class="main-nav__link-descr">{{page.description}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="nav-blur"></div>
+    <div *ngIf="showStoreNav"
+         id="nav-fixed-container"
+         class="fixed mx-auto">
+        <div id="nav-fixed"
+             class="flex flex-row">
+            <div class="nav-items grow"
+                 (click)="goToProduct(product.name)"
+                 [ngClass]="{active: this.storeActive == product.name}"
+                 *ngFor="let product of this.productService.sortBy(this.productService.products, 'order') let isFirst = first; ">
+                <h2>{{product.name}}</h2>
+            </div>
+        </div>
+    </div>
+</nav>

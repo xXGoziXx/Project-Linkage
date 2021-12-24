@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -14,14 +14,16 @@
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
-    "@angular/fire": "github:angular/fire",
+    "@angular/fire": "^7.2.0",
     "@angular/forms": "~12.2.0",
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@splidejs/splide": "^3.6.9",
     "firebase": "^9.6.1",
+    "ng-lazyload-image": "^9.1.0",
     "rxjs": "~6.6.0",
+    "scroll-into-view-if-needed": "^2.2.28",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
@@ -29,14 +31,20 @@
     "@angular-devkit/build-angular": "~12.2.7",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.0",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/line-clamp": "^0.3.0",
+    "@tailwindcss/typography": "^0.5.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
+    "@types/scroll-into-view": "^1.16.0",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "tailwindcss": "^3.0.7",
     "typescript": "~4.3.5"
   }
 }

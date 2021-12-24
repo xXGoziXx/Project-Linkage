@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,10 @@ import { SizingFitComponent } from './pages/sizing-fit/sizing-fit.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,13 +30,17 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
     SizingFitComponent,
     PageNotFoundComponent,
     ContactUsComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    LazyLoadImageModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
