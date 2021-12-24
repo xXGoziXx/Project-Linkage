@@ -39,31 +39,12 @@ $theme-font-color: #2c2c2c;
   text-align: center;
 }
 
-.logo {
-  width: auto;
-  height: 50px;
-}
-.cart {
-  height: 40px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  transform: scale(1);
-  opacity: 0.7;
-  transition: all 0.2s ease-in-out;
-  &:hover,
-  &:focus {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-}
 .toggler-close {
   top: 11px;
 }
 
 // NAV STYLES !!!YOU NEED THEM
-$nav-dark-color: #2c2c2c;
+$nav-dark-color: #0a0a0a;
 $nav-light-color: #fff;
 // $nav-accent-color-1: #119da4;
 // $nav-accent-color-2: #ed474a;
@@ -78,12 +59,10 @@ $toggler-height: 28px;
 $toggler-bar-height: 3px;
 
 .main-nav {
-  position: fixed;
   top: 0;
   left: 0;
 
   width: 100%;
-  //   padding: $nav-padding 0;
 
   z-index: 900;
 }
@@ -103,9 +82,24 @@ $toggler-bar-height: 3px;
   height: 100%;
 }
 
+.logo {
+  width: auto;
+  height: 50px;
+  text-align: center;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.cart {
+  width: 40px;
+  height: 40px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
 .main-nav__toggler {
-  position: relative;
-
   width: $toggler-width;
   height: $toggler-height;
 
@@ -407,7 +401,7 @@ $toggler-bar-height: 3px;
     transform-origin: left center;
 
     background-color: $nav-dark-color;
-
+    pointer-events: none;
     z-index: 10;
   }
 
@@ -427,7 +421,7 @@ $toggler-bar-height: 3px;
     opacity: 0;
     visibility: hidden;
     z-index: -1;
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(#0a0a0a, 0.2);
   }
 }
 
@@ -437,6 +431,7 @@ $toggler-bar-height: 3px;
 
 .main-nav__item:hover {
   &:before {
+    -webkit-animation: transformScaling 0.4s linear 0s forwards;
     animation: transformScaling 0.4s linear 0s forwards;
   }
 
@@ -455,7 +450,7 @@ $toggler-bar-height: 3px;
 }
 #nav-blur {
   position: fixed;
-  background: linear-gradient(to top, transparent 0%, black 100%);
+  background: linear-gradient(to top, transparent 0%, #0a0a0a 100%);
   width: 100%;
   top: 0;
   right: 0;
@@ -481,16 +476,22 @@ $toggler-bar-height: 3px;
   box-shadow: 0 -2px 0 #fff, 0 2px 0 #fff;
   > .nav-items {
     color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(#0a0a0a, 1);
+
     transition: all 0.2s linear;
     @apply px-5 py-3 text-center;
     &:hover {
-      // background-color: rgba(255, 255, 255, 0.2);
       color: rgba(255, 255, 255, 1);
     }
     &.active {
       background-color: rgba(255, 255, 255, 1);
-      color: rgba(0, 0, 0, 1);
+      color: rgba(#0a0a0a, 1);
+    }
+  }
+  /* if backdrop support: very transparent and blurred */
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .nav-items {
+      background-color: rgba(#0a0a0a, 0.75);
     }
   }
 }
