@@ -1,16 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+
 @font-face {
-  font-family: Impact;
-  src: url('./assets/fonts/Impact.ttf');
+  font-family: ImpactLT;
+  src: url("./assets/fonts/Impact/impact.ttf") format("truetype");
 }
 
+html,
 body,
 :host {
-  font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat',
-    'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+  overflow-x: hidden !important;
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
   font-size: 1.2em;
   color: white;
   box-sizing: border-box;
@@ -35,6 +40,8 @@ h3 {
   @apply text-lg;
 }
 p {
+  // font-family: sans-serif;
+  // font-weight: bolder;
   @apply text-base;
 }
 blockquote {
@@ -53,7 +60,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: normal;
+  font-weight: normal !important;
+}
+
+.adjust-text-size {
+  font-size: 3.5vmin;
+  line-height: 3.5vmin;
 }
 .nav-pad {
   padding-top: 80px;
@@ -62,8 +74,8 @@ h6 {
 .btn {
   background: rgba(#0a0a0a, 0.75);
   border: 1px solid #ffffff;
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+  width: auto;
+  max-width: 250px;
   font-size: 24px;
   color: white;
   text-align: center;
@@ -72,7 +84,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  @apply m-4 px-10 border-solid border-2 border-white uppercase;
+  @apply m-4 px-10 py-2 border-solid border-2 border-white uppercase;
 
   &:hover,
   &:active {
@@ -99,4 +111,38 @@ h6 {
       transform: scale(0.95);
     }
   }
+}
+.black-filter {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.splide__slide img {
+  width: 100% !important;
+  height: auto !important;
+}
+.splide__arrows {
+  .splide__arrow--prev {
+    left: 0;
+    @apply ml-2;
+  }
+  .splide__arrow--next {
+    right: 0;
+    @apply mr-2;
+  }
+  .splide__arrow {
+    opacity: 1;
+    svg {
+      fill: white !important;
+    }
+  }
+}
+.splide__list {
+  @apply justify-between;
+}
+.splide__slide {
+  opacity: 0.3;
+}
+
+.splide__slide.is-active {
+  opacity: 1;
+  border: none !important;
 }

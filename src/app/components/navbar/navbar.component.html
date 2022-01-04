@@ -59,10 +59,10 @@
          id="nav-fixed-container"
          class="fixed mx-auto">
         <div id="nav-fixed"
-             class="flex flex-row">
+             class="flex flex-row flex-wrap">
             <div class="nav-items grow"
                  (click)="goToProduct(product.name)"
-                 [ngClass]="{active: this.storeActive == product.name}"
+                 [ngClass]="{active: this.storeActiveSection == product.name}"
                  *ngFor="let product of this.productService.sortBy(this.productService.products, 'order') let isFirst = first; ">
                 <h2>{{product.name}}</h2>
             </div>

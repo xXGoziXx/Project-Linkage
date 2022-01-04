@@ -255,7 +255,7 @@ $toggler-bar-height: 3px;
 
 .main-nav__link-title {
   font: {
-    size: 2.4rem;
+    size: 2rem;
     weight: 700;
   }
   letter-spacing: 2px;
@@ -265,7 +265,7 @@ $toggler-bar-height: 3px;
   margin-top: 5px;
 
   font: {
-    size: 1.2rem;
+    size: 1.1rem;
     style: italic;
   }
 }
@@ -406,7 +406,7 @@ $toggler-bar-height: 3px;
   }
 
   &:after {
-    @include position-absolute($top: -0.7rem, $left: -0.7rem);
+    @include position-absolute($top: -1.5rem, $left: -0.25rem);
     @include transition-mix($delay: 0s);
 
     display: block;
@@ -479,7 +479,7 @@ $toggler-bar-height: 3px;
     background-color: rgba(#0a0a0a, 1);
 
     transition: all 0.2s linear;
-    @apply px-5 py-3 text-center;
+    @apply py-3 text-center;
     &:hover {
       color: rgba(255, 255, 255, 1);
     }

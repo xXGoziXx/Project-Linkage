@@ -1,8 +1,21 @@
 .content {
-  background-color: black;
+  // background-color: black;
+  background: url("../../../assets/img/home-bg.gif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 .nav_arrows > img {
   height: 50px;
   width: auto;
+}
+
+.img-container {
+  img {
+    height: auto;
+    width: 20vw;
+    min-width: 100%;
+  }
 }
