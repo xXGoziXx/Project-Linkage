@@ -1,1 +1,43 @@
-<p>sizing-fit works!</p>
+<div class="content">
+    <div class="nav-pad black-filter min-h-screen px-4">
+        <div class="max-w-xl text-center pb-4 mx-auto">
+            <div class="sizing-fit">
+                <h1 class="mt-2 mb-4 uppercase text-center">
+                    Sizing & Fit
+                </h1>
+                <div class="mt-5 table-container">
+                    <table class="table-auto mx-auto">
+                        <thead>
+                            <tr>
+                                <th class="uppercase first">Size</th>
+                                <th class="uppercase">Length</th>
+                                <th class="uppercase">Width</th>
+                                <th class="uppercase">Arm Length</th>
+                                <th class="uppercase">Arm Width</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let size of sizeChart">
+                                <td class="first">{{size.size}}</td>
+                                <td>{{size.length}}</td>
+                                <td>{{size.width}}</td>
+                                <td>{{size.armLength}}</td>
+                                <td>{{size.armWidth}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="materials-used mt-10">
+                <h1 class="uppercase">
+                    Materials Used
+                </h1>
+                <h5>
+                    The fleece is an insulating fabric which has an adjustable drawstring. It possesses a full length
+                    zipper with pockets
+                    that zip up too. The weight of the fleece is 280 g/m².
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>

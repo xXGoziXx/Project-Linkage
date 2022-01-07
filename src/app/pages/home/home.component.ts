@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
     if (arc) {
       scrollIntoView(arc, {
         // scrollMode: 'if-needed',
-        behavior: "smooth"
-        // block: 'center',
+        behavior: "smooth",
+        block: "start"
         // // inline: 'nearest',
       });
     }

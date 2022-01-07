@@ -18,6 +18,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
+import { ShippingAndReturnsComponent } from './pages/shipping-and-returns/shipping-and-returns.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { environment } from '../environments/environment';
     PageNotFoundComponent,
     ContactUsComponent,
     PrivacyPolicyComponent,
+    ShippingAndReturnsComponent,
   ],
   imports: [
     BrowserModule,

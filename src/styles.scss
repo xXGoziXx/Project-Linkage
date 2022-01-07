@@ -9,13 +9,19 @@
   src: url("./assets/fonts/Impact/impact.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: Vancouver;
+  src: url("./assets/fonts/Vancouver/vancouver.ttf") format("truetype");
+}
+
 html,
 body,
 :host {
   overflow-x: hidden !important;
-  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
-    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
-    sans-serif;
+  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+    "Franklin Gothic Bold", Charcoal, "Helvetica Inserat",
+    "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+
   font-size: 1.2em;
   color: white;
   box-sizing: border-box;
@@ -31,15 +37,30 @@ body,
 }
 
 h1 {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
   @apply text-5xl;
 }
 h2 {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
   @apply text-3xl;
 }
 h3 {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
   @apply text-xl;
 }
 h4 {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
+  @apply text-lg;
+}
+h5 {
   @apply text-lg;
 }
 p {
@@ -75,6 +96,9 @@ h6 {
 }
 
 .btn {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
   background: rgba(#0a0a0a, 0.75);
   border: 1px solid #ffffff;
   width: auto;
@@ -149,4 +173,3 @@ h6 {
   opacity: 1;
   border: none !important;
 }
-

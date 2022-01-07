@@ -1,0 +1,24 @@
+.content {
+  position: relative;
+  background-color: black;
+  background: url("../../../assets/img/storeBackground.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+table {
+  @apply text-xl;
+  .first {
+    border-right: solid medium white;
+  }
+  th {
+    border-bottom: solid medium white;
+    @apply pb-1;
+  }
+  th,
+  td {
+    @apply px-3;
+  }
+}

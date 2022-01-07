@@ -28,8 +28,13 @@ export class NavbarComponent implements OnInit {
     },
     {
       title: "Sizing & Fit",
-      routerLink: "/sizing-and-fit",
+      routerLink: "/sizing-fit",
       description: "Find out what size fits you best"
+    },
+    {
+      title: "Shipping & Returns",
+      routerLink: "/shipping-returns",
+      description: "Learn more about our shipping process"
     },
     {
       title: "Privacy Policy",
@@ -58,9 +63,9 @@ export class NavbarComponent implements OnInit {
       this.storeActiveSection = name;
       scrollIntoView(product, {
         // scrollMode: 'if-needed',
-        behavior: "smooth"
-        // block: 'center',
-        // // inline: 'nearest',
+        behavior: "smooth",
+        block: "end"
+        // inline: "nearest"
       });
     }
   }
