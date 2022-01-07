@@ -35,6 +35,12 @@
 
 .content .product {
   margin-top: 0;
+  img {
+    outline: 2px solid white;
+    outline-offset: -2px;
+    transition: all 0.1s linear;
+    background: black;
+  }
   &:hover {
     img {
       outline-width: 8px;
@@ -43,11 +49,6 @@
     p {
       @apply mt-2;
     }
-  }
-  img {
-    outline: 2px solid white;
-    outline-offset: -2px;
-    transition: all 0.1s linear;
   }
 }
 
