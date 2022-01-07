@@ -8,7 +8,6 @@ import { ProductService } from "src/app/services/product.service";
   styleUrls: ["./store.component.scss"]
 })
 export class StoreComponent implements OnInit, AfterViewInit {
-  // defaultImage = `https://www.jobesports.com/images/loading_spinner.gif`;
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
   selectedProduct: Product = {
     description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,

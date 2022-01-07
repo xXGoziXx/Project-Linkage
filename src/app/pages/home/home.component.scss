@@ -1,10 +1,5 @@
 .content {
-  // background-color: black;
-  background: url("../../../assets/img/home-bg.gif");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
+  background-color: black;
 }
 
 .nav_arrows > img {
@@ -17,5 +12,27 @@
     height: auto;
     width: 20vw;
     min-width: 100%;
+  }
+}
+.description {
+  p {
+    // font-size: 14px;
+    // font-family: sans-serif;
+    // font-weight: bolder;
+    min-height: 7.5vh;
+    max-height: 150px;
+    max-width: 1300px;
+
+    overflow-y: auto;
+  }
+}
+.gallery {
+  img {
+    outline: 2px solid white;
+    outline-offset: -2px;
+    // transition: all 0.1s linear;
+    max-height: 20vh;
+    width: auto;
+    background: black;
   }
 }

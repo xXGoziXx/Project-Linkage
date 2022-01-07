@@ -21,7 +21,7 @@ export class ProductService {
   constructor(private afs: AngularFirestore) {
     this.productDoc = afs.doc<CategoryMetadata>("products/metadata");
     this.arcs = afs
-      .collection<Arc>("arcs", ref => ref.orderBy("date"))
+      .collection<Arc>("arcs", ref => ref.orderBy("date", "desc"))
       .valueChanges();
     this.arcs$ = this.arcs.subscribe((arc: Arc[] | undefined) => {
       console.log("arc", arc);

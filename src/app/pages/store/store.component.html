@@ -4,19 +4,20 @@
              class="flex flex-row invisible">
             <div class="nav-items grow"
                  [ngClass]="{active: isFirst}"
-                 *ngFor="let products of this.productService.sortBy(this.productService.products, 'order') let isFirst = first; ">
-                <!-- <h2>{{products.name}}</h2> -->
+                 *ngFor="let products of
+                 productService.products; let isFirst = first; ">
+                <h3>{{products.name}}</h3>
             </div>
         </div>
         <div class="flex flex-col gap-5 mb-5">
             <div [id]="products.name"
-                 *ngFor="let products of this.productService.sortBy(this.productService.products, 'order')">
-                <h1 class="uppercase">{{products.name}}</h1>
+                 *ngFor="let products of productService.products">
+                <h2 class="uppercase">{{products.name}}</h2>
                 <div class="flex flex-wrap ">
                     <!-- Product Items -->
                     <div class="pt-4 px-1 basis-1/3 md:basis-1/6 product"
                          [id]="i"
-                         *ngFor="let product of this.productService.sortBy(products.items, 'order'); index as i;">
+                         *ngFor="let product of productService.sortBy(products.items, 'order'); index as i;">
                         <img [src]="product.images[0].src"
                              [defaultImage]="defaultImage"
                              [lazyLoad]="product.images[0].src"
@@ -38,7 +39,7 @@
     <div id="card-container"
          class="absolute h-screen w-screen grid place-content-center">
         <div class="card relative mt-2.5 w-min border-2 border-solid border-white">
-            <h1 class="mt-3 text-center uppercase"> {{selectedProduct.name}}</h1>
+            <h2 class="mt-3 text-center uppercase"> {{selectedProduct.name}}</h2>
             <div id="sliders"
                  class="mx-auto"
                  [ngClass]="{'opacity-1': preview, 'opacity-0': !preview}">
@@ -47,7 +48,7 @@
                     <div class="splide__track">
                         <ul class="splide__list">
                             <li class="splide__slide"
-                                *ngFor="let image of this.productService.sortBy(selectedProduct.images, 'order');">
+                                *ngFor="let image of productService.sortBy(selectedProduct.images, 'order');">
                                 <img alt="{{image.alt}}"
                                      [lazyLoad]="image.src"
                                      [defaultImage]="defaultImage" />
@@ -60,7 +61,7 @@
                     <div class="splide__track">
                         <ul class="splide__list">
                             <li class="splide__slide"
-                                *ngFor="let image of this.productService.sortBy(selectedProduct.images, 'order')">
+                                *ngFor="let image of productService.sortBy(selectedProduct.images, 'order')">
                                 <img alt="{{image.alt}}"
                                      [lazyLoad]="image.src"
                                      [defaultImage]="defaultImage" />
@@ -76,21 +77,23 @@
                      [ngStyle]="{'backgroundImage': 'url(' + selectedProductFirstImage.src + ')'}">
                     <div [ngClass]="{'opacity-100': !preview, 'opacity-0' : preview}"
                          class="details-container grid justify-items-center content-between relative w-full h-full p-3">
-                        <h1 class="relative text-center uppercase"> {{selectedProduct.name}}</h1>
-                        <h2 class="relative mt-5 mb-2 text-center uppercase">Description</h2>
-                        <div class="description overflow-y-auto mb-3">
-                            <p class="text-center">
-                                {{selectedProduct.description}}
-                            </p>
+                        <h3 class="relative text-center uppercase"> {{selectedProduct.name}}</h3>
+                        <div>
+                            <h4 class="relative mt-5 mb-2 text-center uppercase">Description</h4>
+                            <div class="description overflow-y-auto mb-3">
+                                <p class="text-center">
+                                    {{selectedProduct.description}}
+                                </p>
+                            </div>
                         </div>
                         <div class="price mb-2 sm:mb-0">
-                            <h2 class="size"
-                                *ngIf="this.selectedProductSizes">
+                            <h3 class="size"
+                                *ngIf="selectedProductSizes">
                                 Size: <span> {{selectedProductSizes}} </span>
-                            </h2>
-                            <h2 class="size">
+                            </h3>
+                            <h3 class="size">
                                 Price: <span> {{selectedProduct.price | currency: 'EUR' }} </span>
-                            </h2>
+                            </h3>
                         </div>
                         <button class="btn hidden sm:block">Add to cart</button>
                     </div>

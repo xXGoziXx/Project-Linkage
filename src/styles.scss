@@ -31,12 +31,15 @@ body,
 }
 
 h1 {
-  @apply text-2xl;
+  @apply text-5xl;
 }
 h2 {
-  @apply text-xl;
+  @apply text-3xl;
 }
 h3 {
+  @apply text-xl;
+}
+h4 {
   @apply text-lg;
 }
 p {
@@ -146,3 +149,4 @@ h6 {
   opacity: 1;
   border: none !important;
 }
+
