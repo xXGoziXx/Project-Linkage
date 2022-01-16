@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Columns, Config, DefaultConfig } from "ngx-easy-table";
 
 @Component({
   selector: "app-sizing-fit",
@@ -36,6 +37,17 @@ export class SizingFitComponent implements OnInit {
       armWidth: "27.8CM"
     }
   ];
+  public columns: Columns[] = [
+    { key: "size", title: "Size" },
+    { key: "length", title: "Length" },
+    { key: "width", title: "Width" },
+    { key: "armLength", title: "Arm Length" },
+    { key: "armWidth", title: "Arm Width" }
+  ];
+  public configuration: Config = {
+    ...DefaultConfig,
+    paginationEnabled: false,
+  };
 
   constructor() {}
 

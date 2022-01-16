@@ -1,30 +1,33 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { LazyLoadImageModule } from "ng-lazyload-image";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TableModule } from "ngx-easy-table";
+import { GoogleMapsModule } from "@angular/google-maps";
+import { NgxPayPalModule } from "ngx-paypal";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { StoreComponent } from './pages/store/store.component';
-import { ProductViewComponent } from './components/product-view/product-view.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
-import { AboutUsComponent } from './pages/about-us/about-us.component';
-import { SizingFitComponent } from './pages/sizing-fit/sizing-fit.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { ContactUsComponent } from './pages/contact-us/contact-us.component';
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { environment } from '../environments/environment';
-import { ShippingAndReturnsComponent } from './pages/shipping-and-returns/shipping-and-returns.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { StoreComponent } from "./pages/store/store.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { CheckoutComponent } from "./pages/checkout/checkout.component";
+import { AboutUsComponent } from "./pages/about-us/about-us.component";
+import { SizingFitComponent } from "./pages/sizing-fit/sizing-fit.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
+import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
+import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
+import { ShippingAndReturnsComponent } from "./pages/shipping-and-returns/shipping-and-returns.component";
+
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { environment } from "../environments/environment";
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     StoreComponent,
-    ProductViewComponent,
     NavbarComponent,
     CheckoutComponent,
     AboutUsComponent,
@@ -32,7 +35,7 @@ import { ShippingAndReturnsComponent } from './pages/shipping-and-returns/shippi
     PageNotFoundComponent,
     ContactUsComponent,
     PrivacyPolicyComponent,
-    ShippingAndReturnsComponent,
+    ShippingAndReturnsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +44,13 @@ import { ShippingAndReturnsComponent } from './pages/shipping-and-returns/shippi
     AngularFirestoreModule,
     AngularFireStorageModule,
     LazyLoadImageModule,
+    FormsModule,
+    GoogleMapsModule,
+    NgxPayPalModule,
+    ReactiveFormsModule,
+    TableModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

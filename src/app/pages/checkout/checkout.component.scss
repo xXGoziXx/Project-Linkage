@@ -1,9 +1,100 @@
-.content {
-  position: relative;
-  background-color: black;
-  background: url("../../../assets/img/storeBackground.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+.checkout-container {
+  max-width: 350px;
+  width: 100%;
+}
+.input-field {
+  // width: max-content;
+  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+    "Franklin Gothic Bold", Arial, Helvetica, sans-serif;
+  max-width: 350px;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto minmax(0, 1fr);
+  .form-label {
+    font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+      Arial, Helvetica, sans-serif;
+    height: auto;
+    width: auto;
+    color: #0a0a0a;
+    background-color: white;
+    border: 2px solid white;
+    line-height: 1.25rem;
+    @apply p-1 pr-2 text-xl;
+  }
+}
+/* custom select css in style.scss */
+input,
+select,
+option {
+  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+    "Franklin Gothic Bold", Arial, Helvetica, sans-serif;
+  height: 100%;
+  border: 2px solid white;
+  background-color: #0a0a0a !important;
+  letter-spacing: 0.75px;
+  border-radius: 0;
+  appearance: none;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  @apply text-xl p-2;
+  &:active,
+  &:focus {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    border-color: white transparent white transparent;
+  }
+}
+select {
+  cursor: pointer;
+}
+
+.addresses {
+  input:first-of-type {
+    border-bottom-width: 1px;
+  }
+  input:last-of-type {
+    border-top-width: 1px;
+  }
+  input:not(:first-of-type):not(:last-of-type) {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+  input#state {
+    border-right-width: 1px;
+    &:active,
+    &:focus {
+      border-color: white white white transparent;
+    }
+  }
+  input#postcode {
+    border-left-width: 1px;
+    &:active,
+    &:focus {
+      border-color: white transparent white white;
+    }
+  }
+}
+
+.checkout-container,
+.button-container {
+  max-width: 350px;
+  width: 100%;
+  button[type="submit"] {
+    margin-bottom: 0;
+  }
+}
+.warning {
+  color: #ff0000;
+  background-color: white;
+  @apply text-center p-1;
+}
+@supports (grid-template-columns: minmax(0, 1fr)) {
+  .input-field {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
 }

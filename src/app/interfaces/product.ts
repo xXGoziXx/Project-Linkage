@@ -1,4 +1,4 @@
-import { Image } from './image';
+import { Image } from "./image";
 
 export interface Product {
   description: string;
@@ -6,5 +6,7 @@ export interface Product {
   name: string;
   order: number;
   price: number;
-  sizes: string[];
+  quantity: number;
+  sizes: any[];
+  size?: string;
 }

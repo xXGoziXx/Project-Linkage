@@ -1,9 +1,21 @@
 <div class="content">
-    <div class="content">
-        <div class="nav-pad black-filter min-h-screen px-4">
-            <div class="max-w-xl text-center pb-4 mx-auto">
-                <h1 class="mt-2 mb-4 uppercase text-center">Contact Us</h1>
-            </div>
+  <div class="nav-pad black-filter min-h-screen h-screen px-4">
+    <h1 class="mt-2 mb-4 uppercase text-center">Contact Us</h1>
+    <div class="max-w-xl buttons-container pb-4 mx-auto grid place-content-center">
+      <a [href]="link.url"
+         target="_blank"
+         *ngFor="let link of links">
+        <div class="link-button primary-font pop">
+          <!-- <img [src]="link.icon"
+               alt="{{link.title}}" /> -->
+          <svg>
+            <image class=""
+                   [attr.xlink:href]="link.icon"
+                   [attr.src]="link.icon" />
+          </svg>
+          <span>{{link.title}}</span>
         </div>
+      </a>
     </div>
+  </div>
 </div>

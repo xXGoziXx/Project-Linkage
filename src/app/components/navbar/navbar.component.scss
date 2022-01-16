@@ -245,12 +245,12 @@ $toggler-bar-height: 3px;
 
 .main-nav__link {
   position: relative;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   color: $nav-dark-color;
+  @apply py-2;
 }
 
 .main-nav__link-title {
@@ -277,6 +277,9 @@ $toggler-bar-height: 3px;
 
 // nav toggling - effect styles
 .main-nav__expandable {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
   &:before,
   &:after {
     @include position-absolute($top: 0, $left: 0);
@@ -411,13 +414,13 @@ $toggler-bar-height: 3px;
   }
 
   &:after {
-    @include position-absolute($top: -0.75rem, $left: -0.2rem);
+    @include position-absolute($top: -0.1rem, $left: -0.2rem);
     @include transition-mix($delay: 0s);
 
     display: block;
 
     font: {
-      size: 4.5vh;
+      size: 4.25vh;
       weight: 700;
     }
 
@@ -459,8 +462,8 @@ $toggler-bar-height: 3px;
   width: 100%;
   top: 0;
   right: 0;
-  @apply pb-5 pt-3;
   z-index: -1;
+  @apply pb-5 pt-3;
 }
 /* if backdrop support: very transparent and blurred */
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {

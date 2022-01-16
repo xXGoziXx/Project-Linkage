@@ -1,7 +1,113 @@
 <div class="content">
-    <div class="nav-pad black-filter min-h-screen px-4">
-        <div class="max-w-xl text-center pb-4 mx-auto">
-            <h1 class="mt-2 uppercase">Checkout</h1>
+  <div class="nav-pad black-filter min-h-screen px-4">
+    <div class="text-left pb-4 checkout-container">
+      <h1 class="mt-2 mb-8 uppercase">Checkout</h1>
+
+      <div class="summary my-8">
+        <h2 class="uppercase">Order Summary:</h2>
+      </div>
+      <div class="delivery-address">
+        <h2 class="uppercase">Customer Shipping Info:</h2>
+        <form id=formId
+              (ngSubmit)="storeCustomerDetails()"
+              [formGroup]="productService.checkoutForm">
+
+          <div class="input-field mt-2">
+            <span class="uppercase form-label">Name:</span>
+            <input id="name"
+                   class="col-span-2 capitalize"
+                   type="text"
+                   name="name"
+                   formControlName="name"
+                   placeholder="Enter name..."
+                   required>
+          </div>
+          <div class="input-field mt-4">
+            <span class="uppercase form-label">Email Address:</span>
+
+            <input id="email"
+                   type="email"
+                   class="col-span-2"
+                   name="email"
+                   formControlName="email"
+                   placeholder="Enter Email Address..."
+                   email="true"
+                   required>
+
+          </div>
+          <div class="input-field mt-4 addresses">
+            <span class="uppercase form-label">Delivery&nbsp;Address:</span>
+            <input id="address1"
+                   type="text"
+                   class="col-span-2"
+                   name="address1"
+                   formControlName="address1"
+                   placeholder="Enter Delivery Address*"
+                   required>
+            <input id="address2"
+                   type="text"
+                   class="col-span-2"
+                   name="address2"
+                   formControlName="address2"
+                   placeholder="Apartment, Unit, Suite, or Floor #">
+            <input id="locality"
+                   type="text"
+                   class="col-span-2"
+                   name="locality"
+                   formControlName="locality"
+                   placeholder="City*"
+                   required>
+            <input id="state"
+                   type="text"
+                   name="state"
+                   formControlName="state"
+                   placeholder="State/Province*"
+                   required>
+            <input id="postcode"
+                   type="text"
+                   name="postcode"
+                   formControlName="postcode"
+                   placeholder="Postal Code*"
+                   required>
+            <input id="country"
+                   type="text"
+                   class="col-span-2"
+                   name="country"
+                   formControlName="country"
+                   placeholder="Country/Region*"
+                   required>
+            <span *ngIf="!isEU"
+                  class="col-span-2 warning secondary-font">We're only shipping to countries in Europe at
+              the moment!</span>
+            <span *ngIf="!this.productService.cart.items.length"
+                  class="col-span-2 warning secondary-font">Your cart is empty! Try adding an item.</span>
+          </div>
+          <div class="flex flex-col items-center justify-center button-container">
+            <button type="submit"
+                    class="btn bg-blur"
+                    [disabled]="!productService.checkoutForm.valid ">Confirm Details</button>
+            <!-- || !this.productService.cart.items.length -->
+
+          </div>
+        </form>
+      </div>
+      <div class="delivery-options my-8 "
+           [hidden]="!detailsConfirmed">
+        <h2 class="uppercase">Delivery Options:</h2>
+        <div class="custom-select mt-2">
+          <select name="deliveryOptions"
+                  id="deliveryOptions"
+                  title="deliveryOptions">
+            <option selected="true"
+                    value="2.50">Standard Delivery (Untracked) - €2.50</option>
+            <option value="3.50">Registered Delivery (Tracked) - €3.50</option>
+          </select>
         </div>
+      </div>
+      <ng-container *ngIf="detailsConfirmed">
+        <ngx-paypal id="paypalButton"
+                    [config]="payPalConfig"></ngx-paypal>
+      </ng-container>
     </div>
+  </div>
 </div>

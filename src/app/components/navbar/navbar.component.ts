@@ -74,12 +74,12 @@ export class NavbarComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const route = event.url;
-        console.log(route);
+        // console.log(route);
         setTimeout(() => {
           // navbar + storeNav?
           const storeNav = document.getElementById("nav-fixed");
           const navBlur = document.getElementById("nav-blur");
-          if (storeNav) navBlur ? (navBlur.style.height = 160 + "px") : null;
+          if (storeNav) navBlur ? (navBlur.style.height = 140 + "px") : null;
           else navBlur ? (navBlur.style.height = 80 + "px") : null;
         }, 1);
         if (route === "/store") {

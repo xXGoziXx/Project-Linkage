@@ -1,9 +1,27 @@
-.content {
-  position: relative;
-  background-color: black;
-  background: url("../../../assets/img/storeBackground.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+.buttons-container {
+  height: calc(100vh - 200px);
+  .link-button {
+    background: white;
+    color: #0a0a0a;
+    max-width: 350px;
+    width: 80vw;
+    height: 80px;
+    opacity: 1;
+    @apply my-4 p-4 uppercase relative flex justify-center items-center;
+    img,
+    svg > image,
+    svg {
+      width: auto;
+      height: 45px;
+      @apply absolute left-0;
+    }
+    img,
+    svg,
+    span {
+      @apply ml-6;
+    }
+    &:hover {
+      filter: invert(100%);
+    }
+  }
 }

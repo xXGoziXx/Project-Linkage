@@ -1,4 +1,4 @@
-<div class="content">
+<div class="home-content">
     <div class="h-screen"
          id="arc-0"
          [ngStyle]="{
@@ -56,8 +56,6 @@
                                  [id]="i"
                                  *ngFor="let image of productService.sortBy(arc.images, 'order'); index as i;">
                                 <img [src]="image.src"
-                                     [defaultImage]="defaultImage"
-                                     [lazyLoad]="image.src"
                                      alt="{{image.alt}}">
                             </div>
                         </div>

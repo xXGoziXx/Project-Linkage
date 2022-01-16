@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Splide } from "@splidejs/splide";
 import { Product } from "src/app/interfaces/product";
 import { ProductService } from "src/app/services/product.service";
@@ -7,7 +7,7 @@ import { ProductService } from "src/app/services/product.service";
   templateUrl: "./store.component.html",
   styleUrls: ["./store.component.scss"]
 })
-export class StoreComponent implements OnInit, AfterViewInit {
+export class StoreComponent implements OnInit {
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
   selectedProduct: Product = {
     description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
@@ -27,13 +27,14 @@ export class StoreComponent implements OnInit, AfterViewInit {
     ],
     name: "Red Fleece",
     order: 0,
-    sizes: []
-    // sizes: ["S", "M", "L", "XL"]
-  };
-  0: {
-    alt: "";
-    src: "https://firebasestorage.googleapis.com/v0/b/pr…dia&token=bc95dc1e-f52d-4fc4-b165-b192670f39f9";
-    order: 0;
+    sizes: [
+      { name: "S", selected: false },
+      { name: "M", selected: false },
+      { name: "L", selected: false },
+      { name: "XL", selected: false }
+    ],
+    size: "",
+    quantity: 1
   };
   previewButtonIcon = {
     show: "../../../assets/icons/eye.svg",
@@ -90,14 +91,38 @@ export class StoreComponent implements OnInit, AfterViewInit {
       }, 1);
     }
   }
-  showMe(value: any) {
-    console.log(value);
-    this.selectedProduct = value;
+  selectProduct(value: any) {
+    // console.log(value);
+    this.selectedProduct = { ...value, quantity: 1 };
+    if (this.selectedProduct.sizes.length) {
+      this.selectedProduct.sizes = this.selectedProduct.sizes.map(size => {
+        if (size.name) {
+          return size;
+        }
+        return {
+          name: size,
+          selected: false
+        };
+      });
+      this.selectedProduct.size = "";
+    }
   }
-  ngOnInit(): void {
-    document.addEventListener("DOMContentLoaded", () => {
-      // this.viewProduct = true;
-    });
+
+  selectSize(i: number) {
+    this.selectedProduct.sizes?.forEach(
+      (size, index) => (this.selectedProduct.sizes[index].selected = false)
+    );
+    this.selectedProduct.sizes[i].selected = true;
   }
-  ngAfterViewInit(): void {}
+
+  checkSize() {
+    if (
+      this.selectedProduct.sizes.length &&
+      this.selectedProduct.sizes.find(size => size.selected)
+    ) {
+      return false;
+    } else if (this.selectedProduct.sizes.length) return true;
+    else return false;
+  }
+  ngOnInit(): void {}
 }

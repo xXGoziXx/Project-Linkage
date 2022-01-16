@@ -3,6 +3,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+@import "~ngx-easy-table/style.scss";
 
 @font-face {
   font-family: ImpactLT;
@@ -14,6 +15,34 @@
   src: url("./assets/fonts/Vancouver/vancouver.ttf") format("truetype");
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+.logo-container {
+  position: absolute;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  .brand-logo {
+    padding: 20px;
+    margin: 0 auto;
+    width: 100vw;
+    max-width: 50vh;
+    animation: pulse 1s infinite;
+    background-color: white;
+  }
+}
+
 html,
 body,
 :host {
@@ -22,7 +51,6 @@ body,
     "Franklin Gothic Bold", Charcoal, "Helvetica Inserat",
     "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
 
-  font-size: 1.2em;
   color: white;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -34,8 +62,19 @@ body,
   user-select: none !important;
   -webkit-tap-highlight-color: transparent;
   -moz-tap-highlight-color: transparent;
+  background-color: #0a0a0a;
+  @apply text-base;
 }
-
+.primary-font {
+  font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
+    Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
+    sans-serif;
+}
+.secondary-font {
+  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+    "Franklin Gothic Bold", Charcoal, "Helvetica Inserat",
+    "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+}
 h1 {
   font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
     Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
@@ -86,6 +125,20 @@ h5,
 h6 {
   font-weight: normal !important;
 }
+.content {
+  position: relative;
+  background-color: black;
+  background-image: url("assets/img/mobile-store-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+@media (min-width: 768px) {
+  .content {
+    background-image: url("assets/img/desktop-store-bg.jpg");
+  }
+}
 
 .adjust-text-size {
   font-size: 3.5vmin;
@@ -111,6 +164,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  vertical-align: middle;
   @apply m-4 px-10 py-2 border-solid border-2 border-white uppercase;
 
   &:hover,
@@ -123,6 +177,11 @@ h6 {
       background: rgba(255, 255, 255, 0.75);
       border-color: rgba(255, 255, 255, 0.75);
     }
+  }
+  &:disabled {
+    background: grey !important;
+    color: white !important;
+    transform: scale(1) !important;
   }
 }
 
@@ -172,4 +231,125 @@ h6 {
 .splide__slide.is-active {
   opacity: 1;
   border: none !important;
+}
+table,
+.ngx-table__table--normal {
+  thead > tr > th {
+    text-align: center;
+    border-bottom: solid 2px white;
+    font-weight: 400;
+    @apply primary-font;
+  }
+  tbody > tr > td {
+    text-align: center;
+    border-bottom: none !important;
+    @apply secondary-font;
+  }
+  thead > tr,
+  tbody > tr {
+    td:first-child {
+      @apply primary-font;
+    }
+    & > td,
+    & > th {
+      color: white;
+      font-size: 125%;
+      // @apply pl-3;
+      .ngx-icon-arrow-down::before,
+      .ngx-icon-arrow-right::before,
+      .ngx-icon-arrow-up::before {
+        border-color: white !important;
+      }
+      &:first-child {
+        border-right: solid 2px white;
+      }
+    }
+  }
+}
+
+//* Custom Select - Start *//
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+  @extend .secondary-font;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected,
+.select-items div {
+  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+    "Franklin Gothic Bold", Arial, Helvetica, sans-serif;
+  height: 100%;
+  border: 2px solid white;
+  background-color: #0a0a0a;
+  letter-spacing: 0.75px;
+  border-radius: 0;
+  appearance: none;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  /*style the items (options), including the selected item:*/
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  @apply text-xl p-2;
+}
+/*style the arrow inside the select element:*/
+.select-selected {
+  &:after {
+    position: absolute;
+    content: "";
+    top: 45%;
+    // bottom: 0;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+    @apply right-4;
+  }
+  /*point the arrow upwards when the select box is open (active):*/
+  &.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 25%;
+  }
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: #0a0a0a;
+  div {
+    border-top-color: transparent;
+    background-color: white;
+    color: #0a0a0a;
+  }
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.select-items > .same-as-selected {
+  background-color: rgba(white, 0.9);
+}
+//* Custom Select - End *//
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .bg-blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
 }
