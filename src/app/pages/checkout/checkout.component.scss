@@ -86,7 +86,14 @@ select {
   width: 100%;
   button[type="submit"] {
     margin-bottom: 0;
+    font-size: 1.25rem;
+    @apply px-5;
   }
+}
+.paypal-container {
+  background-color: rgba(white, 0.9);
+  border-radius: 4px;
+  @apply p-3;
 }
 .warning {
   color: #ff0000;

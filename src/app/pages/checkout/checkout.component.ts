@@ -22,9 +22,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   countries: any;
   continents: any;
   countryCode: string = "";
-  constructor(public productService: ProductService) {
-    this.initCountryContinents();
-  }
+  confirmingDetails: boolean = false;
+  constructor(public productService: ProductService) {}
   async initCountryContinents() {
     this.countries = await (
       await fetch("../../../assets/json/countries.json")
@@ -143,7 +142,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   private initConfig(): void {
     this.payPalConfig = {
       currency: "EUR",
-      clientId: "sb",
+      clientId: environment.paypalClientID,
       createOrderOnClient: data =>
         <ICreateOrderRequest>{
           intent: "CAPTURE",
@@ -176,44 +175,55 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
                   }
                 }
               },
-              payee: { email_address: "linkage.info.inc@gmail.com" },
               description: "Project Linkage Official Merch",
               soft_descriptor: "Linkage Merch",
               items: (this.productService.cart.items as Product[]).map(
-                ({ name, size, description, quantity, price }) => ({
+                ({ name, size, quantity, price }) => ({
                   name: `${name} (${size})`,
-                  description,
                   quantity: String(quantity),
                   unit_amount: { currency_code: "EUR", value: String(price) },
                   category: "PHYSICAL_GOODS"
                 })
-              )
-              // shipping: {
-              //   name: {
-              //     full_name: this.productService.checkoutForm.controls["name"].value
-              //       .split(" ")
-              //       .map(
-              //         (word: string) =>
-              //           word[0].toUpperCase() + word.substring(1)
-              //       )
-              //       .join(" ")
-              //   },
-              //   address: {
-              //     country_code: this.countryCode,
-              //     address_line_1: this.productService.checkoutForm.controls["address1"].value,
-              //     address_line_2: this.productService.checkoutForm.controls["address2"].value,
-              //     admin_area_2: this.productService.checkoutForm.controls["locality"].value,
-              //     admin_area_1: this.productService.checkoutForm.controls["state"].value,
-              //     postal_code: this.productService.checkoutForm.controls["postcode"].value
-              //   }
-              // }
+              ),
+              shipping: {
+                name: {
+                  full_name: this.productService.checkoutForm.controls[
+                    "name"
+                  ].value
+                    .split(" ")
+                    .map(
+                      (word: string) =>
+                        word[0].toUpperCase() + word.substring(1)
+                    )
+                    .join(" ")
+                },
+                address: {
+                  country_code: this.countryCode,
+                  address_line_1:
+                    this.productService.checkoutForm.controls["address1"].value,
+                  address_line_2:
+                    this.productService.checkoutForm.controls["address2"].value,
+                  admin_area_2:
+                    this.productService.checkoutForm.controls["locality"].value,
+                  admin_area_1:
+                    this.productService.checkoutForm.controls["state"].value,
+                  postal_code:
+                    this.productService.checkoutForm.controls["postcode"].value
+                }
+              }
             }
           ],
           payer: {
-            name: this.productService.checkoutForm.controls["name"].value
-              .split(" ")
-              .map((word: string) => word[0].toUpperCase() + word.substring(1))
-              .join(" "),
+            name: {
+              given_name: this.productService.checkoutForm.controls[
+                "name"
+              ].value
+                .split(" ")
+                .map(
+                  (word: string) => word[0].toUpperCase() + word.substring(1)
+                )
+                .join(" ")
+            },
             email_address:
               this.productService.checkoutForm.controls["email"].value,
             address: {
@@ -229,13 +239,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
               postal_code:
                 this.productService.checkoutForm.controls["postcode"].value
             }
+          },
+          application_context: {
+            brand_name: "Project Linkage",
+            locale: "en-IE",
+            shipping_preference: "SET_PROVIDED_ADDRESS",
+            user_action: "PAY_NOW"
           }
-          // application_context: {
-          //   brand_name: "Project Linkage",
-          //   locale: "en-IE",
-          //   shipping_preference: "SET_PROVIDED_ADDRESS",
-          //   user_action: "PAY_NOW"
-          // }
         },
       advanced: {
         commit: "true"
@@ -244,7 +254,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
         label: "paypal",
         shape: "rect",
         size: "responsive",
-        color: "silver",
+        color: "gold",
         layout: "vertical"
       },
       onApprove: (data, actions) => {
@@ -278,11 +288,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     };
   }
-  storeCustomerDetails() {
+  async storeCustomerDetails() {
     // this.productService.checkoutForm.reset();
 
-    // console.log(countries);
-    // console.log(continents);
+    // console.log(this.countries);
+    // console.log(this.continents);
+    this.confirmingDetails = true;
+    await this.initCountryContinents();
     this.countryCode =
       this.getKeyByValue(this.countries, this.country) || this.country;
     if (this.countryCode === "UK") this.countryCode = "GB";
@@ -306,6 +318,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.detailsConfirmed = false;
     }
+    this.confirmingDetails = false;
   }
 
   initCustomSelect() {
