@@ -24,6 +24,23 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   countryCode: string = "";
   confirmingDetails: boolean = false;
   constructor(public productService: ProductService) {}
+  goToProduct(item: Product) {
+    this.productService.selectedProduct = item;
+    this.productService.viewProduct = true;
+    this.productService.preview = false;
+  }
+  increaseItem(index: number) {
+    this.productService.cart.items[index].quantity++;
+  }
+  decreaseItem(index: number) {
+    this.productService.cart.items[index].quantity--;
+    if (this.productService.cart.items[index].quantity <= 0) {
+      this.removeItem(index);
+    }
+  }
+  removeItem(index: number) {
+    this.productService.cart.items.splice(index, 1);
+  }
   async initCountryContinents() {
     this.countries = await (
       await fetch("../../../assets/json/countries.json")
@@ -304,7 +321,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.isEU) {
       this.detailsConfirmed = true;
-      console.log(this.payPalConfig);
       setTimeout(() => {
         const paypalButton = document.getElementById("paypalButton");
         if (paypalButton)

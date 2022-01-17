@@ -187,7 +187,7 @@ h6 {
 
 .pop {
   transform: scale(1);
-  opacity: 0.7;
+  opacity: 0.9;
   transition: all 0.2s ease-in-out;
   &:hover,
   &:active {
@@ -314,9 +314,12 @@ table,
     @apply right-4;
   }
   /*point the arrow upwards when the select box is open (active):*/
-  &.select-arrow-active:after {
-    border-color: transparent transparent #fff transparent;
-    top: 25%;
+  &.select-arrow-active {
+    background-color: rgba(#0a0a0a, 0.9);
+    &:after {
+      border-color: transparent transparent #fff transparent;
+      top: 25%;
+    }
   }
 }
 
@@ -328,6 +331,7 @@ table,
   right: 0;
   z-index: 999;
   background-color: #0a0a0a;
+  @apply mx-1;
   div {
     border-top-color: transparent;
     background-color: white;

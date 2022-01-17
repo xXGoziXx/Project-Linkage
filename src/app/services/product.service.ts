@@ -9,6 +9,7 @@ import { Observable, Subscription } from "rxjs";
 import { Category, CategoryMetadata } from "../interfaces/category-metadata";
 import { Arc } from "../interfaces/arc";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { Splide } from "@splidejs/splide";
 
 @Injectable({
   providedIn: "root"
@@ -19,14 +20,71 @@ export class ProductService {
   private productDoc: AngularFirestoreDocument<CategoryMetadata>; // stores all the references to the product metadata
   productMetadata$: Subscription | undefined; // subscribes to the product metadata values
   products: { name: string; order: number; items: Product[] }[] = [];
+  preview = true;
+  showProductCard = false;
+  defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
+  selectedProduct: Product = {
+    description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
+    price: 34.99,
+    images: [
+      {
+        alt: "",
+        order: 0,
+        src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FONE%20PIECE%20IRISH%20IRELAND%20ANIME%20DOFLAMINGO%20FAN%20COSPLAY-min.png?alt=media&token=6c7697ba-d122-4eba-9649-9b0690bfac47"
+      },
+      {
+        alt: "",
+        order: 1,
+        src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FNARUTO%20ANIME%205%20KAGE%20CLOTHING%20IRELAND%20OTAKU%20WEEB%20FAN-min.png?alt=media&token=638488a4-5b55-48bf-93e2-7c6c8e1ac69e"
+      },
+      { alt: "", order: 2, src: this.defaultImage }
+    ],
+    name: "Red Fleece",
+    order: 0,
+    sizes: [
+      { name: "S", selected: false },
+      { name: "M", selected: false },
+      { name: "L", selected: false },
+      { name: "XL", selected: false }
+    ],
+    size: "",
+    quantity: 1
+  };
   cart: { items: Product[]; total: number } = {
-    items: [],
+    items: [
+      {
+        description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
+        price: 34.99,
+        images: [
+          {
+            alt: "",
+            order: 0,
+            src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FONE%20PIECE%20IRISH%20IRELAND%20ANIME%20DOFLAMINGO%20FAN%20COSPLAY-min.png?alt=media&token=6c7697ba-d122-4eba-9649-9b0690bfac47"
+          },
+          {
+            alt: "",
+            order: 1,
+            src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FNARUTO%20ANIME%205%20KAGE%20CLOTHING%20IRELAND%20OTAKU%20WEEB%20FAN-min.png?alt=media&token=638488a4-5b55-48bf-93e2-7c6c8e1ac69e"
+          },
+          { alt: "", order: 2, src: this.defaultImage }
+        ],
+        name: "Red Fleece",
+        order: 0,
+        sizes: [
+          { name: "S", selected: false },
+          { name: "M", selected: false },
+          { name: "L", selected: false },
+          { name: "XL", selected: true }
+        ],
+        size: "XL",
+        quantity: 1
+      }
+    ],
     get total() {
       if (this.items.length === 0) return 0;
       const result = this.items
         .map(item => item.price * item.quantity)
         .reduce((acc, item) => acc + item);
-      console.log(result);
       return result;
     }
   };
@@ -68,6 +126,47 @@ export class ProductService {
         }
         return null;
       });
+  }
+
+  set viewProduct(value: boolean) {
+    this.showProductCard = value;
+    if (this.showProductCard) {
+      setTimeout(() => {
+        const cardContainer = document.getElementById("card-container");
+
+        if (cardContainer) {
+          cardContainer?.addEventListener("click", e => {
+            if (e.target !== e.currentTarget) return;
+            this.viewProduct = false;
+            this.preview = true;
+          });
+        }
+        const main = new Splide("#main-slider", {
+          type: "fade",
+          width: "100%",
+          rewind: true,
+          pagination: false,
+          arrows: false
+        });
+        const thumbnails = new Splide("#thumbnail-slider", {
+          rewind: true,
+          fixedWidth: 80,
+          gap: 15,
+          pagination: false,
+          arrows: true,
+          focus: 0,
+          isNavigation: true,
+          dragMinThreshold: {
+            mouse: 0,
+            touch: 10
+          }
+        });
+
+        main.sync(thumbnails);
+        main.mount();
+        thumbnails.mount();
+      }, 1);
+    }
   }
   addToCart(product: Product) {
     const sizedProduct = {

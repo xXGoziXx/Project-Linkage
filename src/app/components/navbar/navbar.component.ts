@@ -54,6 +54,7 @@ export class NavbarComponent implements OnInit {
   ];
   showStoreNav: boolean = true;
   storeActiveSection = "";
+  previousUrl: string | undefined;
 
   constructor(private router: Router, public productService: ProductService) {}
 
@@ -73,7 +74,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        if (this.previousUrl === "/store") {
+          this.productService.viewProduct = false;
+          this.productService.preview = true;
+        }
         const route = event.url;
+        this.previousUrl = route;
         // console.log(route);
         setTimeout(() => {
           // navbar + storeNav?

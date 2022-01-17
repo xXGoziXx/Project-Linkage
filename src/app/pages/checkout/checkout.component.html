@@ -5,12 +5,46 @@
 
       <div class="summary my-8">
         <h2 class="uppercase">Order Summary:</h2>
+        <h3 class="empty-cart"
+            *ngIf="!productService.cart.items.length">Your cart is empty!</h3>
+        <div class="cart-container mx-1 grid gap-4 grid-flow-col overflow-x-auto">
+          <div class="cart flex gap-2 my-2"
+               *ngFor="let item of productService.cart.items; index as i">
+            <div class="image-container relative flex-auto">
+              <img [src]="item.images[0].src"
+                   alt="{{item.name}}"
+                   class="absolute" />
+              <img [src]="item.images[0].src"
+                   alt="{{item.name}}"
+                   class="invisible" />
+            </div>
+            <div class="name flex-auto">
+              <h4>Item #{{i+1}} Name:</h4>
+              <a routerLink="/store" (click)="goToProduct(item)"
+                 class="inline-block link"> {{item.name}} <span *ngIf="item.size">({{item.size }})</span></a>
+              <h4>Quantity:</h4>
+              <p class="inline-block"> #{{item.quantity}}</p>
+              <h4>Price:</h4>
+              <p class="inline-block"> {{item.price | currency: 'EUR'}}</p>
+            </div>
+            <div class="action-buttons primary-font text-center grid grid-rows-3 divide-y flex-none">
+              <button (click)="increaseItem(i)"><img src="../../../assets/icons/plus.svg"
+                     alt="increase"></button>
+              <button (click)="decreaseItem(i)"><img src="../../../assets/icons/minus.svg"
+                     alt="decrease"></button>
+              <button (click)="removeItem(i)"><img src="../../../assets/icons/trash.svg"
+                     alt="remove"></button>
+            </div>
+          </div>
+        </div>
+        <h3 class="subtotal mb-4">Subtotal: {{productService.cart.total | currency: 'EUR'}}</h3>
       </div>
-      <div class="delivery-address">
+      <div class="delivery-address ">
         <h2 class="uppercase">Customer Shipping Info:</h2>
         <form id=formId
               (ngSubmit)="storeCustomerDetails()"
-              [formGroup]="productService.checkoutForm">
+              [formGroup]="productService.checkoutForm"
+              class="mx-1">
 
           <div class="input-field mt-2">
             <span class="uppercase form-label">Name:</span>
@@ -80,23 +114,23 @@
                   class="col-span-2 warning secondary-font">We're only shipping to countries in Europe at
               the moment!</span>
             <span *ngIf="!this.productService.cart.items.length"
-                  class="col-span-2 warning secondary-font">Your cart is empty! Try adding an item.</span>
+                  class="col-span-2 warning secondary-font">Seems like you forgot to add an item to your
+              cart!</span>
           </div>
           <div class="flex flex-col items-center justify-center button-container"
                *ngIf="!detailsConfirmed">
             <button type="submit"
                     class="btn bg-blur"
-                    [disabled]="!productService.checkoutForm.valid ">Confirm<span *ngIf="confirmingDetails">ing</span>
-              Details<span *ngIf="confirmingDetails">...</span></button>
-            <!-- || !this.productService.cart.items.length -->
-
+                    [disabled]="!productService.checkoutForm.valid || !this.productService.cart.items.length">Confirm<span
+                    *ngIf="confirmingDetails">ing</span>
+              Details<span *ngIf="confirmingDetails ">...</span></button>
           </div>
         </form>
       </div>
       <div class="delivery-options my-8 "
            [hidden]="!detailsConfirmed">
         <h2 class="uppercase">Delivery Options:</h2>
-        <div class="custom-select mt-2">
+        <div class="custom-select mt-2 px-1">
           <select name="deliveryOptions"
                   id="deliveryOptions"
                   title="deliveryOptions">
@@ -106,7 +140,7 @@
           </select>
         </div>
       </div>
-      <div class="paypal-container"
+      <div class="paypal-container p-1"
            *ngIf="detailsConfirmed">
         <ngx-paypal id="paypalButton"
                     [config]="payPalConfig"></ngx-paypal>

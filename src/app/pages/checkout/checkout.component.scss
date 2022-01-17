@@ -1,16 +1,89 @@
-.checkout-container {
-  max-width: 350px;
+.checkout-container,
+.button-container {
   width: 100%;
+  button[type="submit"] {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+    @apply px-5;
+  }
 }
+.button-container {
+  max-width: 350px;
+}
+.summary {
+  .empty-cart {
+    font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+      "Franklin Gothic Bold", Charcoal, "Helvetica Inserat",
+      "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+    margin-right: -0.25rem;
+    @extend .warning;
+    @apply p-2 ml-1;
+  }
+  .cart-container {
+    width: 100%;
+    border-bottom: 2px solid white;
+    .cart {
+      // max-width: 350px;
+      width: max-content;
+      // height: 164px;
+      background-color: rgba(#0a0a0a, 1);
+      border: white 2px solid;
+      .name {
+        .link {
+          border-bottom: rgba(white, 0.75) solid 2px;
+          &:hover {
+            border-bottom-color: rgba(white, 1);
+          }
+        }
+      }
+      .image-container {
+        border-right: 2px solid white;
+        img {
+          // height: 160px;
+          width: 128px;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+        }
+      }
+      .action-buttons {
+        border-left: 2px solid white;
+        button {
+          @apply uppercase px-5;
+          &:hover,
+          &:focus {
+            background: white;
+            color: #0a0a0a;
+            img {
+              filter: invert(100%);
+            }
+          }
+          &:active {
+            background: rgba(white, 0.75);
+            color: #0a0a0a;
+            img {
+              filter: invert(100%);
+            }
+          }
+        }
+      }
+    }
+  }
+  .subtotal {
+    float: right;
+    background-color: #0a0a0a;
+    border: 2px solid white;
+    border-top-width: 0px;
+    margin-right: -0.25rem;
+    @apply p-2 uppercase;
+  }
+}
+
 .input-field {
   // width: max-content;
   font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
     "Franklin Gothic Bold", Arial, Helvetica, sans-serif;
-  max-width: 350px;
-  width: 100%;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: auto minmax(0, 1fr);
+  @apply grid;
   .form-label {
     font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
       Arial, Helvetica, sans-serif;
@@ -47,6 +120,7 @@ option {
     -moz-box-shadow: none !important;
     box-shadow: none !important;
     border-color: white transparent white transparent;
+    background-color: rgba(#0a0a0a, 0.9) !important;
   }
 }
 select {
@@ -79,16 +153,11 @@ select {
     }
   }
 }
-
-.checkout-container,
-.button-container {
+.delivery-options,
+.paypal-container,
+.input-field {
   max-width: 350px;
   width: 100%;
-  button[type="submit"] {
-    margin-bottom: 0;
-    font-size: 1.25rem;
-    @apply px-5;
-  }
 }
 .paypal-container {
   background-color: rgba(white, 0.9);
@@ -96,9 +165,8 @@ select {
   @apply p-3;
 }
 .warning {
-  color: #ff0000;
   background-color: white;
-  @apply text-center p-1;
+  @apply text-center p-1 text-red-600;
 }
 @supports (grid-template-columns: minmax(0, 1fr)) {
   .input-field {

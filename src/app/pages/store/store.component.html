@@ -20,7 +20,7 @@
                *ngFor="let product of productService.sortBy(products.items, 'order'); index as i;">
             <img [src]="product.images[0].src"
                  alt="{{product.images[0].alt}}"
-                 (click)="viewProduct = true;selectProduct(product);">
+                 (click)="productService.viewProduct = true;selectProduct(product);">
             <p class="mt-2 uppercase text-center product-title">{{product.name}}</p>
           </div>
         </div>
@@ -29,7 +29,7 @@
   </div>
 </div>
 <div id="product-view"
-     *ngIf="showProductCard"
+     *ngIf="productService.showProductCard"
      class="h-screen w-screen fixed">
   <img src="../../../assets/img/desktop-store-bg.jpg"
        alt=""
@@ -40,16 +40,16 @@
   <div id="card-container"
        class="absolute h-screen w-screen grid place-content-center">
     <div class="card relative mt-2.5 w-min border-2 border-solid border-white">
-      <h2 class="mt-3 text-center uppercase"> {{selectedProduct.name}}</h2>
+      <h2 class="mt-3 text-center uppercase"> {{productService.selectedProduct.name}}</h2>
       <div id="sliders"
            class="mx-auto"
-           [ngClass]="{'opacity-1': preview, 'opacity-0': !preview}">
+           [ngClass]="{'opacity-1': productService.preview, 'opacity-0': !productService.preview}">
         <div id="main-slider"
              class="splide mx-auto mt-1 px-12 ">
           <div class="splide__track">
             <ul class="splide__list">
               <li class="splide__slide"
-                  *ngFor="let image of productService.sortBy(selectedProduct.images, 'order');">
+                  *ngFor="let image of productService.sortBy(productService.selectedProduct.images, 'order');">
                 <img alt="{{image.alt}}"
                      [defaultImage]="defaultImage"
                      [lazyLoad]="image.src"
@@ -63,7 +63,7 @@
           <div class="splide__track">
             <ul class="splide__list">
               <li class="splide__slide"
-                  *ngFor="let image of productService.sortBy(selectedProduct.images, 'order')">
+                  *ngFor="let image of productService.sortBy(productService.selectedProduct.images, 'order')">
                 <img alt="{{image.alt}}"
                      [defaultImage]="defaultImage"
                      [lazyLoad]="image.src"
@@ -74,18 +74,18 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="!preview">
+      <ng-container *ngIf="!productService.preview">
         <div id="preview-description"
              class="absolute w-full h-full inset-0 bg-no-repeat bg-cover bg-scroll "
              [ngStyle]="{'backgroundImage': 'url(' + selectedProductFirstImage.src + ')'}">
-          <div [ngClass]="{'opacity-100': !preview, 'opacity-0' : preview}"
+          <div [ngClass]="{'opacity-100': !productService.preview, 'opacity-0' : productService.preview}"
                class="details-container grid justify-items-center content-between relative w-full h-full p-3">
-            <h2 class="relative text-center uppercase"> {{selectedProduct.name}}</h2>
+            <h2 class="relative text-center uppercase"> {{productService.selectedProduct.name}}</h2>
             <div>
               <h4 class="relative mt-5 mb-2 text-center uppercase">Description</h4>
               <div class="description overflow-y-auto mb-3">
                 <p class="text-center">
-                  {{selectedProduct.description}}
+                  {{productService.selectedProduct.description}}
                 </p>
               </div>
             </div>
@@ -94,33 +94,33 @@
               <div *ngIf="selectedProductSizes"
                    class="size">
                 <h3 class="mr-1"> Size: </h3>
-                <div *ngFor="let size of selectedProduct.sizes; index as i"
+                <div *ngFor="let size of productService.selectedProduct.sizes; index as i"
                      [ngClass]="{'active': size.selected}"
                      (click)="selectSize(i)"
                      class="size-btn"> {{size.name}}</div>
               </div>
               <h3 class="price mt-2">
-                Price: <span class="secondary-font"> {{selectedProduct.price | currency: 'EUR' }} </span>
+                Price: <span class="secondary-font"> {{productService.selectedProduct.price | currency: 'EUR' }} </span>
               </h3>
             </div>
             <button class="btn hidden sm:block bg-blur"
-                    (click)="productService.addToCart(selectedProduct)"
+                    (click)="productService.addToCart(productService.selectedProduct)"
                     [disabled]="checkSize()">Add to cart</button>
           </div>
         </div>
       </ng-container>
       <div class="absolute w-full preview-toggler flex justify-center gap-5">
         <div class="preview-button grid place-content-center text-center pop"
-             (click)="viewProduct = false;">
+             (click)="productService.viewProduct = false;this.productService.preview = true;">
           <img src="../../../assets/icons/close.svg"
                alt="close preview">
         </div>
         <button class="btn sm:hidden bg-blur"
-                (click)="productService.addToCart(selectedProduct)"
+                (click)="productService.addToCart(productService.selectedProduct)"
                 [disabled]="checkSize()">Add to cart</button>
         <div class="preview-button grid place-content-center text-center pop"
-             (click)="preview = !preview">
-          <img [src]="preview ? previewButtonIcon.hide : previewButtonIcon.show"
+             (click)="productService.preview = !productService.preview">
+          <img [src]="productService.preview ? previewButtonIcon.hide : previewButtonIcon.show"
                alt="">
         </div>
       </div>
