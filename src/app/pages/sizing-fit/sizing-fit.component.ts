@@ -46,7 +46,7 @@ export class SizingFitComponent implements OnInit {
   ];
   public configuration: Config = {
     ...DefaultConfig,
-    paginationEnabled: false,
+    paginationEnabled: false
   };
 
   constructor() {}

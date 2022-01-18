@@ -1,13 +1,12 @@
-
-
 p {
-  font-family: sans-serif;
-  font-weight: bold;
+	font-family: sans-serif;
+	font-weight: bold;
 }
 a {
-  text-decoration: underline rgba(red, 0.5) solid 2px;
-  transition: all 0.3s linear;
-  &:hover {
-    text-decoration: underline rgba(red, 0.75) solid 2px;
-  }
+	text-decoration: underline rgba(red, .5) solid 2px;
+
+	transition: all .3s linear;
+	&:hover {
+		text-decoration: underline rgba(red, .75) solid 2px;
+	}
 }

@@ -25,7 +25,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   confirmingDetails: boolean = false;
   constructor(public productService: ProductService) {}
   goToProduct(item: Product) {
-    this.productService.selectedProduct = item;
+    this.productService.selectedProduct = { ...item, quantity: 1 };
     this.productService.viewProduct = true;
     this.productService.preview = false;
   }
@@ -50,9 +50,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     ).json();
   }
   initAutocomplete() {
-    let nameField: HTMLInputElement, address1Field: HTMLInputElement;
+    let address1Field: HTMLInputElement;
     address1Field = document.querySelector("#address1") as HTMLInputElement;
-    nameField = document.querySelector("#name") as HTMLInputElement;
     // Create the autocomplete object, restricting the search predictions to
     // addresses in the US and Canada.
     this.autocomplete = new google.maps.places.Autocomplete(address1Field, {
@@ -60,7 +59,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
       fields: ["address_components", "geometry"],
       types: ["address"]
     });
-    nameField.focus();
 
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
@@ -168,7 +166,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
               amount: {
                 currency_code: "EUR",
                 value: String(
-                  this.productService.cart.total +
+                  this.productService.cart.totalPrice +
                     Number(
                       (
                         document.querySelector(
@@ -180,7 +178,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
                 breakdown: {
                   item_total: {
                     currency_code: "EUR",
-                    value: String(this.productService.cart.total)
+                    value: String(this.productService.cart.totalPrice)
                   },
                   shipping: {
                     currency_code: "EUR",

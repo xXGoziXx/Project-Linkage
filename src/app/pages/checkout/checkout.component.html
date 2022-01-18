@@ -29,16 +29,21 @@
               <p class="inline-block"> {{item.price | currency: 'EUR'}}</p>
             </div>
             <div class="action-buttons shrink primary-font text-center grid grid-rows-3 divide-y flex-none">
-              <button (click)="increaseItem(i)"><img src="../../../assets/icons/plus.svg"
-                     alt="increase"></button>
-              <button (click)="decreaseItem(i)"><img src="../../../assets/icons/minus.svg"
-                     alt="decrease"></button>
-              <button (click)="removeItem(i)"><img src="../../../assets/icons/trash.svg"
-                     alt="remove"></button>
+              <button (click)="increaseItem(i)">
+                <img alt="increase"
+                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNiAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0yMS42NDU0IDE0SDE1LjE3NDVWMjBIMTAuODYwNVYxNEg0LjM4OTU5VjEwSDEwLjg2MDVWNEgxNS4xNzQ1VjEwSDIxLjY0NTRWMTRaIiBmaWxsPSIjRTBFMEUwIi8+DQo8L3N2Zz4NCg==" />
+              </button>
+              <button (click)="decreaseItem(i)">
+                <img alt="decrease"
+                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNyAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0yMS43NjE3IDE0SDQuNTA1ODZWMTBIMjEuNzYxN1YxNFoiIGZpbGw9IiNFMEUwRTAiLz4NCjwvc3ZnPg0K" />
+              </button>
+              <button (click)="removeItem(i)">
+                <img alt="remove"
+                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNyAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF8xOF8yNikiPg0KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjE2NTc3IDcuNjA5NUw1LjgyMzk1IDIzLjAwODVDNS44MjM5NSAyMy41NTc1IDYuMzIwNTkgMjQgNi45MzA0OCAyNEgxOS4xOTI5QzE5LjQ4MTQgMjQuMDA0NCAxOS43NiAyMy45MDI1IDE5Ljk2NzQgMjMuNzE2NkMyMC4xNzQ5IDIzLjUzMDcgMjAuMjk0MyAyMy4yNzYgMjAuMjk5NCAyMy4wMDg1TDIxLjk1NzYgNy42MDk1SDQuMTY1NzdaTTEzLjk1NDcgMjEuMTAySDEyLjIyMDVWMTAuNDgzNUgxMy45NTQ3VjIxLjEwMlpNMTcuMTkwMSAyMS4xMDJIMTUuNDU1OUwxNy4wNzM3IDEwLjQ4MzVIMTguODA3OUwxNy4xOTAxIDIxLjEwMlpNMTAuNzE5MiAyMS4xMDJIOC45ODVMNy4zNjcyNiAxMC40ODM1SDkuMTAxNDdMMTAuNzE5MiAyMS4xMDJaIiBmaWxsPSIjRTBFMEUwIi8+DQo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTIyLjExMTMgMy4xNTc1SDE3LjAzNDhWMS4wNjM1QzE3LjAzNDggMC40NzU1IDE2LjI5NzEgMCAxNS42NSAwSDEwLjY0MzFDOS45OTYwNSAwIDkuMDk4MjEgMC4zMzc1IDkuMDk4MjEgMC45MjI1VjMuMDE2NUw0LjAxMDQ0IDMuMTU3NUMzLjg1Nzk4IDMuMTU1NTIgMy43MDY2IDMuMTgxNDMgMy41NjQ5NCAzLjIzMzc0QzMuNDIzMjkgMy4yODYwNiAzLjI5NDE2IDMuMzYzNzYgMy4xODQ5MiAzLjQ2MjRDMy4wNzU2OSAzLjU2MTA0IDIuOTg4NSAzLjY3ODY4IDIuOTI4MzQgMy44MDg1OUMyLjg2ODE5IDMuOTM4NSAyLjgzNjI1IDQuMDc4MTMgMi44MzQzNSA0LjIxOTVWNS45NTJIMjMuMjg0MVY0LjIxOTVDMjMuMjgyNiA0LjA3ODI3IDIzLjI1MTEgMy45Mzg3IDIzLjE5MTMgMy44MDg4MUMyMy4xMzE1IDMuNjc4OTIgMjMuMDQ0NiAzLjU2MTI2IDIyLjkzNTYgMy40NjI1OEMyMi44MjY2IDMuMzYzOSAyMi42OTc3IDMuMjg2MTYgMjIuNTU2MyAzLjIzMzhDMjIuNDE0OCAzLjE4MTQ1IDIyLjI2MzYgMy4xNTU1MiAyMi4xMTEzIDMuMTU3NVpNMTAuNTgwMSAyLjE2QzEwLjU4MDEgMS42OTIgMTEuMTQ3OSAxLjMxMjUgMTEuODQ2NyAxLjMxMjVIMTQuMzc2OUMxNS4wNzU3IDEuMzEyNSAxNS42NDE5IDEuNjkzNSAxNS42NDE5IDIuMTZWMy4xNTc1SDEwLjU3ODRWMi4xNkgxMC41ODAxWiIgZmlsbD0iI0UwRTBFMCIvPg0KPC9nPg0KPGRlZnM+DQo8Y2xpcFBhdGggaWQ9ImNsaXAwXzE4XzI2Ij4NCjxyZWN0IHdpZHRoPSIyNS44ODM3IiBoZWlnaHQ9IjI0IiBmaWxsPSJ3aGl0ZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC45NTkzNTEpIi8+DQo8L2NsaXBQYXRoPg0KPC9kZWZzPg0KPC9zdmc+DQo=" /></button>
             </div>
           </div>
         </div>
-        <h3 class="subtotal mb-4">Subtotal: {{productService.cart.total | currency: 'EUR'}}</h3>
+        <h3 class="subtotal mb-4">Subtotal: {{productService.cart.totalPrice | currency: 'EUR'}}</h3>
       </div>
       <div class="delivery-address ">
         <h2 class="uppercase">Customer Shipping Info:</h2>

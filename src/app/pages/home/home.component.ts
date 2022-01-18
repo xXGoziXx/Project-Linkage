@@ -14,12 +14,17 @@ export class HomeComponent implements OnInit {
   goToArc(name: string) {
     let arc = document.getElementById(name);
     if (arc) {
-      scrollIntoView(arc, {
-        // scrollMode: 'if-needed',
+      arc.scrollIntoView({
         behavior: "smooth",
-        block: "start"
-        // // inline: 'nearest',
+        block: "start",
+        inline: "nearest"
       });
+      // scrollIntoView(arc, {
+      //   // scrollMode: 'if-needed',
+      //   behavior: "smooth",
+      //   block: "start"
+      //   // // inline: 'nearest',
+      // });
     }
   }
 

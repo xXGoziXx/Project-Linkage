@@ -1,10 +1,17 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { LazyLoadImageModule } from "ng-lazyload-image";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { TableModule } from "ngx-easy-table";
 import { GoogleMapsModule } from "@angular/google-maps";
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { environment } from "../environments/environment";
+
+import { LazyLoadImageModule } from "ng-lazyload-image";
+import { TableModule } from "ngx-easy-table";
 import { NgxPayPalModule } from "ngx-paypal";
+import { ToastrModule } from "ngx-toastr";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -19,10 +26,6 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 import { ShippingAndReturnsComponent } from "./pages/shipping-and-returns/shipping-and-returns.component";
 
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
-import { AngularFireStorageModule } from "@angular/fire/compat/storage";
-import { environment } from "../environments/environment";
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,8 @@ import { environment } from "../environments/environment";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ maxOpened: 4 }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ShippingAndReturnsComponent } from './shipping-and-returns.component';
+import { ShippingAndReturnsComponent } from "./shipping-and-returns.component";
 
-describe('ShippingAndReturnsComponent', () => {
+describe("ShippingAndReturnsComponent", () => {
   let component: ShippingAndReturnsComponent;
   let fixture: ComponentFixture<ShippingAndReturnsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShippingAndReturnsComponent ]
-    })
-    .compileComponents();
+      declarations: [ShippingAndReturnsComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ShippingAndReturnsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

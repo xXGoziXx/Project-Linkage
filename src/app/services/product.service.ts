@@ -10,6 +10,7 @@ import { Category, CategoryMetadata } from "../interfaces/category-metadata";
 import { Arc } from "../interfaces/arc";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Splide } from "@splidejs/splide";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: "root"
@@ -50,7 +51,7 @@ export class ProductService {
     size: "",
     quantity: 1
   };
-  cart: { items: Product[]; total: number } = {
+  cart: { items: Product[]; totalPrice: number; totalQuantity: number } = {
     items: [
       {
         description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
@@ -80,10 +81,17 @@ export class ProductService {
         quantity: 1
       }
     ],
-    get total() {
+    get totalPrice() {
       if (this.items.length === 0) return 0;
       const result = this.items
         .map(item => item.price * item.quantity)
+        .reduce((acc, item) => acc + item);
+      return result;
+    },
+    get totalQuantity() {
+      if (this.items.length === 0) return 0;
+      const result = this.items
+        .map(item => item.quantity)
         .reduce((acc, item) => acc + item);
       return result;
     }
@@ -98,7 +106,11 @@ export class ProductService {
     postcode: new FormControl("", Validators.required),
     country: new FormControl("", Validators.required)
   });
-  constructor(private afs: AngularFirestore, private formBuilder: FormBuilder) {
+  constructor(
+    private afs: AngularFirestore,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+  ) {
     this.productDoc = afs.doc<CategoryMetadata>("products/metadata");
     this.arcs = afs
       .collection<Arc>("arcs", ref => ref.orderBy("date", "desc"))
@@ -173,13 +185,19 @@ export class ProductService {
       ...product,
       size: product.sizes?.find(size => size.selected)?.name || ""
     };
+    console.log(product);
     const duplicateProduct = this.cart.items.findIndex(item => {
       return item.name === sizedProduct.name && item.size === sizedProduct.size;
     });
     if (duplicateProduct === -1) {
       this.cart.items.push(sizedProduct);
+      this.showSuccess(sizedProduct, this.cart.totalQuantity);
     } else {
       this.cart.items[duplicateProduct].quantity++;
+      this.showSuccess(
+        this.cart.items[duplicateProduct],
+        this.cart.totalQuantity
+      );
     }
 
     console.log(this.cart);
@@ -188,5 +206,13 @@ export class ProductService {
     return array.sort((a, b) =>
       a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1
     );
+  }
+
+  showSuccess(product: Product, quantity: number) {
+    const title =
+      `#${quantity}: ` +
+      product.name +
+      (product.size ? ` (${product.size})` : "");
+    this.toastr.success("item successfully added to cart", title);
   }
 }

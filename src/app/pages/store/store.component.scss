@@ -1,152 +1,180 @@
 .nav_arrows > img {
-  height: 50px;
-  width: auto;
+	width: auto;
+	height: 50px;
 }
 #nav-fixed-container {
-  left: 0;
-  width: 100%;
-  max-width: 100vw;
+	left: 0;
+
+	width: 100%;
+	max-width: 100vw;
 }
 
 /* if backdrop support: very transparent and blurred */
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  #nav-fixed-container {
-    background: none;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-  }
+	#nav-fixed-container {
+		background: none;
+
+		-webkit-backdrop-filter: blur(10px);
+		        backdrop-filter: blur(10px);
+	}
 }
 
 #nav {
-  @apply my-3 border-solid border-y-2 border-white;
-  > .nav-items {
-    @apply px-5 py-3 text-center;
-  }
+	@apply my-3 border-solid border-y-2 border-white;
+	> .nav-items {
+		@apply px-5 py-3 text-center;
+	}
 }
 
 .content .product {
-  margin-top: 0;
-  img {
-    outline: 2px solid white;
-    outline-offset: -2px;
-    transition: all 0.1s linear;
-    background: #0a0a0a;
-  }
-  .product-title {
-    line-height: 1rem;
-  }
-  &:hover {
-    img {
-      outline-width: 8px;
-      outline-offset: -4px;
-    }
-    p {
-      @apply mt-2;
-    }
-  }
+	margin-top: 0;
+	img {
+		background: #0a0a0a;
+		outline: 2px solid white;
+		outline-offset: -2px;
+
+		transition: all .1s linear;
+	}
+	.product-title {
+		line-height: 1rem;
+	}
+	&:hover {
+		img {
+			box-shadow: 0 0 12px #999;
+			outline-width: 4px;
+			outline-offset: -4px;
+		}
+		p {
+			@apply mt-2;
+		}
+	}
 }
 
 #product-view {
-  top: 0;
-  left: 0;
-  z-index: 2;
-  box-shadow: 5px 3px 30px black;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0);
-  transition: all 0.3 s linear;
-  .background-image {
-    background-color: black;
+	top: 0;
+	left: 0;
+	z-index: 2;
 
-    filter: brightness(50%);
-    z-index: 3;
-    pointer-events: none;
-    @apply opacity-100 absolute top-0 h-screen w-screen;
-  }
-  @supports (
-    (-webkit-backdrop-filter: none) or (backdrop-filter: none) or
-      (not (filter: none))
-  ) {
-    .background-image {
-      display: none;
-    }
-    #card-container {
-      -webkit-backdrop-filter: brightness(50%) blur(10px);
-      backdrop-filter: brightness(50%) blur(10px);
-    }
-  }
+	overflow: hidden;
 
-  .card {
-    pointer-events: auto;
-    background: #0a0a0a;
-    width: 85vw;
-    max-width: calc(min(550px, 55vh) * (9 / 10));
-    top: 7.5vh;
-    margin-bottom: 50px;
-    z-index: 4;
-    .preview-toggler {
-      pointer-events: none;
-      transition: all 0.2s;
+	background-color: rgba(0, 0, 0, 0);
+	box-shadow: 5px 3px 30px black;
 
-      .btn {
-        height: 50px;
-        margin: auto 0;
-        @apply px-3;
-        pointer-events: auto;
-        line-height: 1.2em;
-      }
-      .preview-button {
-        height: 50px;
-        width: 50px;
-        background-color: rgba(#0a0a0a, 1);
-        opacity: 1;
-        pointer-events: auto;
-        @apply border-2 border-white border-solid my-4;
-        &:hover {
-          filter: invert(100%);
-          @apply border-black;
-        }
-        object {
-          width: 100%;
-          height: auto;
-          transition: all 0.2s ease-in-out;
-        }
-      }
-    }
-  }
+	transition: all .3 s linear;
+	.background-image {
+		z-index: 3;
+
+		background-color: black;
+
+		filter: brightness(50%);
+
+		pointer-events: none;
+		@apply opacity-100 absolute top-0 h-screen w-screen;
+	}
+	@supports (
+	(-webkit-backdrop-filter: none) or (backdrop-filter: none) or
+	(not (filter: none))
+	) {
+		.background-image {
+			display: none;
+		}
+		#card-container {
+			-webkit-backdrop-filter: brightness(50%) blur(10px);
+			        backdrop-filter: brightness(50%) blur(10px);
+		}
+	}
+
+	.card {
+		top: 7.5vh;
+		z-index: 4;
+
+		width: 85vw;
+		max-width: calc(min(550px, 55vh) * (9 / 10));
+		margin-bottom: 50px;
+
+		background: #0a0a0a;
+		box-shadow: 0 0 12px #999;
+
+		pointer-events: auto;
+		.preview-toggler {
+			transition: all .2s;
+
+			pointer-events: none;
+
+			.btn {
+				height: 50px;
+				margin: auto 0;
+
+				line-height: 1.2em;
+
+				pointer-events: auto;
+				@apply px-3;
+			}
+			.preview-button {
+				width: 50px;
+
+				background-color: rgba(#0a0a0a, 1);
+
+				opacity: 1;
+
+				pointer-events: auto;
+				@apply border-2 border-white border-solid my-4;
+				&:hover {
+					filter: invert(100%);
+					@apply border-black;
+				}
+				object {
+					width: 100%;
+					height: auto;
+
+					transition: all .2s ease-in-out;
+				}
+			}
+		}
+	}
 }
 #preview-description {
-  // p {
-  //   font-family: sans-serif;
-  // }
-  .size {
-    h3 {
-      display: inline-block;
-    }
-    > .size-btn {
-      display: inline-flex;
-      align-items: center;
-      background-color: #0a0a0a;
-      color: white;
-      font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
-        Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",
-        sans-serif;
-      height: 40px;
-      width: 40px;
-      @apply p-1 mx-1 border-solid border-white border-2 justify-center items-center;
-      h3 {
-        display: inline-block;
-      }
-      &.active {
-        background-color: white;
-        color: #0a0a0a;
-      }
-    }
-  }
-  transition: all 0.2s;
-  .details-container {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  .description {
-    max-height: 175px;
-  }
+	transition: all .2s;
+	// p {
+	//   font-family: sans-serif;
+	// }
+	.size {
+		h3 {
+			display: inline-block;
+		}
+		> .size-btn {
+			align-items: center;
+
+			display: inline-flex;
+			width: 40px;
+			height: 40px;
+
+			color: white;
+			font-family: ImpactLT, Impact, Haettenschweiler, 'Franklin Gothic Bold',
+			Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black',
+			sans-serif;
+
+			background-color: #0a0a0a;
+			@apply p-1 mx-1 border-solid border-white border-2 justify-center items-center;
+			h3 {
+				display: inline-block;
+			}
+			&.active {
+				color: #0a0a0a;
+
+				background-color: white;
+			}
+		}
+	}
+	.details-container {
+		background-color: rgba(0, 0, 0, .5);
+	}
+	.description {
+		max-height: 175px;
+	}
+}
+.preview-button, .add-button {
+	height: 50px;
+
+	box-shadow: 0 0 12px #999;
 }

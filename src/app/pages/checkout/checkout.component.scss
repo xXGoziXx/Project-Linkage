@@ -1,178 +1,186 @@
-.checkout-container,
-.button-container {
-  width: 100%;
-  button[type="submit"] {
-    margin-bottom: 0;
-    font-size: 1.25rem;
-    @apply px-5;
-  }
+.checkout-container, .button-container {
+	width: 100%;
+	button[type='submit'] {
+		margin-bottom: 0;
+
+		font-size: 1.25rem;
+		@apply px-5;
+	}
 }
 .button-container {
-  max-width: 350px;
+	max-width: 350px;
 }
 .summary {
-  .empty-cart {
-    font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
-      "Franklin Gothic Bold", Charcoal, "Helvetica Inserat",
-      "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
-    margin-right: -0.25rem;
-    @extend .warning;
-    @apply p-2 ml-1;
-  }
-  .cart-container {
-    width: 100%;
-    border-bottom: 2px solid white;
-    .cart {
-      // max-width: 350px;
-      width: min-content;
-      height: 164px;
-      background-color: rgba(#0a0a0a, 1);
-      border: white 2px solid;
-      .name {
-        width: max-content;
-        .link {
-          border-bottom: rgba(white, 0.75) solid 2px;
-          &:hover {
-            border-bottom-color: rgba(white, 1);
-          }
-        }
-      }
-      .image-container {
-        border-right: 2px solid white;
-        width: 128px;
-        img {
-          width: 128px;
-          height: 160px;
-          top: 0;
-          bottom: 0;
-          margin: auto;
-        }
-      }
-      .action-buttons {
-        border-left: 2px solid white;
-        width: max-content;
-        button {
-          @apply uppercase px-5;
-          &:hover,
-          &:focus {
-            background: white;
-            color: #0a0a0a;
-            img {
-              filter: invert(100%);
-            }
-          }
-          &:active {
-            background: rgba(white, 0.75);
-            color: #0a0a0a;
-            img {
-              filter: invert(100%);
-            }
-          }
-        }
-      }
-    }
-  }
-  .subtotal {
-    float: right;
-    background-color: #0a0a0a;
-    border: 2px solid white;
-    border-top-width: 0px;
-    margin-right: -0.25rem;
-    @apply p-2 uppercase;
-  }
+	.empty-cart {
+		@extend .warning;
+
+		margin-right: -.25rem;
+
+		font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+		'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat',
+		'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+		@apply p-2 ml-1;
+	}
+	.cart-container {
+		width: 100%;
+
+		border-bottom: 2px solid white;
+		.cart {
+			// max-width: 350px;
+			width: min-content;
+			height: 164px;
+
+			background-color: rgba(#0a0a0a, 1);
+			box-shadow: 0 0 12px #999;
+			border: white 2px solid;
+			.name {
+				width: max-content;
+				.link {
+					border-bottom: rgba(white, .75) solid 2px;
+					&:hover {
+						border-bottom-color: rgba(white, 1);
+					}
+				}
+			}
+			.image-container {
+				width: 128px;
+
+				border-right: 2px solid white;
+				img {
+					top: 0;
+					bottom: 0;
+
+					width: 128px;
+					height: 160px;
+					margin: auto;
+				}
+			}
+			.action-buttons {
+				width: max-content;
+
+				border-left: 2px solid white;
+				button {
+					@apply uppercase px-5;
+					&:hover, &:focus {
+						color: #0a0a0a;
+
+						background: white;
+						img {
+							filter: invert(100%);
+						}
+					}
+					&:active {
+						color: #0a0a0a;
+
+						background: rgba(white, .75);
+						img {
+							filter: invert(100%);
+						}
+					}
+				}
+			}
+		}
+	}
+	.subtotal {
+		float: right;
+		margin-right: -.25rem;
+
+		background-color: #0a0a0a;
+		border: 2px solid white;
+		border-top-width: 0;
+		@apply p-2 uppercase;
+	}
 }
 
 .input-field {
-  // width: max-content;
-  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
-    "Franklin Gothic Bold", Arial, Helvetica, sans-serif;
-  @apply grid;
-  .form-label {
-    font-family: ImpactLT, Impact, Haettenschweiler, "Franklin Gothic Bold",
-      Arial, Helvetica, sans-serif;
-    height: auto;
-    width: auto;
-    color: #0a0a0a;
-    background-color: white;
-    border: 2px solid white;
-    line-height: 1.25rem;
-    @apply p-1 pr-2 text-xl;
-  }
+	// width: max-content;
+	font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+	'Franklin Gothic Bold', Arial, Helvetica, sans-serif;
+	@apply grid;
+	.form-label {
+		width: auto;
+		height: auto;
+
+		color: #0a0a0a;
+		font-family: ImpactLT, Impact, Haettenschweiler, 'Franklin Gothic Bold',
+		Arial, Helvetica, sans-serif;
+		line-height: 1.25rem;
+
+		background-color: white;
+		border: 2px solid white;
+		@apply p-1 pr-2 text-xl;
+	}
 }
 /* custom select css in style.scss */
-input,
-select,
-option {
-  font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
-    "Franklin Gothic Bold", Arial, Helvetica, sans-serif;
-  height: 100%;
-  border: 2px solid white;
-  background-color: #0a0a0a !important;
-  letter-spacing: 0.75px;
-  border-radius: 0;
-  appearance: none;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  @apply text-xl p-2;
-  &:active,
-  &:focus {
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    border-color: white transparent white transparent;
-    background-color: rgba(#0a0a0a, 0.9) !important;
-  }
+input, select, option {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+
+	font-family: Vancouver, ImpactLT, Impact, Haettenschweiler,
+	'Franklin Gothic Bold', Arial, Helvetica, sans-serif;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	letter-spacing: .75px;
+
+	appearance: none;
+	background-color: #0a0a0a !important;
+	border: 2px solid white;
+	border-radius: 0;
+	@apply text-xl p-2;
+	&:active, &:focus {
+		background-color: rgba(#0a0a0a, .9) !important;
+		-webkit-box-shadow: none !important;
+		        box-shadow: none !important;
+		border-color: white transparent white transparent;
+
+		   -moz-box-shadow: none !important;
+	}
 }
 select {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .addresses {
-  input:first-of-type {
-    border-bottom-width: 1px;
-  }
-  input:last-of-type {
-    border-top-width: 1px;
-  }
-  input:not(:first-of-type):not(:last-of-type) {
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-  }
-  input#state {
-    border-right-width: 1px;
-    &:active,
-    &:focus {
-      border-color: white white white transparent;
-    }
-  }
-  input#postcode {
-    border-left-width: 1px;
-    &:active,
-    &:focus {
-      border-color: white transparent white white;
-    }
-  }
+	input:first-of-type {
+		border-bottom-width: 1px;
+	}
+	input:last-of-type {
+		border-top-width: 1px;
+	}
+	input:not(:first-of-type):not(:last-of-type) {
+		border-top-width: 1px;
+		border-bottom-width: 1px;
+	}
+	input#state {
+		border-right-width: 1px;
+		&:active, &:focus {
+			border-color: white white white transparent;
+		}
+	}
+	input#postcode {
+		border-left-width: 1px;
+		&:active, &:focus {
+			border-color: white transparent white white;
+		}
+	}
 }
-.delivery-options,
-.paypal-container,
-.input-field {
-  max-width: 350px;
-  width: 100%;
+.delivery-options, .paypal-container, .input-field {
+	width: 100%;
+	max-width: 350px;
 }
 .paypal-container {
-  background-color: rgba(white, 0.9);
-  border-radius: 4px;
-  @apply p-3;
+	background-color: rgba(white, .9);
+	border-radius: 4px;
+	@apply p-3;
 }
 .warning {
-  background-color: white;
-  @apply text-center p-1 text-red-600;
+	background-color: white;
+	@apply text-center p-1 text-red-600;
 }
 @supports (grid-template-columns: minmax(0, 1fr)) {
-  .input-field {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
+	.input-field {
+		grid-template-columns: auto minmax(0, 1fr);
+	}
 }

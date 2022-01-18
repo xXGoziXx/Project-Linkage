@@ -1,36 +1,37 @@
 .home-content {
-  background-color: black;
+	background-color: black;
+	// overflow-y: hidden;
 }
 
 .nav_arrows > img {
-  height: 50px;
-  width: auto;
+	width: auto;
+	height: 50px;
 }
 
 .img-container {
-  img {
-    height: auto;
-    width: 20vw;
-    min-width: 100%;
-  }
+	img {
+		width: 20vw;
+		height: auto;
+		min-width: 100%;
+	}
 }
 .description {
-  h5,
-  p {
-    min-height: 7.5vh;
-    max-height: 150px;
-    max-width: 1300px;
-
-    overflow-y: auto;
-  }
+	h5, p {
+		max-width: 1300px;
+		max-height: 150px;
+		min-height: 7.5vh;
+		overflow-y: auto;
+	}
 }
 .gallery {
-  img {
-    outline: 2px solid white;
-    outline-offset: -2px;
-    // transition: all 0.1s linear;
-    max-height: 20vh;
-    width: auto;
-    background: #0a0a0a;
-  }
+	img {
+		width: auto;
+
+// transition: all 0.1s linear;
+		max-height: 20vh;
+
+		background: #0a0a0a;
+		outline: 2px solid white;
+		outline-offset: -2px;
+	}
 }
