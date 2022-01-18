@@ -232,18 +232,36 @@ h6 {
   opacity: 1;
   border: none !important;
 }
+.ngx-container {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  border: solid 2px white;
+  background-color: #0a0a0a;
+}
 table,
 .ngx-table__table--normal {
+  // display: block;
+  // overflow-x: auto;
+  // white-space: nowrap;
   thead > tr > th {
     text-align: center;
     border-bottom: solid 2px white;
     font-weight: 400;
     @apply primary-font;
   }
-  tbody > tr > td {
-    text-align: center;
-    border-bottom: none !important;
-    @apply secondary-font;
+  tbody > tr {
+    &:hover {
+      background-color: white;
+      td {
+        color: #0a0a0a;
+      }
+    }
+    > td {
+      text-align: center;
+      border-bottom: none !important;
+      @apply secondary-font;
+    }
   }
   thead > tr,
   tbody > tr {

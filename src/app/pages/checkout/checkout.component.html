@@ -7,27 +7,28 @@
         <h2 class="uppercase">Order Summary:</h2>
         <h3 class="empty-cart"
             *ngIf="!productService.cart.items.length">Your cart is empty!</h3>
-        <div class="cart-container mx-1 grid gap-4 grid-flow-col overflow-x-auto">
+        <div class="cart-container mx-1 flex gap-4  overflow-x-auto">
           <div class="cart flex gap-2 my-2"
                *ngFor="let item of productService.cart.items; index as i">
-            <div class="image-container relative flex-auto">
+            <div class="image-container relative shrink">
               <img [src]="item.images[0].src"
                    alt="{{item.name}}"
                    class="absolute" />
               <img [src]="item.images[0].src"
                    alt="{{item.name}}"
-                   class="invisible" />
+                   class="opacity-0" />
             </div>
-            <div class="name flex-auto">
+            <div class="name shrink ">
               <h4>Item #{{i+1}} Name:</h4>
-              <a routerLink="/store" (click)="goToProduct(item)"
+              <a routerLink="/store"
+                 (click)="goToProduct(item)"
                  class="inline-block link"> {{item.name}} <span *ngIf="item.size">({{item.size }})</span></a>
               <h4>Quantity:</h4>
               <p class="inline-block"> #{{item.quantity}}</p>
               <h4>Price:</h4>
               <p class="inline-block"> {{item.price | currency: 'EUR'}}</p>
             </div>
-            <div class="action-buttons primary-font text-center grid grid-rows-3 divide-y flex-none">
+            <div class="action-buttons shrink primary-font text-center grid grid-rows-3 divide-y flex-none">
               <button (click)="increaseItem(i)"><img src="../../../assets/icons/plus.svg"
                      alt="increase"></button>
               <button (click)="decreaseItem(i)"><img src="../../../assets/icons/minus.svg"

@@ -24,11 +24,12 @@
     border-bottom: 2px solid white;
     .cart {
       // max-width: 350px;
-      width: max-content;
-      // height: 164px;
+      width: min-content;
+      height: 164px;
       background-color: rgba(#0a0a0a, 1);
       border: white 2px solid;
       .name {
+        width: max-content;
         .link {
           border-bottom: rgba(white, 0.75) solid 2px;
           &:hover {
@@ -38,9 +39,10 @@
       }
       .image-container {
         border-right: 2px solid white;
+        width: 128px;
         img {
-          // height: 160px;
           width: 128px;
+          height: 160px;
           top: 0;
           bottom: 0;
           margin: auto;
@@ -48,6 +50,7 @@
       }
       .action-buttons {
         border-left: 2px solid white;
+        width: max-content;
         button {
           @apply uppercase px-5;
           &:hover,
