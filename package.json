@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --aot --build-optimizer",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@angular/service-worker": "~12.2.0",
     "@splidejs/splide": "^3.6.9",
     "classlist.js": "^1.1.20150312",
     "firebase": "^9.6.1",

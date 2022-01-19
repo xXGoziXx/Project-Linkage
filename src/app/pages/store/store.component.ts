@@ -40,7 +40,7 @@ export class StoreComponent implements OnInit {
         });
       this.productService.selectedProduct.size = "";
     }
-    console.log(this.productService.selectedProduct);
+    // console.log(this.productService.selectedProduct);
   }
 
   selectSize(i: number) {

@@ -9,10 +9,10 @@
 }
 
 .img-container {
+	@apply mx-auto;
 	img {
-		width: 20vw;
+		width: 200px;
 		height: auto;
-		min-width: 100%;
 	}
 }
 .description {

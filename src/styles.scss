@@ -29,29 +29,50 @@
 		transform: scale(.9);
 	}
 }
-.logo-container {
-	position: absolute;
-	top: 50%;
-	left: 50%;
 
-	text-align: center;
+@keyframes bg-expand {
+	0% {
+		height: 300px;
+	}
+	100% {
+		height: 100vh;
+	}
+}
+.logo-background {
+	position: fixed;
+
+	width: 100vw;
+	height: 100vh;
+	margin: auto;
 
 	background-color: white;
-	transform: translate(-50%, -50%);
-	.brand-logo {
-		width: 100vw;
-		max-width: 50vh;
-		padding: 20px;
-		margin: 0 auto;
 
-		background-color: white;
+	animation-duration: .1s;
+	animation-iteration-count: 1;
+	animation-name: bg-expand;
+	animation-timing-function: linear;
+	@apply inset-0;
+}
+.brand-logo {
+	position: fixed;
 
-		animation: pulse 1s infinite;
-	}
+	width: 100vw;
+	height: auto;
+	max-width: 50vh;
+	padding: 20px;
+	margin: auto;
+
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-name: pulse;
+	animation-timing-function: ease;
+
+	@apply inset-0;
 }
 
 html, body, :host {
 	box-sizing: border-box;
+	min-height: 100vh;
 	overflow-x: hidden !important;
 
 	color: white;

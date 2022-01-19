@@ -24,7 +24,7 @@ export class ProductService {
   preview = true;
   showProductCard = false;
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
-  selectedProduct: Product = {
+  selectedProduct!: Product /*= {
     description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
     price: 34.99,
     images: [
@@ -50,10 +50,10 @@ export class ProductService {
     ],
     size: "",
     quantity: 1
-  };
+  }*/;
   cart: { items: Product[]; totalPrice: number; totalQuantity: number } = {
     items: [
-      {
+      /*{
         description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
         price: 34.99,
         images: [
@@ -79,7 +79,7 @@ export class ProductService {
         ],
         size: "XL",
         quantity: 1
-      }
+      }*/
     ],
     get totalPrice() {
       if (this.items.length === 0) return 0;
@@ -185,7 +185,7 @@ export class ProductService {
       ...product,
       size: product.sizes?.find(size => size.selected)?.name || ""
     };
-    console.log(product);
+    // console.log(product);
     const duplicateProduct = this.cart.items.findIndex(item => {
       return item.name === sizedProduct.name && item.size === sizedProduct.size;
     });
@@ -200,7 +200,7 @@ export class ProductService {
       );
     }
 
-    console.log(this.cart);
+    // console.log(this.cart);
   }
   sortBy(array: any[], prop: string) {
     return array.sort((a, b) =>

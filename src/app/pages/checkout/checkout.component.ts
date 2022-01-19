@@ -309,7 +309,9 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log(this.countries);
     // console.log(this.continents);
     this.confirmingDetails = true;
-    await this.initCountryContinents();
+    if (this.continents === undefined && this.countries === undefined) {
+      await this.initCountryContinents();
+    }
     this.countryCode =
       this.getKeyByValue(this.countries, this.country) || this.country;
     if (this.countryCode === "UK") this.countryCode = "GB";

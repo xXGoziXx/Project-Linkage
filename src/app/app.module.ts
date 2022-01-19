@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.com
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 import { ShippingAndReturnsComponent } from "./pages/shipping-and-returns/shipping-and-returns.component";
+import { ServiceWorkerModule } from "@angular/service-worker";
 
 @NgModule({
   declarations: [
@@ -53,9 +54,21 @@ import { ShippingAndReturnsComponent } from "./pages/shipping-and-returns/shippi
     GoogleMapsModule,
     NgxPayPalModule,
     ReactiveFormsModule,
-    TableModule
+    TableModule,
+    ServiceWorkerModule.register("ngsw-worker.js", {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: "registerWhenStable:30000"
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useValue: () => new Promise(resolve => setTimeout(resolve, 3000)),
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

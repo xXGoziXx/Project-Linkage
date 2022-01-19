@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { PwaService } from "./services/pwa-service.service";
 
 @Component({
   selector: "app-root",
@@ -7,4 +8,5 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "Project-Linkage";
+  constructor(private pwaService: PwaService) {}
 }

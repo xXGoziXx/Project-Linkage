@@ -70,7 +70,6 @@ export class NavbarComponent implements OnInit {
       });
     }
   }
-
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -79,6 +78,8 @@ export class NavbarComponent implements OnInit {
           this.productService.preview = true;
         }
         const route = event.url;
+        const page = this.pages.find(page => page.routerLink === route);
+        document.title = `${page ? page.title + " | " : ""}Linkage`;
         this.previousUrl = route;
         // console.log(route);
         setTimeout(() => {

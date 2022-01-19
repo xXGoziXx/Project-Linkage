@@ -7,11 +7,11 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ContactUsComponent implements OnInit {
   links = [
-    {
-      icon: "../../../assets/icons/fb.svg",
-      title: "Facebook",
-      url: "https://www.facebook.com/Linkage-111517534088447"
-    },
+    // {
+    //   icon: "../../../assets/icons/fb.svg",
+    //   title: "Facebook",
+    //   url: "https://www.facebook.com/Linkage-111517534088447"
+    // },
     {
       icon: "../../../assets/icons/ig.svg",
       title: "Instagram",
