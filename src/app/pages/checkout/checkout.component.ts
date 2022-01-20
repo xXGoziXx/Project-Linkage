@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   public payPalConfig?: IPayPalConfig;
   showSuccess: boolean = false;
   detailsConfirmed: boolean = false;
-  country: string = "";
+  country!: string;
   isEU = true;
 
   checkoutFormSubscription!: Subscription;
@@ -31,15 +31,27 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   increaseItem(index: number) {
     this.productService.cart.items[index].quantity++;
+    localStorage.setItem(
+      "project_linkage",
+      JSON.stringify({ items: this.productService.cart.items })
+    );
   }
   decreaseItem(index: number) {
     this.productService.cart.items[index].quantity--;
     if (this.productService.cart.items[index].quantity <= 0) {
       this.removeItem(index);
     }
+    localStorage.setItem(
+      "project_linkage",
+      JSON.stringify({ items: this.productService.cart.items })
+    );
   }
   removeItem(index: number) {
     this.productService.cart.items.splice(index, 1);
+    localStorage.setItem(
+      "project_linkage",
+      JSON.stringify({ items: this.productService.cart.items })
+    );
   }
   async initCountryContinents() {
     this.countries = await (
@@ -165,26 +177,34 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
             {
               amount: {
                 currency_code: "EUR",
-                value: String(
-                  this.productService.cart.totalPrice +
-                    Number(
-                      (
-                        document.querySelector(
-                          "select#deliveryOptions"
-                        ) as HTMLSelectElement
-                      ).value
-                    )
-                ),
+                value: parseFloat(
+                  String(
+                    this.productService.cart.totalPrice +
+                      Number(
+                        (
+                          document.querySelector(
+                            "select#deliveryOptions" + (this.countryCode === "IE"
+                              ? "0"
+                              : "1")
+                          ) as HTMLSelectElement
+                        ).value
+                      )
+                  )
+                ).toFixed(2),
                 breakdown: {
                   item_total: {
                     currency_code: "EUR",
-                    value: String(this.productService.cart.totalPrice)
+                    value: parseFloat(
+                      String(this.productService.cart.totalPrice)
+                    ).toFixed(2)
                   },
                   shipping: {
                     currency_code: "EUR",
                     value: (
                       document.querySelector(
-                        "select#deliveryOptions"
+                        "select#deliveryOptions" + (this.countryCode === "IE"
+                          ? "0"
+                          : "1")
                       ) as HTMLSelectElement
                     ).value
                   }
@@ -194,9 +214,12 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
               soft_descriptor: "Linkage Merch",
               items: (this.productService.cart.items as Product[]).map(
                 ({ name, size, quantity, price }) => ({
-                  name: `${name} (${size})`,
+                  name: name + (size ? ` (${size})` : ""),
                   quantity: String(quantity),
-                  unit_amount: { currency_code: "EUR", value: String(price) },
+                  unit_amount: {
+                    currency_code: "EUR",
+                    value: parseFloat(String(price)).toFixed(2)
+                  },
                   category: "PHYSICAL_GOODS"
                 })
               ),
@@ -205,6 +228,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
                   full_name: this.productService.checkoutForm.controls[
                     "name"
                   ].value
+                    ?.trim()
                     .split(" ")
                     .map(
                       (word: string) =>
@@ -233,6 +257,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
               given_name: this.productService.checkoutForm.controls[
                 "name"
               ].value
+                ?.trim()
                 .split(" ")
                 .map(
                   (word: string) => word[0].toUpperCase() + word.substring(1)
@@ -252,7 +277,9 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
               admin_area_1:
                 this.productService.checkoutForm.controls["state"].value,
               postal_code:
-                this.productService.checkoutForm.controls["postcode"].value
+                this.productService.checkoutForm.controls[
+                  "postcode"
+                ].value?.trim()
             }
           },
           application_context: {
@@ -285,18 +312,37 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
           );
         });
       },
-      onClientAuthorization: data => {
+      onClientAuthorization: async data => {
         console.log(
           "onClientAuthorization - you should probably inform your server about completed transaction at this point",
           data
         );
-        this.showSuccess = true;
+
+        const orderData = {
+          id: data.id,
+          email:
+            this.productService.checkoutForm.controls["email"].value?.trim(),
+          name: this.productService.checkoutForm.controls["name"].value
+            ?.trim()
+            .split(" ")
+            .map((word: string) => word[0].toUpperCase() + word.substring(1))
+            .join(" "),
+          country:
+            this.productService.checkoutForm.controls["country"].value?.trim()
+        };
+        await this.productService.createOrder(orderData);
+        this.productService.showOrderComplete();
+        this.productService.checkoutForm.reset();
+        this.productService.cart.items = [];
+        localStorage.setItem("project_linkage", JSON.stringify({ items: [] }));
       },
       onCancel: (data, actions) => {
         console.log("OnCancel", data, actions);
       },
       onError: err => {
         console.log("OnError", err);
+        this.productService.showOrderIncomplete();
+        this.productService.showOrderIncomplete();
       },
       onClick: (data, actions) => {
         console.log("onClick", data, actions);
@@ -304,17 +350,17 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
   async storeCustomerDetails() {
-    // this.productService.checkoutForm.reset();
-
-    // console.log(this.countries);
-    // console.log(this.continents);
     this.confirmingDetails = true;
     if (this.continents === undefined && this.countries === undefined) {
       await this.initCountryContinents();
     }
+    // console.log(this.countries);
+    // console.log(this.continents);
+    console.log(this.countryCode);
     this.countryCode =
       this.getKeyByValue(this.countries, this.country) || this.country;
-    if (this.countryCode === "UK") this.countryCode = "GB";
+    const GB = ["UK", "Scotland", "Wales", "England", "Northern Ireland"];
+    if (GB.includes(this.countryCode)) this.countryCode = "GB";
     console.log(this.countryCode);
     if (this.countryCode && this.continents[this.countryCode] !== "EU") {
       this.isEU = false;
@@ -447,7 +493,7 @@ except the current select box:*/
         //   .map((word: string) => word[0].toUpperCase() + word.substring(1))
         //   .join(" ");
         this.country =
-          this.productService.checkoutForm.controls["country"].value;
+          this.productService.checkoutForm.controls["country"].value?.trim();
         this.detailsConfirmed = false;
         this.isEU = true;
       });

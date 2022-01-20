@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "project-linkage"
-  }
+    "default": "project-linkage",
+    "project-linkage": "project-linkage"
+  },
+  "targets": {}
 }

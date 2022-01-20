@@ -5,5 +5,9 @@ service cloud.firestore {
       allow write: if false;
       allow read;
     }
+     match /orders/{order} {
+        allow create: if true;
+        allow read: if false;
+      }
   }
 }

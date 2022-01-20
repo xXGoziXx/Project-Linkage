@@ -136,15 +136,28 @@
       <div class="delivery-options my-8 "
            [hidden]="!detailsConfirmed">
         <h2 class="uppercase">Delivery Options:</h2>
-        <div class="custom-select mt-2 px-1">
+        <div class="custom-select mt-2 px-1"
+             [hidden]="countryCode !== 'IE'">
           <select name="deliveryOptions"
-                  id="deliveryOptions"
+                  id="deliveryOptions0"
                   title="deliveryOptions">
             <option selected="true"
-                    value="2.50">Standard Delivery (Untracked) - €2.50</option>
-            <option value="3.50">Registered Delivery (Tracked) - €3.50</option>
+                    value="1.49">
+              Ireland (Untracked) - €1.49</option>
+            <option value="3.49">Ireland (Tracked) - €3.49</option>
           </select>
         </div>
+        <div class="custom-select mt-2 px-1 none"
+             [hidden]="countryCode === 'IE'">
+          <select name="deliveryOptions"
+                  id="deliveryOptions1"
+                  title="deliveryOptions">
+            <option selected="true"
+                    value="2.49">Rest of Europe (Untracked) - €2.49</option>
+            <option value="8.99">Rest of Europe (Tracked) - €8.99</option>
+          </select>
+        </div>
+
       </div>
       <div class="paypal-container p-1"
            *ngIf="detailsConfirmed">

@@ -11,7 +11,8 @@
     </div>
     <div class="flex flex-col gap-5 mb-5">
       <div [id]="products.name"
-           *ngFor="let products of productService.products">
+           *ngFor="let products of productService.products"
+           class="pb-4">
         <h2 class="uppercase">{{products.name}}</h2>
         <div class="flex flex-wrap ">
           <!-- Product Items -->

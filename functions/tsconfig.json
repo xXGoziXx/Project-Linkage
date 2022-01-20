@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "importHelpers": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "es2020",
+    "moduleResolution": "Node",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",

@@ -86,7 +86,7 @@ export class ProductService {
       const result = this.items
         .map(item => item.price * item.quantity)
         .reduce((acc, item) => acc + item);
-      return result;
+      return Number(parseFloat(String(result)).toFixed(2));
     },
     get totalQuantity() {
       if (this.items.length === 0) return 0;
@@ -111,6 +111,12 @@ export class ProductService {
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) {
+    const itemsJSON = localStorage.getItem("project_linkage");
+    if (itemsJSON) {
+      // console.log(JSON.parse(itemsJSON));
+      const { items } = JSON.parse(itemsJSON);
+      this.cart.items = items;
+    }
     this.productDoc = afs.doc<CategoryMetadata>("products/metadata");
     this.arcs = afs
       .collection<Arc>("arcs", ref => ref.orderBy("date", "desc"))
@@ -199,7 +205,10 @@ export class ProductService {
         this.cart.totalQuantity
       );
     }
-
+    localStorage.setItem(
+      "project_linkage",
+      JSON.stringify({ items: this.cart.items })
+    );
     // console.log(this.cart);
   }
   sortBy(array: any[], prop: string) {
@@ -213,6 +222,29 @@ export class ProductService {
       `#${quantity}: ` +
       product.name +
       (product.size ? ` (${product.size})` : "");
-    this.toastr.success("item successfully added to cart", title);
+    this.toastr.success("Item successfully added to cart!", title);
+  }
+  showOrderComplete() {
+    this.toastr.success("Thanks for shopping with us!", "Order Completed:");
+  }
+  showOrderIncomplete() {
+    this.toastr.success(
+      "There has been an issue processing your order. Please contact us for support!",
+      "Order Failed:"
+    );
+  }
+  async createOrder({
+    id,
+    email,
+    name,
+    country
+  }: {
+    id: string;
+    email: string;
+    name: string;
+    country: string;
+  }) {
+    const orderDoc = this.afs.doc(`orders/${id}`);
+    await orderDoc.set({ id, email, name, country });
   }
 }
