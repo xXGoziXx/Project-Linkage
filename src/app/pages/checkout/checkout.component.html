@@ -22,14 +22,15 @@
               <h4>Item #{{i+1}} Name:</h4>
               <a routerLink="/store"
                  (click)="goToProduct(item)"
-                 class="inline-block link"> {{item.name}} <span *ngIf="item.size">({{item.size }})</span></a>
+                 class="inline-block link"> {{item.name}} <span *ngIf="item.size !== 'R'">({{item.size }})</span></a>
               <h4>Quantity:</h4>
               <p class="inline-block"> #{{item.quantity}}</p>
               <h4>Price:</h4>
               <p class="inline-block"> {{item.price | currency: 'EUR'}}</p>
             </div>
             <div class="action-buttons shrink primary-font text-center grid grid-rows-3 divide-y flex-none">
-              <button (click)="increaseItem(i)">
+              <button (click)="increaseItem(i)"
+                      [disabled]="item.quantity >= item.stock[item.size]">
                 <img alt="increase"
                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNiAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0yMS42NDU0IDE0SDE1LjE3NDVWMjBIMTAuODYwNVYxNEg0LjM4OTU5VjEwSDEwLjg2MDVWNEgxNS4xNzQ1VjEwSDIxLjY0NTRWMTRaIiBmaWxsPSIjRTBFMEUwIi8+DQo8L3N2Zz4NCg==" />
               </button>

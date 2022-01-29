@@ -7,6 +7,8 @@ import { PwaService } from "./services/pwa-service.service";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = "Project-Linkage";
-  constructor(private pwaService: PwaService) {}
+  title = "Project Linkage";
+  constructor(private pwaService: PwaService) {
+    document.title = this.title;
+  }
 }

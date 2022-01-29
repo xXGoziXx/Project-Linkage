@@ -1,8 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as functions from "firebase-functions";
+import functions from "firebase-functions";
 import {Base64} from "js-base64";
 import * as nodemailer from "nodemailer";
 import fetch from "node-fetch";
+import admin from "firebase-admin";
+
+const {initializeApp, firestore} = admin;
+initializeApp();
+const db = firestore();
+
+let paypalApiUrl = "https://api-m.sandbox.paypal.com/v2";
+if (process.env.NODE_ENV === "production") {
+  paypalApiUrl = "https://api-m.paypal.com/v2";
+}
+console.log(paypalApiUrl);
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -19,7 +30,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 /**
- * @param  {string} email
+ * @param  {{ email:string, name:string, id:string, country:string}} data
  * @param  {any} order
  * @return {string}
  */
@@ -224,9 +235,48 @@ h1 {
   });
   return response;
 }
+
+/**
+ * @param  {{name:string, quantity: number}[]} items
+ * @return {void}
+ */
+async function updateStock(items: {name: string; quantity: number}[]) {
+  console.log(items);
+
+  for (const item of items) {
+    const quantity = item.quantity;
+    console.log("Qty: " + quantity);
+    const nameSplit = item.name.split(" ");
+    let size = nameSplit[nameSplit.length - 1];
+    let category = nameSplit[nameSplit.length - 2];
+    if (size.charAt(0) !== "(" && size.charAt(size.length) !== ")") {
+      size = "(R)";
+      category = nameSplit[nameSplit.length - 1];
+    } else {
+      nameSplit.splice(nameSplit.length - 1, 1);
+    }
+    const name = nameSplit.join(" ");
+    console.log("Name: " + name);
+    size = size.replace(/\(|\)/g, "");
+    console.log("Size:", size);
+    console.log("Category:", `${category.toLowerCase()}s`);
+    const productDocRef = await db
+      .collection(`${category.toLowerCase()}s`)
+      .where("name", "==", name)
+      .get();
+    productDocRef.docs.forEach((doc) => {
+      doc.ref
+        .update({
+          [`stock.${size}`]: firestore.FieldValue.increment(-quantity),
+        })
+        .then(() => {
+          console.log(doc.data());
+        });
+    });
+  }
+}
 export const createOrder = functions.firestore
   .document("orders/{userId}")
-
   .onCreate(async (snap: any) => {
     const data = snap.data() as {
       id: string;
@@ -239,26 +289,21 @@ export const createOrder = functions.firestore
     console.log("Order ID: ", id);
     const client = functions.config().paypal_live.client_id;
     const secret = functions.config().paypal_live.client_secret;
-    // const client = functions.config().paypal.client_id;
-    // const secret = functions.config().paypal.client_secret;
     const basicAuthString = client + ":" + secret;
     const accessToken = Base64.encode(basicAuthString);
-    console.log("Access Token: ", accessToken);
     try {
-      const order = await (
-        await fetch(
-          "https://api-m.paypal.com/v2/checkout/orders/" + id,
-          // "https://api-m.sandbox.paypal.com/v2/checkout/orders/" + id,
-          {
-            headers: {
-              "Authorization": `Basic ${accessToken}`,
-              "Content-Type": "application/json",
-            },
+      const order: any = await (
+        await fetch(paypalApiUrl + "/checkout/orders/" + id, {
+          headers: {
+            "Authorization": `Basic ${accessToken}`,
+            "Content-Type": "application/json",
           },
-        )
+        })
       ).json();
       // console.log("Order retrieved: ", order);
       snap.ref.set(order, {merge: true}); // Update the order document
+      const items = order.purchase_units[0].items;
+      updateStock(items);
       return sendMail(data, order);
     } catch (error) {
       console.error(error);

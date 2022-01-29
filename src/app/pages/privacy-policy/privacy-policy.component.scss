@@ -3,10 +3,14 @@ p {
 	font-weight: bold;
 }
 a {
-	text-decoration: underline rgba(red, .5) solid 2px;
+	        text-decoration: underline rgba(red, .5) solid 2px;
 
 	transition: all .3s linear;
+
+	-webkit-text-decoration: underline rgba(red, .5) solid 2px;
 	&:hover {
-		text-decoration: underline rgba(red, .75) solid 2px;
+		        text-decoration: underline rgba(red, .75) solid 2px;
+
+		-webkit-text-decoration: underline rgba(red, .75) solid 2px;
 	}
 }

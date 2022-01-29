@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import scrollIntoView from "scroll-into-view-if-needed";
 import { ProductService } from "src/app/services/product.service";
+import { Meta, Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-navbar",
@@ -56,7 +57,12 @@ export class NavbarComponent implements OnInit {
   storeActiveSection = "";
   previousUrl: string | undefined;
 
-  constructor(private router: Router, public productService: ProductService) {}
+  constructor(
+    private router: Router,
+    public productService: ProductService,
+    private meta: Meta,
+    private title: Title
+  ) {}
 
   goToProduct(name: string) {
     let product = document.getElementById(name);
@@ -79,7 +85,13 @@ export class NavbarComponent implements OnInit {
         }
         const route = event.url;
         const page = this.pages.find(page => page.routerLink === route);
-        document.title = `${page ? page.title + " | " : ""}Linkage`;
+        let prefix = "";
+        if (page) {
+          prefix = page.title + " | ";
+        } else if (route === "/checkout") {
+          prefix = "Checkout | ";
+        }
+        document.title = prefix + "Linkage";
         this.previousUrl = route;
         // console.log(route);
         setTimeout(() => {

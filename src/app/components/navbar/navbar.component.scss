@@ -44,8 +44,6 @@ $theme-font-color: #2c2c2c;
 }
 
 // NAV STYLES !!!YOU NEED THEM
-$nav-dark-color: #0a0a0a;
-$nav-light-color: #fff;
 // $nav-accent-color-1: #119da4;
 // $nav-accent-color-2: #ed474a;
 // $nav-accent-color-3: #568259;
@@ -81,13 +79,15 @@ $toggler-bar-height: 3px;
 }
 
 .logo {
+	display: block;
 	width: auto;
 	height: 50px;
 
 	text-align: center;
+
 	img {
 		width: 100%;
-		height: 100%;
+		height: 50px;
 	}
 }
 .cart {
@@ -97,7 +97,8 @@ $toggler-bar-height: 3px;
 		width: 100%;
 		height: 100%;
 
-		filter: invert(100%);
+		-webkit-filter: invert(100%);
+		        filter: invert(100%);
 	}
 }
 .main-nav__toggler {
@@ -114,17 +115,17 @@ $toggler-bar-height: 3px;
 	&:hover, &:focus {
 		.toggler-open__bar {
 			&:nth-child(1) {
-				background-color: rgba($nav-light-color, 1);
+				background-color: rgba(#fff, 1);
 				transform: scaleX(1.1) translateY(-3px);
 			}
 
 			&:nth-child(2) {
-				background-color: rgba($nav-light-color, 1);
+				background-color: rgba(#fff, 1);
 				transform: scaleX(.9);
 			}
 
 			&:nth-child(3) {
-				background-color: rgba($nav-light-color, 1);
+				background-color: rgba(#fff, 1);
 				transform: scaleX(1.1) translateY(3px);
 			}
 		}
@@ -142,7 +143,7 @@ $toggler-bar-height: 3px;
 	width: 100%;
 	height: $toggler-bar-height;
 
-	background-color: rgba($nav-light-color, .7);
+	background-color: rgba(#fff, .7);
 	border-radius: $toggler-bar-height;
 
 	&:nth-child(1) {
@@ -173,7 +174,7 @@ $toggler-bar-height: 3px;
 
 		content: '';
 
-		background-color: $nav-dark-color;
+		background-color: #0a0a0a;
 		border-radius: $toggler-bar-height;
 	}
 
@@ -218,7 +219,7 @@ $toggler-bar-height: 3px;
 	height: 100%;
 	padding: $nav-padding 0;
 
-	background-color: $nav-light-color;
+	background-color: #fff;
 }
 
 .main-nav__expandable-content {
@@ -252,7 +253,7 @@ $toggler-bar-height: 3px;
 
 	display: flex;
 
-	color: $nav-dark-color;
+	color: #0a0a0a;
 	@apply py-2;
 }
 
@@ -260,7 +261,8 @@ $toggler-bar-height: 3px;
 	font: {
 		size: 4vh;
 		weight: 400;
-	} ; font-family: ImpactLT, Impact, Haettenschweiler, 'Franklin Gothic Bold',
+	} ;
+	font-family: ImpactLT, Impact, Haettenschweiler, 'Franklin Gothic Bold',
 	Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black',
 	sans-serif;
 	letter-spacing: 2px;
@@ -272,10 +274,11 @@ $toggler-bar-height: 3px;
 		style: italic;
 	}
 ;
-// margin-top: 2.5px;
+	// margin-top: 2.5px;
 	font-family: ImpactLT, Impact, Haettenschweiler, 'Franklin Gothic Bold',
 	Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black',
 	sans-serif;
+	;
 }
 
 // nav toggling - effect styles
@@ -301,11 +304,11 @@ $toggler-bar-height: 3px;
 	}
 
 	&:before {
-		background-color: $nav-dark-color;
+		background-color: #0a0a0a;
 	}
 
 	&:after {
-		background-color: rgba($nav-light-color, .7);
+		background-color: rgba(#fff, .7);
 
 		transition-delay: .07s;
 	}
@@ -376,6 +379,25 @@ $toggler-bar-height: 3px;
 	visibility: hidden;
 }
 
+@-webkit-keyframes transformScaling {
+	0% {
+		transform: scaleX(0);
+		transform-origin: left center;
+	}
+	50% {
+		transform: scaleX(1);
+		transform-origin: left center;
+	}
+	50.5% {
+		transform: scaleX(1);
+		transform-origin: right center;
+	}
+	100% {
+		transform: scaleX(0);
+		transform-origin: right center;
+	}
+}
+
 @keyframes transformScaling {
 	0% {
 		transform: scaleX(0);
@@ -411,7 +433,7 @@ $toggler-bar-height: 3px;
 
 		content: '';
 
-		background-color: $nav-dark-color;
+		background-color: #0a0a0a;
 		transform: scaleX(0);
 		transform-origin: left center;
 
@@ -432,7 +454,9 @@ $toggler-bar-height: 3px;
 		font: {
 			size: 4.25vh;
 			weight: 700;
-		} ; opacity: 0;
+		} ;
+
+		opacity: 0;
 		visibility: hidden;
 	}
 }
@@ -488,7 +512,8 @@ $toggler-bar-height: 3px;
 }
 
 #nav-fixed {
-	box-shadow: 0 -2px 0 #fff, 0 2px 0 #fff;
+	border-top: 2px white solid;
+	border-bottom: 2px white solid;
 	@apply my-3 uppercase;
 	> .nav-items {
 		color: rgba(255, 255, 255, .5);

@@ -7,6 +7,7 @@ export interface Product {
   order: number;
   price: number;
   quantity: number;
-  sizes: any[];
-  size?: string;
+  sizes: string[];
+  size: string;
+  stock: { [key: string]: number };
 }
