@@ -30,11 +30,20 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.productService.preview = false;
   }
   increaseItem(index: number) {
-    this.productService.cart.items[index].quantity++;
-    localStorage.setItem(
-      "project_linkage",
-      JSON.stringify({ items: this.productService.cart.items })
-    );
+    if (
+      this.productService.cart.items[index].quantity <=
+      this.productService.cart.items[index].stock[
+        this.productService.cart.items[index].size
+      ]
+    ) {
+      this.productService.cart.items[index].quantity++;
+      localStorage.setItem(
+        "project_linkage",
+        JSON.stringify({ items: this.productService.cart.items })
+      );
+    } else {
+      this.productService.showMaxStockReached();
+    }
   }
   decreaseItem(index: number) {
     this.productService.cart.items[index].quantity--;
@@ -183,9 +192,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
                       Number(
                         (
                           document.querySelector(
-                            "select#deliveryOptions" + (this.countryCode === "IE"
-                              ? "0"
-                              : "1")
+                            "select#deliveryOptions" +
+                              (this.countryCode === "IE" ? "0" : "1")
                           ) as HTMLSelectElement
                         ).value
                       )
@@ -202,9 +210,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
                     currency_code: "EUR",
                     value: (
                       document.querySelector(
-                        "select#deliveryOptions" + (this.countryCode === "IE"
-                          ? "0"
-                          : "1")
+                        "select#deliveryOptions" +
+                          (this.countryCode === "IE" ? "0" : "1")
                       ) as HTMLSelectElement
                     ).value
                   }

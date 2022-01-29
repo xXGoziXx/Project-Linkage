@@ -4,8 +4,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GoogleMapsModule } from "@angular/google-maps";
 import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import {
+  AngularFirestoreModule,
+  USE_EMULATOR as USE_FIRESTORE_EMULATOR
+} from "@angular/fire/compat/firestore";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from "@angular/fire/compat/functions";
 import { environment } from "../environments/environment";
 
 import { LazyLoadImageModule } from "ng-lazyload-image";
@@ -67,6 +71,18 @@ import { ServiceWorkerModule } from "@angular/service-worker";
       provide: APP_INITIALIZER,
       useValue: () => new Promise(resolve => setTimeout(resolve, 3000)),
       multi: true
+    },
+    {
+      provide: USE_FIRESTORE_EMULATOR,
+      useValue: environment.useEmulators
+        ? ["localhost", 8080]
+        : undefined
+    },
+    {
+      provide: USE_FUNCTIONS_EMULATOR,
+      useValue: environment.useEmulators
+        ? ["localhost", 5001]
+        : undefined
     }
   ],
   bootstrap: [AppComponent]

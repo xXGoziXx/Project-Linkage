@@ -1,3 +1,4 @@
+import { isEqual } from "lodash-es";
 import { Injectable } from "@angular/core";
 import { Product } from "src/app/interfaces/product";
 import {
@@ -11,7 +12,6 @@ import { Arc } from "../interfaces/arc";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Splide } from "@splidejs/splide";
 import { ToastrService } from "ngx-toastr";
-
 @Injectable({
   providedIn: "root"
 })
@@ -43,43 +43,40 @@ export class ProductService {
     name: "Red Fleece",
     order: 0,
     sizes: [
-      { name: "S", selected: false },
-      { name: "M", selected: false },
-      { name: "L", selected: false },
-      { name: "XL", selected: false }
+      "S",
+      "M",
+      "L",
+      "XL"
     ],
+    stock: {S:1, M:1, L:1, XL:0},
     size: "",
     quantity: 1
   }*/;
   cart: { items: Product[]; totalPrice: number; totalQuantity: number } = {
     items: [
-      /*{
-        description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
-        price: 34.99,
-        images: [
-          {
-            alt: "",
-            order: 0,
-            src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FONE%20PIECE%20IRISH%20IRELAND%20ANIME%20DOFLAMINGO%20FAN%20COSPLAY-min.png?alt=media&token=6c7697ba-d122-4eba-9649-9b0690bfac47"
-          },
-          {
-            alt: "",
-            order: 1,
-            src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FNARUTO%20ANIME%205%20KAGE%20CLOTHING%20IRELAND%20OTAKU%20WEEB%20FAN-min.png?alt=media&token=638488a4-5b55-48bf-93e2-7c6c8e1ac69e"
-          },
-          { alt: "", order: 2, src: this.defaultImage }
-        ],
-        name: "Red Fleece",
-        order: 0,
-        sizes: [
-          { name: "S", selected: false },
-          { name: "M", selected: false },
-          { name: "L", selected: false },
-          { name: "XL", selected: true }
-        ],
-        size: "XL",
-        quantity: 1
-      }*/
+      // {
+      //   description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
+      //   price: 34.99,
+      //   images: [
+      //     {
+      //       alt: "",
+      //       order: 0,
+      //       src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FONE%20PIECE%20IRISH%20IRELAND%20ANIME%20DOFLAMINGO%20FAN%20COSPLAY-min.png?alt=media&token=6c7697ba-d122-4eba-9649-9b0690bfac47"
+      //     },
+      //     {
+      //       alt: "",
+      //       order: 1,
+      //       src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FNARUTO%20ANIME%205%20KAGE%20CLOTHING%20IRELAND%20OTAKU%20WEEB%20FAN-min.png?alt=media&token=638488a4-5b55-48bf-93e2-7c6c8e1ac69e"
+      //     },
+      //     { alt: "", order: 2, src: this.defaultImage }
+      //   ],
+      //   name: "Red Fleece",
+      //   order: 0,
+      //   sizes: ["S", "M", "L", "XL"],
+      //   size: "XL",
+      //   stock: { S: 1, M: 1, L: 1, XL: 0 },
+      //   quantity: 1
+      // }
     ],
     get totalPrice() {
       if (this.items.length === 0) return 0;
@@ -132,13 +129,41 @@ export class ProductService {
               afs.collection<Product>(category.name, ref =>
                 ref.orderBy("order")
               );
-            productCategoryCol.valueChanges().subscribe(product => {
+            productCategoryCol.valueChanges().subscribe(products => {
               // console.log(product, category);
-              this.products[category.order] = {
-                name: category.name,
-                order: category.order,
-                items: product
-              };
+              if (this.products[category.order]) {
+                this.products[category.order].name = category.name;
+                this.products[category.order].order = category.order;
+                this.products[category.order].items.forEach((item, i) => {
+                  if (!isEqual(item, products[i])) {
+                    this.products[category.order].items[i] = products[i];
+                  }
+                });
+              } else {
+                this.products[category.order] = {
+                  name: category.name,
+                  order: category.order,
+                  items: products
+                };
+              }
+              if (this.selectedProduct) {
+                const updatedProduct =
+                  products[
+                    products.findIndex(
+                      product => product.name === this.selectedProduct.name
+                    )
+                  ];
+                for (let key in updatedProduct) {
+                  let prop: keyof Product = key as keyof Product;
+                  if (
+                    this.selectedProduct[prop] !== updatedProduct[prop] &&
+                    prop !== "images"
+                  ) {
+                    (<Product[keyof Product]>this.selectedProduct[prop]) =
+                      updatedProduct[prop];
+                  }
+                }
+              }
             });
           });
         }
@@ -186,19 +211,20 @@ export class ProductService {
       }, 1);
     }
   }
-  addToCart(product: Product) {
-    const sizedProduct = {
-      ...product,
-      size: product.sizes?.find(size => size.selected)?.name || ""
-    };
-    // console.log(product);
+  addToCart() {
+    const product = { ...this.selectedProduct };
     const duplicateProduct = this.cart.items.findIndex(item => {
-      return item.name === sizedProduct.name && item.size === sizedProduct.size;
+      return item.name === product.name && item.size === product.size;
     });
+    // If the product isn't in the cart
     if (duplicateProduct === -1) {
-      this.cart.items.push(sizedProduct);
-      this.showSuccess(sizedProduct, this.cart.totalQuantity);
-    } else {
+      this.cart.items.push(product);
+      this.showSuccess(product, this.cart.totalQuantity);
+    } // If it is and it's current quantity less than in stock
+    else if (
+      this.cart.items[duplicateProduct].quantity <
+      this.cart.items[duplicateProduct].stock[product.size]
+    ) {
       this.cart.items[duplicateProduct].quantity++;
       this.showSuccess(
         this.cart.items[duplicateProduct],
@@ -221,7 +247,7 @@ export class ProductService {
     const title =
       `#${quantity}: ` +
       product.name +
-      (product.size ? ` (${product.size})` : "");
+      (product.size !== "R" ? ` (${product.size})` : "");
     this.toastr.success("Item successfully added to cart!", title);
   }
   showOrderComplete() {
@@ -231,6 +257,12 @@ export class ProductService {
     this.toastr.success(
       "There has been an issue processing your order. Please contact us for support!",
       "Order Failed:"
+    );
+  }
+  showMaxStockReached() {
+    this.toastr.success(
+      "The max number in stock has been reached!",
+      "Product Notification:"
     );
   }
   async createOrder({

@@ -28,24 +28,124 @@
 
 .content .product {
 	margin-top: 0;
-	img {
-		background: #0a0a0a;
-		outline: 2px solid white;
-		outline-offset: -2px;
+	.img-container {
+		transition: -webkit-filter .5s;
+		transition:         filter .5s;
+		transition:         filter .5s, -webkit-filter .5s;
+		.sold-container {
+			$sold-out-height: 8.5vw;
+			$md-sold-out-height: 4.25vw;
+			$sold-out-font: 8vw;
+			$md-sold-out-font: 4vw;
 
-		transition: all .1s linear;
-	}
-	.product-title {
-		line-height: 1rem;
-	}
-	&:hover {
-		img {
-			box-shadow: 0 0 12px #999;
-			outline-width: 4px;
-			outline-offset: -4px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+
+			width: 100%;
+			height: 100%;
+
+			transition: opacity 1s;
+
+			opacity: 0;
+			.sold-out {
+				position: relative;
+				top: calc(50% - (#{$sold-out-font}/ 2));
+
+				width: 100%;
+				height: $sold-out-height;
+
+				color: rgba(white, .5);
+				font-size: $sold-out-font;
+				line-height: $sold-out-font;
+				text-align: center;
+				white-space: nowrap;
+
+				-webkit-background-clip: text;
+				        background-clip: text;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: cover;
+
+				-webkit-text-fill-color: rgba(white, .4);
+
+				&:before, &:after {
+					position: absolute;
+
+					content: '';
+				}
+
+				/* Background */
+				&:before {
+					z-index: -2;
+					@apply inset-0;
+				}
+
+				/* Text Background (black zone) */
+				&:after {
+					z-index: -1;
+
+					height: $sold-out-height;
+					margin: auto 0;
+
+					background-color: black;
+					@apply inset-0;
+				}
+			}
+			@media (min-width: 768px) {
+				.sold-out {
+					top: calc(50% - (#{$md-sold-out-font}/ 2));
+
+					height: $md-sold-out-height;
+
+					font-size: $md-sold-out-font !important;
+					line-height: $md-sold-out-font;
+					&:after {
+						height: $md-sold-out-font;
+					}
+				}
+			}
 		}
-		p {
-			@apply mt-2;
+		img {
+			background-color: #0a0a0a;
+			outline: 2px solid white;
+			outline-offset: -2px;
+
+			transition: all .1s linear;
+		}
+		.black-filter {
+			position: absolute;
+			z-index: 0;
+
+			width: 100%;
+			height: 100%;
+
+			background-color: rgba(0, 0, 0, .5) !important;
+			outline: 2px solid white;
+			outline-offset: -2px;
+
+			transition: all .1s linear;
+			transition: opacity .5s;
+
+			opacity: 0;
+		}
+		.product-title {
+			line-height: 1rem;
+		}
+		&:hover {
+			img {
+				box-shadow: 0 0 12px #999;
+				outline-width: 4px;
+				outline-offset: -4px;
+			}
+			.black-filter {
+				outline-width: 4px;
+				outline-offset: -4px;
+			}
+			p {
+				@apply mt-2;
+			}
 		}
 	}
 }
@@ -66,14 +166,15 @@
 
 		background-color: black;
 
-		filter: brightness(50%);
+		-webkit-filter: brightness(50%);
+		        filter: brightness(50%);
 
 		pointer-events: none;
 		@apply opacity-100 absolute top-0 h-screen w-screen;
 	}
 	@supports (
-	(-webkit-backdrop-filter: none) or (backdrop-filter: none) or
-	(not (filter: none))
+	((-webkit-backdrop-filter: none) or (backdrop-filter: none)) or
+	(not ((-webkit-filter: none) or (filter: none)))
 	) {
 		.background-image {
 			display: none;
@@ -120,7 +221,8 @@
 				pointer-events: auto;
 				@apply border-2 border-white border-solid my-4;
 				&:hover {
-					filter: invert(100%);
+					-webkit-filter: invert(100%);
+					        filter: invert(100%);
 					@apply border-black;
 				}
 				object {

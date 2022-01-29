@@ -18,10 +18,30 @@
           <!-- Product Items -->
           <div class="pt-4 px-1 basis-1/3 md:basis-1/6 product"
                [id]="i"
+               [@fadeOut]="{value: getTotalStock(product.stock) <= 0, params:{duration: 1000}}"
                *ngFor="let product of productService.sortBy(products.items, 'order'); index as i;">
-            <img [src]="product.images[0].src"
-                 alt="{{product.images[0].alt}}"
-                 (click)="productService.viewProduct = true;selectProduct(product);">
+            <div class="img-container relative"
+                 [ngClass]="{'grayscale': getTotalStock(product.stock) <= 0}">
+              <div class="sold-container"
+                   [id]="'soldOut'+i"
+                   *ngIf="getTotalStock(product.stock) <= 0">
+                <div class="sold-out uppercase"
+                     [ngStyle]="{backgroundImage: 'url(' + product.images[0].src + ')'}">
+                  Sold out
+                </div>
+              </div>
+              <div [id]="'blackFilter'+i"
+                   class="black-filter"
+                   [@fadeOut]
+                   *ngIf="getTotalStock(product.stock) <= 0"></div>
+              <img class="opacity-1"
+                   [src]="product.images[0].src"
+                   [defaultImage]="defaultImage"
+                   [lazyLoad]="product.images[0].src"
+                   (onStateChange)="stateChangeHandler($event, i)"
+                   alt="{{product.images[0].alt}}"
+                   (click)="productService.viewProduct = true;selectProduct(product);">
+            </div>
             <p class="mt-2 uppercase text-center product-title">{{product.name}}</p>
           </div>
         </div>
@@ -95,18 +115,19 @@
               <div *ngIf="selectedProductSizes"
                    class="size">
                 <h3 class="mr-1"> Size: </h3>
-                <div *ngFor="let size of productService.selectedProduct.sizes; index as i"
-                     [ngClass]="{'active': size.selected}"
-                     (click)="selectSize(i)"
-                     class="size-btn"> {{size.name}}</div>
+                <div *ngFor="let size of checkSizesAvailable(productService.selectedProduct)"
+                     [ngClass]="{'active': productService.selectedProduct.size === size}"
+                     (click)="selectSize(size)"
+                     class="size-btn"> {{size}}</div>
               </div>
               <h3 class="price mt-2">
                 Price: <span class="secondary-font"> {{productService.selectedProduct.price | currency: 'EUR' }} </span>
               </h3>
             </div>
             <button class="btn hidden sm:block bg-blur relative add-button text-ellipsis"
-                    (click)="productService.addToCart(productService.selectedProduct)"
-                    [disabled]="checkSize()">Add to cart
+                    (click)="productService.addToCart()"
+                    [disabled]="getItemStatus() !== 'Add to cart'">
+              {{getItemStatus()}}
             </button>
 
           </div>
@@ -121,8 +142,8 @@
                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0xLjcyMDI5IDAuMjgwNzEyQzEuNTMxNjkgMC4wOTg1NTM3IDEuMjc5MDggLTAuMDAyMjQwNjIgMS4wMTY4OSAzLjc4MDI2ZS0wNUMwLjc1NDY5IDAuMDAyMzE2MjIgMC41MDM4NzggMC4xMDc0ODUgMC4zMTg0NyAwLjI5Mjg5NEMwLjEzMzA2MSAwLjQ3ODMwMiAwLjAyNzg5MjMgMC43MjkxMTQgMC4wMjU2MTM5IDAuOTkxMzExQzAuMDIzMzM1NSAxLjI1MzUxIDAuMTI0MTMgMS41MDYxMSAwLjMwNjI4OCAxLjY5NDcxTDYuMDgxMjkgNy40Njk3MUwwLjMwNTI4OCAxMy4yNDQ3QzAuMjA5Nzc4IDEzLjMzNyAwLjEzMzU5NSAxMy40NDczIDAuMDgxMTg2NCAxMy41NjkzQzAuMDI4Nzc3NCAxMy42OTEzIDAuMDAxMTkxNTcgMTMuODIyNSAzLjc3NTcxZS0wNSAxMy45NTUzQy0wLjAwMTExNjA2IDE0LjA4ODEgMC4wMjQxODU0IDE0LjIxOTggMC4wNzQ0NjYzIDE0LjM0MjdDMC4xMjQ3NDcgMTQuNDY1NiAwLjE5OSAxNC41NzcyIDAuMjkyODkzIDE0LjY3MTFDMC4zODY3ODYgMTQuNzY1IDAuNDk4NDM4IDE0LjgzOTMgMC42MjEzMzQgMTQuODg5NUMwLjc0NDIzIDE0LjkzOTggMC44NzU5MSAxNC45NjUxIDEuMDA4NjkgMTQuOTY0QzEuMTQxNDcgMTQuOTYyOCAxLjI3MjY5IDE0LjkzNTIgMS4zOTQ2OSAxNC44ODI4QzEuNTE2NyAxNC44MzA0IDEuNjI3MDQgMTQuNzU0MiAxLjcxOTI5IDE0LjY1ODdMNy40OTUyOSA4Ljg4MzcxTDEzLjI3MDMgMTQuNjU4N0MxMy40NTg5IDE0Ljg0MDkgMTMuNzExNSAxNC45NDE3IDEzLjk3MzcgMTQuOTM5NEMxNC4yMzU5IDE0LjkzNzEgMTQuNDg2NyAxNC44MzE5IDE0LjY3MjEgMTQuNjQ2NUMxNC44NTc1IDE0LjQ2MTEgMTQuOTYyNyAxNC4yMTAzIDE0Ljk2NSAxMy45NDgxQzE0Ljk2NzIgMTMuNjg1OSAxNC44NjY0IDEzLjQzMzMgMTQuNjg0MyAxMy4yNDQ3TDguOTA5MjkgNy40Njk3MUwxNC42ODQzIDEuNjk0NzFDMTQuODY2NCAxLjUwNjExIDE0Ljk2NzIgMS4yNTM1MSAxNC45NjUgMC45OTEzMTFDMTQuOTYyNyAwLjcyOTExNCAxNC44NTc1IDAuNDc4MzAyIDE0LjY3MjEgMC4yOTI4OTRDMTQuNDg2NyAwLjEwNzQ4NSAxNC4yMzU5IDAuMDAyMzE2MjIgMTMuOTczNyAzLjc4MDI2ZS0wNUMxMy43MTE1IC0wLjAwMjI0MDYyIDEzLjQ1ODkgMC4wOTg1NTM3IDEzLjI3MDMgMC4yODA3MTJMNy40OTUyOSA2LjA1NTcxTDEuNzIwMjkgMC4yNzk3MTJWMC4yODA3MTJaIiBmaWxsPSJ3aGl0ZSIvPg0KPC9zdmc+DQo=" />
         </div>
         <button class="btn sm:hidden bg-blur add-button grow text-ellipsis"
-                (click)="productService.addToCart(productService.selectedProduct)"
-                [disabled]="checkSize()">Add to cart
+                (click)="productService.addToCart()"
+                [disabled]="getItemStatus() !== 'Add to cart'">{{getItemStatus()}}
         </button>
         <div class="preview-button grid place-content-center text-center pop"
              (click)="productService.preview = !productService.preview">

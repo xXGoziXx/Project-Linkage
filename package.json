@@ -1,12 +1,14 @@
 {
   "name": "project-linkage",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host=0.0.0.0",
+    "start:dev": "concurrently \"npm:watch\" \"cd functions && npm run watch\" \"npm:emulators\"",
     "build": "ng build --prod --aot --build-optimizer",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "emulators": "firebase emulators:start --import functions/local --only hosting,firestore,functions"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,7 @@
     "@splidejs/splide": "^3.6.9",
     "classlist.js": "^1.1.20150312",
     "firebase": "^9.6.1",
+    "lodash-es": "^4.17.21",
     "ng-lazyload-image": "^9.1.0",
     "ngx-easy-table": "^15.1.0",
     "ngx-paypal": "^9.0.0",
@@ -44,8 +47,10 @@
     "@tailwindcss/line-clamp": "^0.3.0",
     "@tailwindcss/typography": "^0.5.0",
     "@types/jasmine": "~3.8.0",
+    "@types/lodash-es": "^4.17.5",
     "@types/node": "^12.11.1",
     "@types/scroll-into-view": "^1.16.0",
+    "concurrently": "^7.0.0",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
