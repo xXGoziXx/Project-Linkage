@@ -9,5 +9,6 @@
   "useTabs": false,
   "arrowParens": "always",
   "jsxSingleQuote": false,
-  "quoteProps": "consistent"
+  "quoteProps": "consistent",
+  "endOfLine": "lf"
 }
