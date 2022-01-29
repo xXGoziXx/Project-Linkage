@@ -5,9 +5,8 @@ import * as nodemailer from "nodemailer";
 import fetch from "node-fetch";
 import admin from "firebase-admin";
 
-const {initializeApp, firestore} = admin;
-initializeApp();
-const db = firestore();
+admin.initializeApp();
+const db = admin.firestore();
 
 let paypalApiUrl = "https://api-m.sandbox.paypal.com/v2";
 if (process.env.NODE_ENV === "production") {
@@ -267,7 +266,7 @@ async function updateStock(items: {name: string; quantity: number}[]) {
     productDocRef.docs.forEach((doc) => {
       doc.ref
         .update({
-          [`stock.${size}`]: firestore.FieldValue.increment(-quantity),
+          [`stock.${size}`]: admin.firestore.FieldValue.increment(-quantity),
         })
         .then(() => {
           console.log(doc.data());
