@@ -5,6 +5,8 @@ import scrollIntoView from "scroll-into-view-if-needed";
 import { Product } from "src/app/interfaces/product";
 import { ProductService } from "../../services/product.service";
 import { environment } from "../../../environments/environment";
+declare let gtag: Function;
+declare let fbq: Function;
 @Component({
   selector: "app-checkout",
   templateUrl: "./checkout.component.html",
@@ -36,6 +38,22 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
         this.productService.cart.items[index].size
       ]
     ) {
+      const product = this.productService.cart.items[index];
+      const addToCart = {
+        currency: "EUR",
+        value: product.price,
+        items: [
+          {
+            item_name: product.name,
+            currency: "EUR",
+            item_brand: "Linkage",
+            price: product.price,
+            quantity: product.quantity
+          }
+        ]
+      };
+      fbq("track", "AddToCart");
+      gtag("event", "add_to_cart", addToCart);
       this.productService.cart.items[index].quantity++;
       localStorage.setItem(
         "project_linkage",
@@ -49,7 +67,22 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.productService.cart.items[index].quantity--;
     if (this.productService.cart.items[index].quantity <= 0) {
       this.removeItem(index);
+      const removeFromCart = {
+        currency: "EUR",
+        value: this.productService.cart.items[index].price,
+        items: [
+          {
+            item_name: this.productService.cart.items[index].name,
+            currency: "EUR",
+            item_brand: "Linkage",
+            price: this.productService.cart.items[index].price,
+            quantity: this.productService.cart.items[index].quantity
+          }
+        ]
+      };
+      gtag("event", "remove_from_cart", removeFromCart);
     }
+
     localStorage.setItem(
       "project_linkage",
       JSON.stringify({ items: this.productService.cart.items })
@@ -338,6 +371,31 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
             this.productService.checkoutForm.controls["country"].value?.trim()
         };
         await this.productService.createOrder(orderData);
+        const purchaseInfo = {
+          currency: "EUR",
+          transaction_id: orderData.id,
+          value: this.productService.cart.totalPrice,
+          shipping: Number(
+            (
+              document.querySelector(
+                "select#deliveryOptions" +
+                  (this.countryCode === "IE" ? "0" : "1")
+              ) as HTMLSelectElement
+            ).value
+          ),
+          items: this.productService.cart.items.map(product => ({
+            item_name: product.name,
+            currency: "EUR",
+            item_brand: "Linkage",
+            price: product.price,
+            quantity: product.quantity
+          }))
+        };
+        gtag("event", "add_shipping_info", purchaseInfo);
+        fbq("track", "Purchase", {
+          value: this.productService.cart.totalPrice,
+          currency: "EUR"
+        });
         this.productService.showOrderComplete();
         this.productService.checkoutForm.reset();
         this.productService.cart.items = [];
@@ -358,12 +416,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   async storeCustomerDetails() {
     this.confirmingDetails = true;
+
     if (this.continents === undefined && this.countries === undefined) {
       await this.initCountryContinents();
     }
     // console.log(this.countries);
     // console.log(this.continents);
-    console.log(this.countryCode);
+    // console.log(this.countryCode);
     this.countryCode =
       this.getKeyByValue(this.countries, this.country) || this.country;
     const GB = ["UK", "Scotland", "Wales", "England", "Northern Ireland"];
@@ -381,12 +440,28 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
             // scrollMode: 'if-needed',
             behavior: "smooth",
             block: "end"
-            // // inline: 'nearest',
+            // inline: 'nearest',
           });
       }, 300);
     } else {
       this.detailsConfirmed = false;
     }
+    const shippingInfo = {
+      currency: "EUR",
+      value: (
+        document.querySelector(
+          "select#deliveryOptions" + (this.countryCode === "IE" ? "0" : "1")
+        ) as HTMLSelectElement
+      ).value,
+      shipping_tier: (
+        document.querySelector(
+          "select#deliveryOptions" + (this.countryCode === "IE" ? "0" : "1")
+        ) as HTMLSelectElement
+      ).innerText
+        .split("-")[0]
+        .trim()
+    };
+    gtag("event", "add_shipping_info", shippingInfo);
     this.confirmingDetails = false;
   }
 
@@ -416,8 +491,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
           optionItem.setAttribute("class", "same-as-selected");
         }
         optionItem.addEventListener("click", function (e) {
-          /*when an item is clicked, update the original select box,
-        and the selected item:*/
+          /*when an item is clicked, update the original select box, and the selected item:*/
           let sameAsSelected,
             select,
             previousSibling,
@@ -453,6 +527,23 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
         /*when the select box is clicked, close any other select boxes,
       and open/close the current select box:*/
         e.stopPropagation();
+        const shippingInfo = {
+          currency: "EUR",
+          value: (
+            document.querySelector(
+              "select#deliveryOptions" + (self.countryCode === "IE" ? "0" : "1")
+            ) as HTMLSelectElement
+          ).value,
+          shipping_tier: (
+            document.querySelector(
+              "select#deliveryOptions" + (self.countryCode === "IE" ? "0" : "1")
+            ) as HTMLSelectElement
+          ).innerText
+            .split("-")[0]
+            .trim()
+        };
+        console.log(shippingInfo);
+        gtag("event", "add_shipping_info", shippingInfo);
         self.closeAllSelect(this);
         (this.nextSibling as any).classList.toggle("select-hide");
         this.classList.toggle("select-arrow-active");
@@ -505,6 +596,19 @@ except the current select box:*/
         this.isEU = true;
       });
     this.initConfig();
+    const viewCartInfo = {
+      currency: "EUR",
+      value: this.productService.cart.totalPrice,
+      items: this.productService.cart.items.map(product => ({
+        item_name: product.name,
+        currency: "EUR",
+        item_brand: "Linkage",
+        price: product.price,
+        quantity: product.quantity
+      }))
+    };
+    gtag("event", "view_cart", viewCartInfo);
+    console.log("testing ngOnInit");
   }
   ngAfterViewInit(): void {
     this.initAutocomplete();

@@ -12,6 +12,8 @@ import { Arc } from "../interfaces/arc";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Splide } from "@splidejs/splide";
 import { ToastrService } from "ngx-toastr";
+declare let gtag: Function;
+declare let fbq: Function;
 @Injectable({
   providedIn: "root"
 })
@@ -216,8 +218,23 @@ export class ProductService {
     const duplicateProduct = this.cart.items.findIndex(item => {
       return item.name === product.name && item.size === product.size;
     });
+    const addToCart = {
+      currency: "EUR",
+      value: product.price,
+      items: [
+        {
+          item_name: product.name,
+          currency: "EUR",
+          item_brand: "Linkage",
+          price: product.price,
+          quantity: product.quantity
+        }
+      ]
+    };
     // If the product isn't in the cart
     if (duplicateProduct === -1) {
+      fbq("track", "AddToCart");
+      gtag("event", "add_to_cart", addToCart);
       this.cart.items.push(product);
       this.showSuccess(product, this.cart.totalQuantity);
     } // If it is and it's current quantity less than in stock
@@ -225,6 +242,8 @@ export class ProductService {
       this.cart.items[duplicateProduct].quantity <
       this.cart.items[duplicateProduct].stock[product.size]
     ) {
+      fbq("track", "AddToCart");
+      gtag("event", "add_to_cart", addToCart);
       this.cart.items[duplicateProduct].quantity++;
       this.showSuccess(
         this.cart.items[duplicateProduct],

@@ -32,6 +32,7 @@
           href="/manifest.webmanifest?v=2">
     <meta name="theme-color"
           content="#000000">
+
     <script async
             defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIQHWcuolYECtJOAlSgMVLVSv_bynSJf4&amp;libraries=places&amp;language=en"></script>
@@ -45,6 +46,30 @@
 
       gtag('config', 'G-B8KC2V92BL');
     </script>
+    <!-- Facebook Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '486504496334444');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1"
+           width="1"
+           src="https://www.facebook.com/tr?id=486504496334444&ev=PageView
+    &noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
   </head>
 
   <body>
@@ -59,4 +84,4 @@
     <noscript>Please enable JavaScript to continue using this application.</noscript>
   </body>
 
-  <html>
+</html>

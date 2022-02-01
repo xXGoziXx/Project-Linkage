@@ -3,7 +3,8 @@ import { NavigationEnd, Router } from "@angular/router";
 import scrollIntoView from "scroll-into-view-if-needed";
 import { ProductService } from "src/app/services/product.service";
 import { Meta, Title } from "@angular/platform-browser";
-
+declare let gtag: Function;
+declare let fbq: Function;
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
@@ -84,13 +85,27 @@ export class NavbarComponent implements OnInit {
           this.productService.preview = true;
         }
         const route = event.url;
+        gtag("config", "G-B8KC2V92BL", { page_path: route });
+        fbq("track", "PageView");
         const page = this.pages.find(page => page.routerLink === route);
         let prefix = "";
+        let description = "";
         if (page) {
+          description = page.description;
           prefix = page.title + " | ";
         } else if (route === "/checkout") {
           prefix = "Checkout | ";
+          description = "Check out what items you've added to your cart";
         }
+        this.meta.addTags([
+          { name: "description", content: description },
+          { name: "author", content: "GT Nventionz" },
+          {
+            name: "keywords",
+            content:
+              "Linkage, Anime, Merchandise, Ecommerce, Store, Kage, Ireland, Irish, Clothing, Shopping, Durags, Fleece, Beanies"
+          }
+        ]);
         document.title = prefix + "Linkage";
         this.previousUrl = route;
         // console.log(route);

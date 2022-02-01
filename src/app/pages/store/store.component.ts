@@ -3,6 +3,8 @@ import { ProductService } from "src/app/services/product.service";
 import { Product } from "src/app/interfaces/product";
 import { StateChange } from "ng-lazyload-image";
 import { trigger, transition, style, animate } from "@angular/animations";
+declare let gtag: Function;
+declare let fbq: Function;
 @Component({
   selector: "app-store",
   templateUrl: "./store.component.html",
@@ -39,6 +41,21 @@ export class StoreComponent implements OnInit {
     if (!this.productService.selectedProduct.sizes.length) {
       this.productService.selectedProduct.size = "R";
     }
+    const viewItem = {
+      currency: "EUR",
+      value: this.productService.selectedProduct.price,
+      items: [
+        {
+          item_name: this.productService.selectedProduct.name,
+          currency: "EUR",
+          item_brand: "Linkage",
+          price: this.productService.selectedProduct.price,
+          quantity: this.productService.selectedProduct.quantity
+        }
+      ]
+    };
+    fbq("track", "ViewContent");
+    gtag("event", "view_item", viewItem);
     // console.log(this.productService.selectedProduct);
   }
 
