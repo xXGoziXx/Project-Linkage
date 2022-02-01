@@ -8,7 +8,8 @@
     "build": "ng build --prod --aot --build-optimizer",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "emulators": "firebase emulators:start --import functions/local --only hosting,firestore,functions"
+    "emulators": "firebase emulators:start --import functions/local --only hosting,firestore,functions",
+    "deploy": "git checkout prod && git pull origin main && git push && git checkout -"
   },
   "private": true,
   "dependencies": {
