@@ -542,7 +542,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
             .split("-")[0]
             .trim()
         };
-        console.log(shippingInfo);
         gtag("event", "add_shipping_info", shippingInfo);
         self.closeAllSelect(this);
         (this.nextSibling as any).classList.toggle("select-hide");
@@ -608,7 +607,6 @@ except the current select box:*/
       }))
     };
     gtag("event", "view_cart", viewCartInfo);
-    console.log("testing ngOnInit");
   }
   ngAfterViewInit(): void {
     this.initAutocomplete();

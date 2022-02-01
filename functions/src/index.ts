@@ -229,7 +229,7 @@ h1 {
     } else {
       response = "Sent!";
     }
-    console.log("Response:", response);
+    // console.log("Response:", response);
     return response;
   });
   return response;
@@ -240,11 +240,11 @@ h1 {
  * @return {void}
  */
 async function updateStock(items: {name: string; quantity: number}[]) {
-  console.log(items);
+  // console.log(items);
 
   for (const item of items) {
     const quantity = item.quantity;
-    console.log("Qty: " + quantity);
+    // console.log("Qty: " + quantity);
     const nameSplit = item.name.split(" ");
     let size = nameSplit[nameSplit.length - 1];
     let category = nameSplit[nameSplit.length - 2];
@@ -255,10 +255,10 @@ async function updateStock(items: {name: string; quantity: number}[]) {
       nameSplit.splice(nameSplit.length - 1, 1);
     }
     const name = nameSplit.join(" ");
-    console.log("Name: " + name);
+    // console.log("Name: " + name);
     size = size.replace(/\(|\)/g, "");
-    console.log("Size:", size);
-    console.log("Category:", `${category.toLowerCase()}s`);
+    // console.log("Size:", size);
+    // console.log("Category:", `${category.toLowerCase()}s`);
     const productDocRef = await db
       .collection(`${category.toLowerCase()}s`)
       .where("name", "==", name)
@@ -269,7 +269,7 @@ async function updateStock(items: {name: string; quantity: number}[]) {
           [`stock.${size}`]: admin.firestore.FieldValue.increment(-quantity),
         })
         .then(() => {
-          console.log(doc.data());
+          // console.log(doc.data());
         });
     });
   }
@@ -283,7 +283,7 @@ export const createOrder = functions.firestore
       email: string;
       country: string;
     };
-    console.log("Order Document: ", data);
+    // console.log("Order Document: ", data);
     const id = snap.id;
     console.log("Order ID: ", id);
     const client = functions.config().paypal_live.client_id;
