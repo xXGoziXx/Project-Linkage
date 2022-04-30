@@ -3,6 +3,7 @@ import { ProductService } from "src/app/services/product.service";
 import { Product } from "src/app/interfaces/product";
 import { StateChange } from "ng-lazyload-image";
 import { trigger, transition, style, animate } from "@angular/animations";
+import { CloseIcon, EyeIcon } from "src/app/components/icons";
 declare let gtag: Function;
 declare let fbq: Function;
 @Component({
@@ -20,7 +21,8 @@ declare let fbq: Function;
 })
 export class StoreComponent implements OnInit {
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
-
+  CloseIcon = CloseIcon;
+  EyeIcon = EyeIcon;
   constructor(public productService: ProductService) {}
   get selectedProductFirstImage() {
     return this.productService.selectedProduct.images.filter(
@@ -99,7 +101,7 @@ export class StoreComponent implements OnInit {
     return "Add to cart";
   }
 
-  stateChangeHandler(event: StateChange, index: number) {
+  stateChangeHandler(event: StateChange, id: string) {
     switch (event.reason) {
       case "setup":
         // The lib has been instantiated but we have not done anything yet.
@@ -118,10 +120,10 @@ export class StoreComponent implements OnInit {
       case "loading-succeeded":
         // The image has successfully been loaded and placed into the DOM
         const soldOut: HTMLElement | null = document.getElementById(
-          "soldOut" + index
+          "soldOut" + id
         );
         const blackFilter: HTMLElement | null = document.getElementById(
-          "blackFilter" + index
+          "blackFilter" + id
         );
         if (soldOut && blackFilter) {
           soldOut.style.opacity = "1";

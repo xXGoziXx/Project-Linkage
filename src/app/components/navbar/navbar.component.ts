@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from "@angular/router";
 import scrollIntoView from "scroll-into-view-if-needed";
 import { ProductService } from "src/app/services/product.service";
 import { Meta, Title } from "@angular/platform-browser";
+import { CartIcon, LogoIcon } from "../icons";
 declare let gtag: Function;
 declare let fbq: Function;
 @Component({
@@ -17,6 +18,11 @@ export class NavbarComponent implements OnInit {
     navItem: ".main-nav__item",
     openToggler: ".toggler-open"
   };
+
+  LogoIcon = LogoIcon;
+
+  CartIcon = CartIcon;
+
   pages = [
     {
       title: "Home",

@@ -86,7 +86,6 @@ $toggler-bar-height: 3px;
 	text-align: center;
 
 	img {
-		width: 100%;
 		height: 50px;
 	}
 }
@@ -279,6 +278,14 @@ $toggler-bar-height: 3px;
 	Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black',
 	sans-serif;
 	;
+	;
+	;
+	;
+	;
+	;
+	;
+	;
+	;
 }
 
 // nav toggling - effect styles
@@ -452,7 +459,7 @@ $toggler-bar-height: 3px;
 		color: rgba(#0a0a0a, .2);
 		content: attr(data-add-text);
 		font: {
-			size: 4.25vh;
+			size: 4vh;
 			weight: 700;
 		} ;
 
@@ -463,6 +470,8 @@ $toggler-bar-height: 3px;
 
 .main-nav__link-title {
 	@include transition-mix($delay: 0s);
+
+	margin-bottom: 10px;
 }
 
 .main-nav__item:hover {
@@ -482,6 +491,7 @@ $toggler-bar-height: 3px;
 		@include transition-mix($timing: ease-out, $delay: .45s);
 
 		transform: translateX(10px);
+		;
 	}
 }
 #nav-blur {

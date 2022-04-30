@@ -1,0 +1,4 @@
+const icon =
+`data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNyAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0yMS43NjE3IDE0SDQuNTA1ODZWMTBIMjEuNzYxN1YxNFoiIGZpbGw9IiNFMEUwRTAiLz4NCjwvc3ZnPg0K`;
+
+export default icon;

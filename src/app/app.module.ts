@@ -30,6 +30,7 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 import { ShippingAndReturnsComponent } from "./pages/shipping-and-returns/shipping-and-returns.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ServiceWorkerModule } from "@angular/service-worker";
     PageNotFoundComponent,
     ContactUsComponent,
     PrivacyPolicyComponent,
-    ShippingAndReturnsComponent
+    ShippingAndReturnsComponent,
+    SafeUrlPipe,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
     {
       provide: USE_FIRESTORE_EMULATOR,
       useValue: environment.useEmulators
-        ? ["localhost", 8080]
+        ? ["0.0.0.0", 8080]
         : undefined
     },
     {

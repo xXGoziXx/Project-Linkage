@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ProductService } from "src/app/services/product.service";
 import scrollIntoView from "scroll-into-view-if-needed";
+import { CircleLogoImage } from "src/app/components/icons";
 
 @Component({
   selector: "app-home",
@@ -9,7 +10,7 @@ import scrollIntoView from "scroll-into-view-if-needed";
 })
 export class HomeComponent implements OnInit {
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
-
+CircleLogoImage = CircleLogoImage;
   constructor(public productService: ProductService) {}
   goToArc(name: string) {
     let arc = document.getElementById(name);

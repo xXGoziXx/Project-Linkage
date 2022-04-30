@@ -5,6 +5,8 @@ import scrollIntoView from "scroll-into-view-if-needed";
 import { Product } from "src/app/interfaces/product";
 import { ProductService } from "../../services/product.service";
 import { environment } from "../../../environments/environment";
+import { MinusIcon, PlusIcon, TrashIcon } from "src/app/components/icons";
+
 declare let gtag: Function;
 declare let fbq: Function;
 @Component({
@@ -25,7 +27,11 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   continents: any;
   countryCode: string = "";
   confirmingDetails: boolean = false;
-  constructor(public productService: ProductService) {}
+  PlusIcon = PlusIcon;
+  MinusIcon = MinusIcon;
+  TrashIcon = TrashIcon;
+  constructor(public productService: ProductService) {
+  }
   goToProduct(item: Product) {
     this.productService.selectedProduct = { ...item, quantity: 1 };
     this.productService.viewProduct = true;
