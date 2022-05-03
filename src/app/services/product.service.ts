@@ -6,7 +6,8 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from "@angular/fire/compat/firestore";
-import { Observable, Subscription } from "rxjs";
+import { forkJoin, Observable, Subscription } from "rxjs";
+import { take, tap } from "rxjs/operators";
 import { Category, CategoryMetadata } from "../interfaces/category-metadata";
 import { Arc } from "../interfaces/arc";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
@@ -26,60 +27,9 @@ export class ProductService {
   preview = true;
   showProductCard = false;
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
-  selectedProduct!: Product /*= {
-    description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
-    price: 34.99,
-    images: [
-      {
-        alt: "",
-        order: 0,
-        src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FONE%20PIECE%20IRISH%20IRELAND%20ANIME%20DOFLAMINGO%20FAN%20COSPLAY-min.png?alt=media&token=6c7697ba-d122-4eba-9649-9b0690bfac47"
-      },
-      {
-        alt: "",
-        order: 1,
-        src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FNARUTO%20ANIME%205%20KAGE%20CLOTHING%20IRELAND%20OTAKU%20WEEB%20FAN-min.png?alt=media&token=638488a4-5b55-48bf-93e2-7c6c8e1ac69e"
-      },
-      { alt: "", order: 2, src: this.defaultImage }
-    ],
-    name: "Red Fleece",
-    order: 0,
-    sizes: [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    stock: {S:1, M:1, L:1, XL:0},
-    size: "",
-    quantity: 1
-  }*/;
+  selectedProduct!: Product;
   cart: { items: Product[]; totalPrice: number; totalQuantity: number } = {
-    items: [
-      // {
-      //   description: `Fire, Lightning, Earth, Water and Wind (火雷土水風) are the five kanji symbols used at the back of the fleece. They represent the five Kage with a quote paraphrased from Itachi about being "acknowledged by the people" when you're someone who can lead a nation.`,
-      //   price: 34.99,
-      //   images: [
-      //     {
-      //       alt: "",
-      //       order: 0,
-      //       src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FONE%20PIECE%20IRISH%20IRELAND%20ANIME%20DOFLAMINGO%20FAN%20COSPLAY-min.png?alt=media&token=6c7697ba-d122-4eba-9649-9b0690bfac47"
-      //     },
-      //     {
-      //       alt: "",
-      //       order: 1,
-      //       src: "https://firebasestorage.googleapis.com/v0/b/project-linkage.appspot.com/o/Fleeces%2FRed%20Fleece%2FNARUTO%20ANIME%205%20KAGE%20CLOTHING%20IRELAND%20OTAKU%20WEEB%20FAN-min.png?alt=media&token=638488a4-5b55-48bf-93e2-7c6c8e1ac69e"
-      //     },
-      //     { alt: "", order: 2, src: this.defaultImage }
-      //   ],
-      //   name: "Red Fleece",
-      //   order: 0,
-      //   sizes: ["S", "M", "L", "XL"],
-      //   size: "XL",
-      //   stock: { S: 1, M: 1, L: 1, XL: 0 },
-      //   quantity: 1
-      // }
-    ],
+    items: [],
     get totalPrice() {
       if (this.items.length === 0) return 0;
       const result = this.items
@@ -127,12 +77,30 @@ export class ProductService {
         // checking to make sure the categories aren't empty
         if (categories) {
           categories.map((category: Category) => {
-            const productCategoryCol: AngularFirestoreCollection<Product> =
-              afs.collection<Product>(category.name, ref =>
-                ref.orderBy("order")
+            const categoryName = category.name.split("/");
+            const productCategoryCols: Observable<Product[]>[] =
+              categoryName.map((name: string) => {
+                afs
+                  .collection<Product>(name, ref => ref.orderBy("order"))
+                  .valueChanges()
+                  .subscribe(val => console.log(name, val));
+
+                return afs
+                  .collection<Product>(name, ref => ref.orderBy("order"))
+                  .valueChanges();
+              });
+            const productCategoryCol: Observable<Product[][]> =
+              forkJoin(productCategoryCols);
+            // const productCategoryCol: AngularFirestoreCollection<Product> =
+            //   afs.collection<Product>(category.name, ref =>
+            //     ref.orderBy("order")
+            //   );
+            productCategoryCol.subscribe((productsCollection: Product[][]) => {
+              console.log(productsCollection, category);
+              const products = productsCollection.reduce(
+                (acc, val) => acc.concat(val),
+                []
               );
-            productCategoryCol.valueChanges().subscribe(products => {
-              // console.log(product, category);
               if (this.products[category.order]) {
                 this.products[category.order].name = category.name;
                 this.products[category.order].order = category.order;

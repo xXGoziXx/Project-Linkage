@@ -30,7 +30,7 @@
     "firebase": "^9.6.1",
     "lodash-es": "^4.17.21",
     "ng-lazyload-image": "^9.1.0",
-    "ngx-easy-table": "^15.1.0",
+    "ngx-easy-table": "^15.2.0",
     "ngx-paypal": "^9.0.0",
     "ngx-toastr": "^14.2.1",
     "rxjs": "~6.6.0",
@@ -40,7 +40,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.7",
+    "@angular-devkit/build-angular": "^13.3.4",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
