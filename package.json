@@ -13,20 +13,19 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.2.0",
+    "@angular/animations": "~13.3.5",
     "@angular/cdk": "^13.1.2",
-    "@angular/common": "~12.2.0",
-    "@angular/compiler": "~12.2.0",
-    "@angular/core": "~12.2.0",
+    "@angular/common": "~13.3.5",
+    "@angular/compiler": "~13.3.5",
+    "@angular/core": "~13.3.5",
     "@angular/fire": "^7.2.0",
-    "@angular/forms": "~12.2.0",
+    "@angular/forms": "~13.3.5",
     "@angular/google-maps": "^13.1.2",
-    "@angular/platform-browser": "~12.2.0",
-    "@angular/platform-browser-dynamic": "~12.2.0",
-    "@angular/router": "~12.2.0",
-    "@angular/service-worker": "~12.2.0",
+    "@angular/platform-browser": "~13.3.5",
+    "@angular/platform-browser-dynamic": "~13.3.5",
+    "@angular/router": "~13.3.5",
+    "@angular/service-worker": "~13.3.5",
     "@splidejs/splide": "^3.6.9",
-    "classlist.js": "^1.1.20150312",
     "firebase": "^9.6.1",
     "lodash-es": "^4.17.21",
     "ng-lazyload-image": "^9.1.0",
@@ -36,13 +35,12 @@
     "rxjs": "~6.6.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "tslib": "^2.3.0",
-    "web-animations-js": "^2.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.3.4",
-    "@angular/cli": "~12.2.7",
-    "@angular/compiler-cli": "~12.2.0",
+    "@angular/cli": "~13.3.4",
+    "@angular/compiler-cli": "~13.3.5",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/line-clamp": "^0.3.0",
@@ -59,6 +57,6 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "tailwindcss": "^3.0.7",
-    "typescript": "~4.3.5"
+    "typescript": "~4.6.4"
   }
 }
