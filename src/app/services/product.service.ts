@@ -1,26 +1,26 @@
 import { isEqual } from "lodash-es";
-import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { combineLatest, Observable, Subscription } from "rxjs";
 import { Product } from "src/app/interfaces/product";
+
+import { Injectable } from "@angular/core";
 import {
   AngularFirestore,
-  AngularFirestoreCollection,
   AngularFirestoreDocument
 } from "@angular/fire/compat/firestore";
-import { forkJoin, Observable, Subscription } from "rxjs";
-import { take, tap } from "rxjs/operators";
-import { Category, CategoryMetadata } from "../interfaces/category-metadata";
-import { Arc } from "../interfaces/arc";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Splide } from "@splidejs/splide";
-import { ToastrService } from "ngx-toastr";
+
+
+import { Category, CategoryMetadata } from "../interfaces/category-metadata";
+
 declare let gtag: Function;
 declare let fbq: Function;
 @Injectable({
   providedIn: "root"
 })
 export class ProductService {
-  arcs: Observable<Arc[]> | undefined; // watches the product metadata values
-  arcs$: Subscription | undefined; // subscribes to the product metadata values
+
   private productDoc: AngularFirestoreDocument<CategoryMetadata>; // stores all the references to the product metadata
   productMetadata$: Subscription | undefined; // subscribes to the product metadata values
   products: { name: string; order: number; items: Product[] }[] = [];
@@ -67,40 +67,39 @@ export class ProductService {
       this.cart.items = items;
     }
     this.productDoc = afs.doc<CategoryMetadata>("products/metadata");
-    this.arcs = afs
-      .collection<Arc>("arcs", ref => ref.orderBy("date", "desc"))
-      .valueChanges();
     this.productMetadata$ = this.productDoc
       .valueChanges()
       .subscribe((metadata: CategoryMetadata | undefined) => {
-        const categories = metadata?.categories;
+        let categories = metadata?.categories
+          .filter(category => category.order >= 0)
+          .sort(
+            (categoryA: Category, categoryB: Category) =>
+              categoryA.order - categoryB.order
+          )
+          .map((category, index: number) => ({ ...category, order: index }));
+        // console.log(categories);
+
         // checking to make sure the categories aren't empty
         if (categories) {
-          categories.map((category: Category) => {
+          categories.forEach((category: Category) => {
             const categoryName = category.name.split("/");
             const productCategoryCols: Observable<Product[]>[] =
-              categoryName.map((name: string) => {
+              categoryName.map((name: string) =>
                 afs
-                  .collection<Product>(name, ref => ref.orderBy("order"))
+                  .collection<Product>(
+                    name,
+                    ref => ref.where("order", ">=", 0).orderBy("order") // filters out products with an order less than 0
+                  )
                   .valueChanges()
-                  .subscribe(val => console.log(name, val));
-
-                return afs
-                  .collection<Product>(name, ref => ref.orderBy("order"))
-                  .valueChanges();
-              });
+              );
             const productCategoryCol: Observable<Product[][]> =
-              forkJoin(productCategoryCols);
-            // const productCategoryCol: AngularFirestoreCollection<Product> =
-            //   afs.collection<Product>(category.name, ref =>
-            //     ref.orderBy("order")
-            //   );
+              combineLatest(productCategoryCols);
             productCategoryCol.subscribe((productsCollection: Product[][]) => {
-              console.log(productsCollection, category);
               const products = productsCollection.reduce(
                 (acc, val) => acc.concat(val),
                 []
               );
+              // console.log(products, category);
               if (this.products[category.order]) {
                 this.products[category.order].name = category.name;
                 this.products[category.order].order = category.order;
@@ -111,7 +110,7 @@ export class ProductService {
                 });
               } else {
                 this.products[category.order] = {
-                  name: category.name,
+                  name: category.title ? category.title : category.name,
                   order: category.order,
                   items: products
                 };

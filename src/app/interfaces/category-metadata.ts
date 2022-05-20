@@ -5,4 +5,5 @@ export interface CategoryMetadata {
 export interface Category {
   name: string;
   order: number;
+  title: string;
 }

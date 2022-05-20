@@ -1,26 +1,26 @@
 <div class="content">
   <div class="nav-pad black-filter min-h-screen px-4">
-    <div class="max-w-xl text-center pb-4 mx-auto">
-      <div class="sizing-fit">
-        <h1 class="mt-2 mb-4 uppercase text-center">
-          Sizing & Fit
-        </h1>
-        <div class="mt-5 table-container">
-          <ngx-table [configuration]="configuration"
-                     [data]="sizeChart"
-                     [columns]="columns">
-          </ngx-table>
+    <div class="text-center pb-4 mx-auto">
+      <h1 class="mt-2 mb-4 uppercase text-center">Sizing & Fit</h1>
+      <div class="sizing-fit flex-wrap flex justify-around content-start gap-4">
+        <div class="grow max-w-full" *ngFor="let sizingChart of sizingCharts">
+          <h2 class="mt-5 uppercase text-center">
+            {{ sizingChart.name | titlecase }}
+          </h2>
+          <div class="mt-2 table-container">
+            <ngx-table
+              [configuration]="configuration"
+              [data]="sizingChart.sizes"
+              [columns]="sizingChart.columns"
+            >
+            </ngx-table>
+            <div class="materials-used bg-white text-black">
+              <h5 class="p-2">
+                {{ sizingChart.materials }}
+              </h5>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="materials-used mt-10">
-        <h1 class="uppercase">
-          Materials Used
-        </h1>
-        <h5>
-          The fleece is an insulating fabric which has an adjustable drawstring. It possesses a full length
-          zipper with pockets
-          that zip up too. The weight of the fleece is 280 g/m².
-        </h5>
       </div>
     </div>
   </div>

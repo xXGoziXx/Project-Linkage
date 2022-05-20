@@ -3,9 +3,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import '@splidejs/splide/dist/css/themes/splide-default.min.css';
-@import '~ngx-easy-table/style.scss';
-@import '~ngx-toastr/toastr';
-
+@import 'node_modules/ngx-easy-table/style.scss';
+@import 'ngx-toastr/toastr';
 @font-face {
 	font-family: ImpactLT;
 

@@ -157,7 +157,6 @@ export class NavbarComponent implements OnInit {
         }
         setTimeout(() => {
           const nav = document.querySelector(this.PATH.expandableNav);
-          //your code to be executed after 750 milliseconds
           nav?.classList.remove("js-open");
         }, delay);
       }

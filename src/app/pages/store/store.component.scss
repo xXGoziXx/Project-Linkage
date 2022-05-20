@@ -130,9 +130,6 @@
 
 			opacity: 0;
 		}
-		.product-title {
-			line-height: 1rem;
-		}
 		&:hover {
 			img {
 				box-shadow: 0 0 12px #999;
@@ -146,6 +143,12 @@
 			p {
 				@apply mt-2;
 			}
+		}
+	}
+	.product-title {
+		@media only screen and (min-width: 1280px) {
+			font-size: 1.3rem;
+			line-height: 1rem;
 		}
 	}
 }

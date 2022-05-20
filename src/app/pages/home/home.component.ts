@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ProductService } from "src/app/services/product.service";
-import scrollIntoView from "scroll-into-view-if-needed";
+import { ArcService } from "src/app/services/arc.service";
 import { CircleLogoImage } from "src/app/components/icons";
 
 @Component({
@@ -10,8 +9,8 @@ import { CircleLogoImage } from "src/app/components/icons";
 })
 export class HomeComponent implements OnInit {
   defaultImage = `https://www.atmosair.com/wp-content/themes/atmosair/assets/icons/loading-spinner-white-thin.gif`;
-CircleLogoImage = CircleLogoImage;
-  constructor(public productService: ProductService) {}
+  CircleLogoImage = CircleLogoImage;
+  constructor(public arcService: ArcService) {}
   goToArc(name: string) {
     let arc = document.getElementById(name);
     if (arc) {
@@ -20,12 +19,6 @@ CircleLogoImage = CircleLogoImage;
         block: "start",
         inline: "nearest"
       });
-      // scrollIntoView(arc, {
-      //   // scrollMode: 'if-needed',
-      //   behavior: "smooth",
-      //   block: "start"
-      //   // // inline: 'nearest',
-      // });
     }
   }
 
