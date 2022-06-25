@@ -33,6 +33,7 @@ export class StoreComponent implements OnInit {
     return this.productService.selectedProduct.sizes.join(" / ");
   }
 
+// currently not doing anything with this
   checkSizesAvailable(product: Product) {
     return product.sizes.filter(
       size => this.productService.selectedProduct.stock[size] !== 0

@@ -183,20 +183,17 @@
             <div class="price mb-2 sm:mb-0">
               <div *ngIf="selectedProductSizes" class="size">
                 <h3 class="mr-1">Size:</h3>
-                <div
-                  *ngFor="
-                    let size of checkSizesAvailable(
-                      productService.selectedProduct
-                    )
-                  "
+                <button
+                  *ngFor="let size of productService.selectedProduct.sizes"
                   [ngClass]="{
                     active: productService.selectedProduct.size === size
                   }"
                   (click)="selectSize(size)"
                   class="size-btn"
+                  [disabled]="false"
                 >
                   {{ size }}
-                </div>
+                </button>
               </div>
               <h3 class="price mt-2">
                 Price:

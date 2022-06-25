@@ -99,7 +99,7 @@ export class ProductService {
                 (acc, val) => acc.concat(val),
                 []
               );
-              console.log(products, category);
+              // console.log(products, category);
               if (this.products[category.order]) {
                 this.products[category.order].name = category.title
                   ? category.title
