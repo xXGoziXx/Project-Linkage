@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from "@angular/core";
-import { IPayPalConfig, ICreateOrderRequest } from "ngx-paypal";
-import { Subscription } from "rxjs";
-import scrollIntoView from "scroll-into-view-if-needed";
-import { Product } from "src/app/interfaces/product";
-import { ProductService } from "../../services/product.service";
-import { environment } from "../../../environments/environment";
-import { MinusIcon, PlusIcon, TrashIcon } from "src/app/components/icons";
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
+import { Subscription } from 'rxjs';
+import scrollIntoView from 'scroll-into-view-if-needed';
+import { MinusIcon, PlusIcon, TrashIcon } from 'src/app/components/icons';
+import { Product } from 'src/app/interfaces/product';
+
+import { environment } from '../../../environments/environment';
+import { ProductService } from '../../services/product.service';
 
 declare let gtag: Function;
 declare let fbq: Function;

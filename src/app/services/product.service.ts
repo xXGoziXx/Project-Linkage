@@ -99,9 +99,11 @@ export class ProductService {
                 (acc, val) => acc.concat(val),
                 []
               );
-              // console.log(products, category);
+              console.log(products, category);
               if (this.products[category.order]) {
-                this.products[category.order].name = category.name;
+                this.products[category.order].name = category.title
+                  ? category.title
+                  : category.name;
                 this.products[category.order].order = category.order;
                 this.products[category.order].items.forEach((item, i) => {
                   if (!isEqual(item, products[i])) {

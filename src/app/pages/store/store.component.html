@@ -16,8 +16,8 @@
         *ngFor="let products of productService.products"
         class="pb-4"
       >
-        <h2 class="uppercase">{{ products.name }}</h2>
-        <div class="flex flex-wrap">
+        <h2 class="uppercase text-center">{{ products.name }}</h2>
+        <div class="flex flex-wrap justify-center">
           <!-- Product Items -->
           <div
             class="pt-4 px-1 basis-1/3 md:basis-1/6 product"
@@ -223,8 +223,6 @@
             this.productService.preview = true
           "
         >
-          <!-- <img src="../../../assets/icons/close.svg"
-               alt="close preview"> -->
           <img alt="close preview" [src]="CloseIcon | safeUrl" />
         </div>
         <button
