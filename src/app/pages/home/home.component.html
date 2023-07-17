@@ -12,19 +12,28 @@
   >
     <div class="h-full flex flex-col mx-auto black-filter relative">
       <div class="mt-4 flex-auto grid place-content-center">
+        <div class="text-center my-6">
+          <a href="https://www.depop.com/project_linkage"
+             target="_blank"
+              rel="noopener noreferrer"
+             draggable="false"
+             class="btn bg-blur drop-link">Latest Drop
+          </a>
+        </div>
         <div class="img-container">
           <!-- <img src="../../../assets/img/circle.png"
                alt=""
                class="" /> -->
           <img alt="circle image" [src]="CircleLogoImage | safeUrl" />
         </div>
-        <div class="text-center m-5">
-          <a routerLink="/store" draggable="false" class="btn bg-blur"
-            >Latest Drop
+        <div class="text-center my-6">
+          <a routerLink="/store"
+             draggable="false"
+             class="btn bg-blur drop-link">Previous Drop
           </a>
         </div>
       </div>
-      <div class="absolute bottom-0 inset-x-0 text-center nav_arrows mb-1">
+      <div class="absolute bottom-0 inset-x-0 text-center nav_arrows mb-1">brandy
         <img
           class="inline p-2 pop"
           *ngIf="arcService.arcs | async"
@@ -58,7 +67,7 @@
         <div
           class="nav-pad pt-4 flex-auto grid justify-items-center text-center"
         >
-          <h1 class="uppercase">{{ isFirst ? "Previous Arc" : arc.name }}</h1>
+          <h1 class="uppercase">{{ arc.name }}</h1>
           <div class="description my-2">
             <h2 class="uppercase">Description</h2>
             <h5>{{ arc.description }}</h5>

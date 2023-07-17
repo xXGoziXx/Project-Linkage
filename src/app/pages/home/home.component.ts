@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ArcService } from "src/app/services/arc.service";
 import { CircleLogoImage } from "src/app/components/icons";
 
+
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
