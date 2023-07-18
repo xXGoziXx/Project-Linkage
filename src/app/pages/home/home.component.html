@@ -16,14 +16,12 @@
           <a href="https://www.depop.com/project_linkage"
              target="_blank"
               rel="noopener noreferrer"
+              (click)="tagEvent('PageView','Depop','Depop Link' )"
              draggable="false"
              class="btn bg-blur drop-link">Latest Drop
           </a>
         </div>
         <div class="img-container">
-          <!-- <img src="../../../assets/img/circle.png"
-               alt=""
-               class="" /> -->
           <img alt="circle image" [src]="CircleLogoImage | safeUrl" />
         </div>
         <div class="text-center my-6">
